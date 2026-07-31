@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>커뮤니티</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100svh;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #111111;
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+    }
+
+    button,
+    input,
+    a {
+      color: inherit;
+      font: inherit;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      padding-bottom: calc(106px + env(safe-area-inset-bottom));
+      background-color: #ffffff;
+    }
+
+    /* 휴대폰 상태바 */
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 36px;
+      padding:
+        max(8px, env(safe-area-inset-top))
+        24px
+        0;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 18px;
+      height: 13px;
+    }
+
+    .signal-icon span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background-color: #111111;
+    }
+
+    .signal-icon span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal-icon span:nth-child(3) {
+      height: 10px;
+    }
+
+    .signal-icon span:nth-child(4) {
+      height: 13px;
+    }
+
+    .wifi-icon {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi-icon::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #111111;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .wifi-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .battery-icon {
+      position: relative;
+      width: 23px;
+      height: 11px;
+      border: 1.5px solid #111111;
+      border-radius: 3px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 5px;
+      border-radius: 1px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 헤더 */
+
+    .header {
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      width: 100%;
+      min-height: 77px;
+      padding: 9px 29px 8px;
+    }
+
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+    }
+
+    .header-title {
+      margin: 0;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .back-icon {
+      position: relative;
+      display: block;
+      width: 21px;
+      height: 21px;
+    }
+
+    .back-icon::before {
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      width: 11px;
+      height: 11px;
+      border-left: 2px solid #111111;
+      border-bottom: 2px solid #111111;
+      content: "";
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .back-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      width: 16px;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+      transform: translateY(-50%);
+    }
+
+    .bell-icon {
+      position: relative;
+      display: block;
+      width: 17px;
+      height: 19px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .bell-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      border-radius: 5px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .bell-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    /* 메인 콘텐츠 */
+
+    .main {
+      width: 100%;
+      padding: 0 29px 42px;
+    }
+
+    /* 검색창 */
+
+    .search-box {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      margin-bottom: 38px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background-color: #f5f5f5;
+    }
+
+    .search-icon {
+      position: relative;
+      display: block;
+      width: 17px;
+      height: 17px;
+      margin-left: 3px;
+      border: 2px solid #111111;
+      border-radius: 50%;
+    }
+
+    .search-icon::after {
+      position: absolute;
+      right: -5px;
+      bottom: -3px;
+      width: 7px;
+      height: 2px;
+      border-radius: 5px;
+      background-color: #111111;
+      content: "";
+      transform: rotate(45deg);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      padding: 0 8px;
+      border: 0;
+      outline: none;
+      background-color: transparent;
+      color: #111111;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .search-input::placeholder {
+      color: #111111;
+      opacity: 1;
+    }
+
+    /* 게시글 탭 */
+
+    .community-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      gap: 17px;
+      width: 100%;
+      margin-bottom: 17px;
+    }
+
+    .community-tab {
+      min-height: 44px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .community-tab.active {
+      background-color: #fff4f6;
+    }
+
+    /* 게시글 목록 */
+
+    .post-list {
+      display: grid;
+      gap: 42px;
+      width: 100%;
+    }
+
+    .post-card {
+      width: 100%;
+      min-height: 132px;
+      padding: 14px 15px 12px;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+
+    .post-title {
+      margin: 0 0 9px;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.45;
+      letter-spacing: -0.5px;
+    }
+
+    .post-content {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.5px;
+      text-align: center;
+      word-break: keep-all;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .post-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+      width: 100%;
+      margin-top: 8px;
+      padding: 0 14px;
+    }
+
+    .post-count {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .heart-icon {
+      position: relative;
+      width: 20px;
+      height: 18px;
+      transform: rotate(-45deg);
+    }
+
+    .heart-icon::before,
+    .heart-icon::after {
+      position: absolute;
+      width: 14px;
+      height: 20px;
+      border: 2px solid #c9c9c9;
+      border-radius: 14px 14px 0 0;
+      content: "";
+    }
+
+    .heart-icon::before {
+      top: 0;
+      left: 6px;
+      transform: rotate(45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart-icon::after {
+      top: 0;
+      left: 0;
+      transform: rotate(-45deg);
+      transform-origin: 100% 100%;
+    }
+
+    .comment-icon {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border: 1.8px solid #111111;
+      background-color: #ffffff;
+    }
+
+    .post-time {
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* 하단 내비게이션 */
+
+    .bottom-navigation {
+      position: fixed;
+      z-index: 30;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      min-height: 106px;
+      padding:
+        17px
+        13px
+        calc(20px + env(safe-area-inset-bottom));
+      border-top: 1px solid #ffe7eb;
+      background-color: #ffffff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      min-width: 0;
+      color: #111111;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      opacity: 0.45;
+    }
+
+    .nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .home-indicator {
+      position: fixed;
+      z-index: 40;
+      bottom: 3px;
+      left: 50%;
+      width: 132px;
+      height: 5px;
+      border-radius: 999px;
+      background-color: #000000;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <span class="wifi-icon" aria-hidden="true"></span>
+        <span class="battery-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <header class="header">
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="이전 화면"
+      >
+        <span class="back-icon"></span>
+      </button>
+
+      <h1 class="header-title">
+        커뮤니티
+      </h1>
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="알림"
+      >
+        <span class="bell-icon"></span>
+      </button>
+
+    </header>
+
+    <main class="main">
+
+      <label class="search-box">
+        <span
+          class="search-icon"
+          aria-hidden="true"
+        ></span>
+
+        <input
+          class="search-input"
+          type="search"
+          placeholder="검색어를 입력하세요"
+          aria-label="커뮤니티 검색"
+        >
+      </label>
+
+      <nav
+        class="community-tabs"
+        aria-label="커뮤니티 게시글 분류"
+      >
+        <button
+          class="community-tab active"
+          type="button"
+        >
+          인기글
+        </button>
+
+        <button
+          class="community-tab"
+          type="button"
+        >
+          최신글
+        </button>
+
+        <button
+          class="community-tab"
+          type="button"
+        >
+          내가 쓴 글
+        </button>
+      </nav>
+
+      <section
+        class="post-list"
+        aria-label="커뮤니티 글 목록"
+      >
+
+        <article class="post-card">
+
+          <h2 class="post-title">
+            요즘 불안감이 너무 커요....
+          </h2>
+
+          <p class="post-content">
+            작은 일에도 걱정이 많아지고, 마음이 쉽게
+            지친 그런가요?
+          </p>
+
+          <div class="post-info">
+
+            <div class="post-count">
+              <span
+                class="heart-icon"
+                aria-hidden="true"
+              ></span>
+              <span>24</span>
+            </div>
+
+            <div class="post-count">
+              <span
+                class="comment-icon"
+                aria-hidden="true"
+              ></span>
+              <span>10</span>
+            </div>
+
+            <time class="post-time">
+              2시간 전
+            </time>
+
+          </div>
+
+        </article>
+
+        <article class="post-card">
+
+          <h2 class="post-title">
+            나를 위한 작은 실천들
+          </h2>
+
+          <p class="post-content">
+            매일 나를 위해 실천하는 작은 습관들을
+            공유해요!
+          </p>
+
+          <div class="post-info">
+
+            <div class="post-count">
+              <span
+                class="heart-icon"
+                aria-hidden="true"
+              ></span>
+              <span>30</span>
+            </div>
+
+            <div class="post-count">
+              <span
+                class="comment-icon"
+                aria-hidden="true"
+              ></span>
+              <span>8</span>
+            </div>
+
+            <time class="post-time">
+              5시간 전
+            </time>
+
+          </div>
+
+        </article>
+
+        <article class="post-card">
+
+          <h2 class="post-title">
+            오늘의 감사일기
+          </h2>
+
+          <p class="post-content">
+            오늘 하루 감사했던 순간들을 적어보는
+            시간을 가져보세요.
+          </p>
+
+          <div class="post-info">
+
+            <div class="post-count">
+              <span
+                class="heart-icon"
+                aria-hidden="true"
+              ></span>
+              <span>19</span>
+            </div>
+
+            <div class="post-count">
+              <span
+                class="comment-icon"
+                aria-hidden="true"
+              ></span>
+              <span>6</span>
+            </div>
+
+            <time class="post-time"></time>
+
+          </div>
+
+        </article>
+
+      </section>
+
+    </main>
+
+    <nav
+      class="bottom-navigation"
+      aria-label="하단 메뉴"
+    >
+
+      <a
+        class="nav-item active"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/home-icon.png"
+          alt=""
+        >
+        <span>홈</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/diary-icon.png"
+          alt=""
+        >
+        <span>기록</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/statistics-icon.png"
+          alt=""
+        >
+        <span>통계</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/recommend-icon.png"
+          alt=""
+        >
+        <span>추천</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/mypage-icon.png"
+          alt=""
+        >
+        <span>마이</span>
+      </a>
+
+    </nav>
+
+    <div class="home-indicator"></div>
+
+  </div>
+</body>
+</html>

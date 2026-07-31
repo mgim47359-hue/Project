@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>감정케어 다이어리</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100svh;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #111111;
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      color: inherit;
+      font: inherit;
+    }
+
+    img {
+      display: block;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      padding-bottom: calc(108px + env(safe-area-inset-bottom));
+      background-color: #ffffff;
+    }
+
+    /* 휴대폰 상태 표시 영역 */
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 34px;
+      padding:
+        max(8px, env(safe-area-inset-top))
+        25px
+        0;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 18px;
+      height: 13px;
+    }
+
+    .signal-icon span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background-color: #111111;
+    }
+
+    .signal-icon span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal-icon span:nth-child(3) {
+      height: 10px;
+    }
+
+    .signal-icon span:nth-child(4) {
+      height: 13px;
+    }
+
+    .wifi-icon {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi-icon::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #111111;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .wifi-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .battery-icon {
+      position: relative;
+      width: 23px;
+      height: 11px;
+      border: 1.5px solid #111111;
+      border-radius: 3px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 5px;
+      border-radius: 1px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 상단 헤더 */
+
+    .header {
+      display: grid;
+      grid-template-columns: 45px 1fr 45px;
+      align-items: center;
+      width: 100%;
+      min-height: 86px;
+      padding: 8px 20px 12px;
+    }
+
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+    }
+
+    .hamburger-icon {
+      position: relative;
+      display: block;
+      width: 21px;
+      height: 17px;
+    }
+
+    .hamburger-icon span {
+      position: absolute;
+      left: 0;
+      display: block;
+      height: 2px;
+      border-radius: 10px;
+      background-color: #111111;
+    }
+
+    .hamburger-icon span:nth-child(1) {
+      top: 0;
+      width: 17px;
+    }
+
+    .hamburger-icon span:nth-child(2) {
+      top: 7px;
+      width: 21px;
+    }
+
+    .hamburger-icon span:nth-child(3) {
+      top: 15px;
+      width: 13px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 57px;
+      height: 57px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      overflow: hidden;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .bell-icon {
+      position: relative;
+      display: block;
+      width: 17px;
+      height: 19px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .bell-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      border-radius: 5px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .bell-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    /* 메인 콘텐츠 */
+
+    .main {
+      width: 100%;
+      padding: 0 36px 40px;
+    }
+
+    .hero {
+      width: 100%;
+      margin-bottom: 17px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* 주요 기능 */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 25px 13px;
+      width: 100%;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      grid-column: span 2;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .feature-card:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+
+    .feature-card:nth-child(5) {
+      grid-column: 4 / span 2;
+    }
+
+    .feature-icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 76px;
+      height: 76px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    .feature-card:nth-child(1) .feature-icon-box {
+      background-color: #fff0f3;
+    }
+
+    .feature-card:nth-child(2) .feature-icon-box {
+      background-color: #f0ecff;
+    }
+
+    .feature-card:nth-child(3) .feature-icon-box {
+      background-color: #e9f6ee;
+    }
+
+    .feature-card:nth-child(4) .feature-icon-box {
+      background-color: #fff7e9;
+    }
+
+    .feature-card:nth-child(5) .feature-icon-box {
+      background-color: #fff0f3;
+    }
+
+    .feature-icon {
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+    }
+
+    .feature-title {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -0.7px;
+      white-space: nowrap;
+    }
+
+    .feature-description {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.85;
+      letter-spacing: -0.4px;
+      word-break: keep-all;
+    }
+
+    /* 하단 내비게이션 */
+
+    .bottom-navigation {
+      position: fixed;
+      z-index: 30;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      min-height: 106px;
+      padding:
+        13px
+        12px
+        calc(20px + env(safe-area-inset-bottom));
+      border-top: 1px solid #eeeeee;
+      background-color: #ffffff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      min-width: 0;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+      opacity: 0.45;
+    }
+
+    .nav-item.active {
+      color: #111111;
+    }
+
+    .nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .home-indicator {
+      position: fixed;
+      z-index: 40;
+      bottom: 3px;
+      left: 50%;
+      width: 132px;
+      height: 5px;
+      border-radius: 999px;
+      background-color: #000000;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <span class="wifi-icon" aria-hidden="true"></span>
+        <span class="battery-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <header class="header">
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="전체 메뉴"
+      >
+        <span class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="./imges/logo.png"
+          alt="감정케어 다이어리 로고"
+        >
+
+        <h1 class="brand-title">
+          감정케어 다이어리
+        </h1>
+      </div>
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="알림"
+      >
+        <span class="bell-icon"></span>
+      </button>
+
+    </header>
+
+    <main class="main">
+
+      <section class="hero">
+        <img
+          class="hero-image"
+          src="./imges/main-banner.png"
+          alt="감정을 이해하고 나를 더 사랑하는 시간"
+        >
+      </section>
+
+      <section
+        class="feature-grid"
+        aria-label="감정케어 다이어리 주요 기능"
+      >
+
+        <a
+          class="feature-card"
+          href="#"
+        >
+          <div class="feature-icon-box">
+            <img
+              class="feature-icon"
+              src="./imges/emotion-record-icon.png"
+              alt=""
+            >
+          </div>
+
+          <h2 class="feature-title">
+            감정 기록하기
+          </h2>
+
+          <p class="feature-description">
+            지금 이 순간의 감정을<br>
+            자유롭게 기록해보세요.
+          </p>
+        </a>
+
+        <a
+          class="feature-card"
+          href="#"
+        >
+          <div class="feature-icon-box">
+            <img
+              class="feature-icon"
+              src="./imges/emotion-chart-icon.png"
+              alt=""
+            >
+          </div>
+
+          <h2 class="feature-title">
+            감정 분석하기
+          </h2>
+
+          <p class="feature-description">
+            나의 감정 패턴과 변화를<br>
+            한눈에 확인해보세요.
+          </p>
+        </a>
+
+        <a
+          class="feature-card"
+          href="#"
+        >
+          <div class="feature-icon-box">
+            <img
+              class="feature-icon"
+              src="./imges/emotion-care-icon.png"
+              alt=""
+            >
+          </div>
+
+          <h2 class="feature-title">
+            감정 추천받기
+          </h2>
+
+          <p class="feature-description">
+            당신의 감정에 맞는<br>
+            케어 방법을 추천해드려요.
+          </p>
+        </a>
+
+        <a
+          class="feature-card"
+          href="#"
+        >
+          <div class="feature-icon-box">
+            <img
+              class="feature-icon"
+              src="./imges/community-icon.png"
+              alt=""
+            >
+          </div>
+
+          <h2 class="feature-title">
+            커뮤니티
+          </h2>
+
+          <p class="feature-description">
+            비슷한 고민을 가진 사람들과<br>
+            이야기를 나눠보세요.
+          </p>
+        </a>
+
+        <a
+          class="feature-card"
+          href="#"
+        >
+          <div class="feature-icon-box">
+            <img
+              class="feature-icon"
+              src="./imges/security-icon.png"
+              alt=""
+            >
+          </div>
+
+          <h2 class="feature-title">
+            안전한 보안
+          </h2>
+
+          <p class="feature-description">
+            내 소중한 기록은<br>
+            안전하게 보호돼요.
+          </p>
+        </a>
+
+      </section>
+
+    </main>
+
+    <nav
+      class="bottom-navigation"
+      aria-label="하단 메뉴"
+    >
+
+      <a
+        class="nav-item active"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/home-icon.png"
+          alt=""
+        >
+        <span>홈</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/diary-icon.png"
+          alt=""
+        >
+        <span>기록</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/statistics-icon.png"
+          alt=""
+        >
+        <span>통계</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/recommend-icon.png"
+          alt=""
+        >
+        <span>추천</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/mypage-icon.png"
+          alt=""
+        >
+        <span>마이</span>
+      </a>
+
+    </nav>
+
+    <div class="home-indicator"></div>
+
+  </div>
+</body>
+</html>

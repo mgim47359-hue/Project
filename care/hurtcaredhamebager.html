@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>감정케어 다이어리 메뉴</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100svh;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #111111;
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+    }
+
+    a,
+    button {
+      color: inherit;
+      font: inherit;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+    }
+
+    img {
+      display: block;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+    /* 휴대폰 상태바 */
+
+    .status-bar {
+      position: relative;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 35px;
+      padding:
+        max(8px, env(safe-area-inset-top))
+        24px
+        0;
+      background-color: #ffffff;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 18px;
+      height: 13px;
+    }
+
+    .signal-icon span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background-color: #111111;
+    }
+
+    .signal-icon span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal-icon span:nth-child(3) {
+      height: 10px;
+    }
+
+    .signal-icon span:nth-child(4) {
+      height: 13px;
+    }
+
+    .wifi-icon {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi-icon::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #111111;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .wifi-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .battery-icon {
+      position: relative;
+      width: 23px;
+      height: 11px;
+      border: 1.5px solid #111111;
+      border-radius: 3px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 5px;
+      border-radius: 1px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 오른쪽 본문 영역 */
+
+    .page-content {
+      width: 100%;
+      min-height: calc(100svh - 35px);
+      padding-left: 138px;
+      background-color: #ffffff;
+    }
+
+    .content-header {
+      display: grid;
+      grid-template-columns: 1fr 35px;
+      align-items: center;
+      width: 100%;
+      min-height: 78px;
+      padding: 10px 28px 9px 18px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 61px;
+      height: 61px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      overflow: hidden;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .close-icon {
+      position: relative;
+      width: 22px;
+      height: 22px;
+    }
+
+    .close-icon::before,
+    .close-icon::after {
+      position: absolute;
+      top: 10px;
+      left: 1px;
+      width: 20px;
+      height: 2px;
+      border-radius: 10px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .close-icon::before {
+      transform: rotate(45deg);
+    }
+
+    .close-icon::after {
+      transform: rotate(-45deg);
+    }
+
+    .notification-icon {
+      position: absolute;
+      top: 53px;
+      right: 80px;
+      width: 17px;
+      height: 19px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .notification-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      border-radius: 4px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .notification-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .content-main {
+      width: 100%;
+      padding: 0 20px 40px 16px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px 20px;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .feature-card {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .feature-card:last-child {
+      grid-column: 2;
+    }
+
+    .feature-icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 70px;
+      margin: 0 auto 17px;
+      border-radius: 6px;
+    }
+
+    .feature-card:nth-child(1) .feature-icon-box {
+      background-color: #f0ecff;
+    }
+
+    .feature-card:nth-child(2) .feature-icon-box {
+      background-color: #e8f7ec;
+    }
+
+    .feature-card:nth-child(3) .feature-icon-box {
+      background-color: #fff0f3;
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .feature-title {
+      margin: 0 0 9px;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.45;
+      letter-spacing: -0.6px;
+    }
+
+    .feature-description {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.8;
+      word-break: keep-all;
+    }
+
+    .security-banner {
+      width: 196px;
+      margin: 58px 0 0 -124px;
+    }
+
+    .security-banner-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* 왼쪽 사이드 메뉴 */
+
+    .side-menu {
+      position: absolute;
+      z-index: 40;
+      top: 35px;
+      left: 0;
+      width: 138px;
+      min-height: calc(100svh - 35px);
+      border-right: 1px solid #f2f2f2;
+      background-color: #ffffff;
+    }
+
+    .side-nav {
+      width: 100%;
+    }
+
+    .side-nav-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      align-items: center;
+      width: 100%;
+      min-height: 72px;
+      padding: 0 9px 0 18px;
+    }
+
+    .side-nav-item:first-child {
+      min-height: 56px;
+    }
+
+    .side-nav-item:nth-child(6) {
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .side-nav-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      white-space: nowrap;
+    }
+
+    .side-icon {
+      position: relative;
+      display: block;
+      width: 23px;
+      height: 23px;
+    }
+
+    /* 홈 아이콘 */
+
+    .home-side-icon::before {
+      position: absolute;
+      top: 8px;
+      left: 4px;
+      width: 15px;
+      height: 12px;
+      border-radius: 2px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .home-side-icon::after {
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 15px;
+      height: 15px;
+      background-color: #111111;
+      clip-path: polygon(50% 0, 100% 45%, 83% 45%, 83% 100%, 17% 100%, 17% 45%, 0 45%);
+      content: "";
+    }
+
+    /* 연필 */
+
+    .pencil-side-icon {
+      transform: rotate(-42deg);
+    }
+
+    .pencil-side-icon::before {
+      position: absolute;
+      top: 8px;
+      left: 2px;
+      width: 17px;
+      height: 8px;
+      border: 2px solid #111111;
+      border-radius: 2px;
+      content: "";
+    }
+
+    .pencil-side-icon::after {
+      position: absolute;
+      top: 9px;
+      right: -3px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 6px solid #111111;
+      content: "";
+    }
+
+    /* 차트 */
+
+    .chart-side-icon span {
+      position: absolute;
+      bottom: 2px;
+      width: 4px;
+      background-color: #111111;
+    }
+
+    .chart-side-icon span:nth-child(1) {
+      left: 2px;
+      height: 7px;
+    }
+
+    .chart-side-icon span:nth-child(2) {
+      left: 9px;
+      height: 13px;
+    }
+
+    .chart-side-icon span:nth-child(3) {
+      left: 16px;
+      height: 19px;
+    }
+
+    /* 하트 */
+
+    .heart-side-icon::before,
+    .heart-side-icon::after {
+      position: absolute;
+      top: 4px;
+      width: 13px;
+      height: 19px;
+      border-radius: 13px 13px 0 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    .heart-side-icon::before {
+      left: 11px;
+      transform: rotate(45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart-side-icon::after {
+      left: 0;
+      transform: rotate(-45deg);
+      transform-origin: 100% 100%;
+    }
+
+    /* 커뮤니티 */
+
+    .community-side-icon::before,
+    .community-side-icon::after {
+      position: absolute;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+    }
+
+    .community-side-icon::before {
+      top: 2px;
+      left: 4px;
+      width: 7px;
+      height: 7px;
+      box-shadow: 10px 0 0 #111111;
+    }
+
+    .community-side-icon::after {
+      bottom: 2px;
+      left: 1px;
+      width: 21px;
+      height: 10px;
+      border-radius: 10px 10px 3px 3px;
+    }
+
+    /* 보관함 */
+
+    .archive-side-icon {
+      width: 17px;
+      height: 20px;
+      margin-left: 2px;
+      border: 1.8px solid #111111;
+      border-radius: 2px;
+    }
+
+    .archive-side-icon::before {
+      position: absolute;
+      top: 4px;
+      left: 3px;
+      width: 9px;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .archive-side-icon::after {
+      position: absolute;
+      top: 9px;
+      left: 4px;
+      width: 7px;
+      height: 5px;
+      border-top: 1.5px solid #111111;
+      border-bottom: 1.5px solid #111111;
+      content: "";
+    }
+
+    /* 사용자 */
+
+    .user-side-icon::before {
+      position: absolute;
+      top: 1px;
+      left: 7px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #111111;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .user-side-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 3px;
+      width: 18px;
+      height: 10px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 12px 12px 0 0;
+      content: "";
+    }
+
+    /* 알림 */
+
+    .bell-side-icon {
+      width: 16px;
+      height: 18px;
+      margin-left: 3px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .bell-side-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .bell-side-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    /* 설정 */
+
+    .setting-side-icon {
+      border: 2px solid #111111;
+      border-radius: 50%;
+    }
+
+    .setting-side-icon::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border: 2px solid #111111;
+      border-radius: 50%;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .setting-side-icon::after {
+      position: absolute;
+      top: -4px;
+      left: 8px;
+      width: 3px;
+      height: 29px;
+      background-color: #111111;
+      content: "";
+      box-shadow:
+        0 0 0 0 #111111;
+      transform: rotate(45deg);
+    }
+
+    /* 스피커 */
+
+    .speaker-side-icon::before {
+      position: absolute;
+      top: 7px;
+      left: 1px;
+      width: 8px;
+      height: 9px;
+      border: 2px solid #111111;
+      content: "";
+    }
+
+    .speaker-side-icon::after {
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      width: 12px;
+      height: 17px;
+      background-color: #111111;
+      clip-path: polygon(0 28%, 100% 0, 100% 100%, 0 72%);
+      content: "";
+    }
+
+    /* 정보 */
+
+    .info-side-icon {
+      border: 2px solid #111111;
+      border-radius: 50%;
+    }
+
+    .info-side-icon::before {
+      position: absolute;
+      top: 4px;
+      left: 9px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+    }
+
+    .info-side-icon::after {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      width: 3px;
+      height: 8px;
+      border-radius: 2px;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 아이폰 하단 인디케이터 */
+
+    .home-indicator {
+      position: fixed;
+      z-index: 70;
+      bottom: 3px;
+      left: 50%;
+      width: 132px;
+      height: 5px;
+      border-radius: 999px;
+      background-color: #000000;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <span class="wifi-icon" aria-hidden="true"></span>
+        <span class="battery-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <aside class="side-menu">
+
+      <nav
+        class="side-nav"
+        aria-label="전체 메뉴"
+      >
+
+        <a
+          class="side-nav-item"
+          href="./home.html"
+        >
+          <span class="side-icon home-side-icon"></span>
+          <span class="side-nav-label">홈</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./record.html"
+        >
+          <span class="side-icon pencil-side-icon"></span>
+          <span class="side-nav-label">감정 기록</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./statistics.html"
+        >
+          <span class="side-icon chart-side-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="side-nav-label">감정 통계</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./recommend.html"
+        >
+          <span class="side-icon heart-side-icon"></span>
+          <span class="side-nav-label">추천 케어</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./community.html"
+        >
+          <span class="side-icon community-side-icon"></span>
+          <span class="side-nav-label">커뮤니티</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./archive.html"
+        >
+          <span class="side-icon archive-side-icon"></span>
+          <span class="side-nav-label">기록 보관함</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./mypage.html"
+        >
+          <span class="side-icon user-side-icon"></span>
+          <span class="side-nav-label">마이 페이지</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./notification.html"
+        >
+          <span class="side-icon bell-side-icon"></span>
+          <span class="side-nav-label">알림</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./settings.html"
+        >
+          <span class="side-icon setting-side-icon"></span>
+          <span class="side-nav-label">설정</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./notice.html"
+        >
+          <span class="side-icon speaker-side-icon"></span>
+          <span class="side-nav-label">공지사항</span>
+        </a>
+
+        <a
+          class="side-nav-item"
+          href="./contact.html"
+        >
+          <span class="side-icon info-side-icon"></span>
+          <span class="side-nav-label">문의하기</span>
+        </a>
+
+      </nav>
+
+    </aside>
+
+    <div class="page-content">
+
+      <header class="content-header">
+
+        <div class="brand-row">
+          <img
+            class="brand-logo"
+            src="./imges/logo.png"
+            alt="감정케어 다이어리 로고"
+          >
+
+          <h1 class="brand-title">
+            감정케어 다이어리
+          </h1>
+        </div>
+
+        <a
+          href="./home.html"
+          aria-label="메뉴 닫기"
+        >
+          <span class="close-icon"></span>
+        </a>
+
+      </header>
+
+      <span
+        class="notification-icon"
+        aria-hidden="true"
+      ></span>
+
+      <main class="content-main">
+
+        <section>
+          <img
+            class="hero-image"
+            src="./imges/main-banner.png"
+            alt="감정을 이해하고 나를 더 사랑하는 시간"
+          >
+        </section>
+
+        <section
+          class="feature-grid"
+          aria-label="주요 기능"
+        >
+
+          <article class="feature-card">
+
+            <div class="feature-icon-box">
+              <img
+                class="feature-icon"
+                src="./imges/emotion-chart-icon.png"
+                alt=""
+              >
+            </div>
+
+            <h2 class="feature-title">
+              감정 기록하기
+            </h2>
+
+            <p class="feature-description">
+              나의 감정 패턴과 변화를<br>
+              한눈에 확인해보세요.
+            </p>
+
+          </article>
+
+          <article class="feature-card">
+
+            <div class="feature-icon-box">
+              <img
+                class="feature-icon"
+                src="./imges/emotion-care-icon.png"
+                alt=""
+              >
+            </div>
+
+            <h2 class="feature-title">
+              감정 기록하기
+            </h2>
+
+            <p class="feature-description">
+              당신의 감정에 맞는<br>
+              케어 방법을 추천해드려요.
+            </p>
+
+          </article>
+
+          <article class="feature-card">
+
+            <div class="feature-icon-box">
+              <img
+                class="feature-icon"
+                src="./imges/security-icon.png"
+                alt=""
+              >
+            </div>
+
+            <h2 class="feature-title">
+              안전한 보안
+            </h2>
+
+            <p class="feature-description">
+              내 소중한 기록은<br>
+              안전하게 보호돼요.
+            </p>
+
+          </article>
+
+        </section>
+
+        <section class="security-banner">
+          <img
+            class="security-banner-image"
+            src="./imges/security-banner.png"
+            alt="소중한 감정을 안전하게 보호하는 보안 설정"
+          >
+        </section>
+
+      </main>
+
+    </div>
+
+    <div class="home-indicator"></div>
+
+  </div>
+</body>
+</html>

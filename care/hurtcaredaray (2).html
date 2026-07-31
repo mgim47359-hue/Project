@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>오늘의 감정 기록</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100svh;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #111111;
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      padding-bottom: calc(108px + env(safe-area-inset-bottom));
+      background-color: #ffffff;
+    }
+
+    /* 상태바 */
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 34px;
+      padding:
+        max(8px, env(safe-area-inset-top))
+        25px
+        0;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 18px;
+      height: 13px;
+    }
+
+    .signal-icon span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background-color: #111111;
+    }
+
+    .signal-icon span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal-icon span:nth-child(3) {
+      height: 10px;
+    }
+
+    .signal-icon span:nth-child(4) {
+      height: 13px;
+    }
+
+    .wifi-icon {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi-icon::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #111111;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .wifi-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .battery-icon {
+      position: relative;
+      width: 23px;
+      height: 11px;
+      border: 1.5px solid #111111;
+      border-radius: 3px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 5px;
+      border-radius: 1px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 헤더 */
+
+    .header {
+      display: grid;
+      grid-template-columns: 50px 1fr 74px;
+      align-items: center;
+      width: 100%;
+      min-height: 86px;
+      padding: 8px 20px 10px;
+    }
+
+    .left-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 28px;
+    }
+
+    .hamburger-icon {
+      position: relative;
+      width: 19px;
+      height: 16px;
+    }
+
+    .hamburger-icon span {
+      position: absolute;
+      left: 0;
+      display: block;
+      height: 2px;
+      border-radius: 999px;
+      background-color: #111111;
+    }
+
+    .hamburger-icon span:nth-child(1) {
+      top: 0;
+      width: 16px;
+    }
+
+    .hamburger-icon span:nth-child(2) {
+      top: 7px;
+      width: 19px;
+    }
+
+    .hamburger-icon span:nth-child(3) {
+      top: 14px;
+      width: 12px;
+    }
+
+    .back-icon {
+      position: relative;
+      width: 18px;
+      height: 18px;
+    }
+
+    .back-icon::before {
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      width: 12px;
+      height: 12px;
+      border-left: 2px solid #111111;
+      border-bottom: 2px solid #111111;
+      content: "";
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .back-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      width: 15px;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+      transform: translateY(-50%);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      overflow: hidden;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .right-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 13px;
+    }
+
+    .bell-icon {
+      position: relative;
+      width: 17px;
+      height: 19px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .bell-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      border-radius: 5px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .bell-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .calendar-icon {
+      position: relative;
+      width: 20px;
+      height: 18px;
+      border: 2px solid #111111;
+      border-radius: 3px;
+    }
+
+    .calendar-icon::before {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .calendar-icon::after {
+      position: absolute;
+      top: -5px;
+      left: 4px;
+      width: 9px;
+      height: 6px;
+      border-right: 2px solid #111111;
+      border-left: 2px solid #111111;
+      content: "";
+    }
+
+    /* 메인 */
+
+    .main {
+      width: 100%;
+      padding: 0 24px 40px;
+    }
+
+    .section-title {
+      margin: 12px 0 20px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* 감정 선택 */
+
+    .emotion-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .emotion-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .emotion-face {
+      width: 51px;
+      height: 51px;
+      margin-bottom: 14px;
+      object-fit: contain;
+    }
+
+    .emotion-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      white-space: nowrap;
+    }
+
+    /* 태그 */
+
+    .tag-heading {
+      display: flex;
+      align-items: center;
+      gap: 37px;
+      margin-bottom: 32px;
+    }
+
+    .tag-title,
+    .tag-guide {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .tag-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px 15px;
+      width: 100%;
+      margin-bottom: 31px;
+    }
+
+    .tag-button {
+      min-height: 45px;
+      border-radius: 4px;
+      background-color: #f7f7f7;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .tag-button.active {
+      background-color: #fff0f4;
+    }
+
+    /* 한 줄 기록 */
+
+    .field-label {
+      display: block;
+      margin: 0 0 13px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .textarea-wrap {
+      position: relative;
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    .diary-textarea {
+      display: block;
+      width: 100%;
+      height: 130px;
+      padding: 18px 16px 30px;
+      resize: none;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      outline: none;
+      background-color: #ffffff;
+      color: #222222;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .diary-textarea::placeholder {
+      color: #555555;
+    }
+
+    .text-count {
+      position: absolute;
+      right: 16px;
+      bottom: 8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* 사진 추가 */
+
+    .photo-label {
+      display: block;
+      margin: 0 0 14px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .photo-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 49px;
+      margin-left: 22px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      background-color: #ffffff;
+    }
+
+    .plus-icon {
+      position: relative;
+      width: 20px;
+      height: 20px;
+    }
+
+    .plus-icon::before,
+    .plus-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: #bdbdbd;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .plus-icon::before {
+      width: 20px;
+      height: 2px;
+    }
+
+    .plus-icon::after {
+      width: 2px;
+      height: 20px;
+    }
+
+    /* 하단 내비게이션 */
+
+    .bottom-navigation {
+      position: fixed;
+      z-index: 30;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      min-height: 106px;
+      padding:
+        13px
+        12px
+        calc(20px + env(safe-area-inset-bottom));
+      border-top: 1px solid #eeeeee;
+      background-color: #ffffff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      min-width: 0;
+      color: #111111;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+      opacity: 0.45;
+    }
+
+    .nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .home-indicator {
+      position: fixed;
+      z-index: 40;
+      bottom: 3px;
+      left: 50%;
+      width: 132px;
+      height: 5px;
+      border-radius: 999px;
+      background-color: #000000;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <span class="wifi-icon" aria-hidden="true"></span>
+        <span class="battery-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <header class="header">
+
+      <div class="left-actions">
+        <button
+          class="header-button"
+          type="button"
+          aria-label="전체 메뉴"
+        >
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        <button
+          class="header-button"
+          type="button"
+          aria-label="이전 화면"
+        >
+          <span class="back-icon"></span>
+        </button>
+      </div>
+
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="./imges/logo.png"
+          alt="감정케어 다이어리 로고"
+        >
+
+        <h1 class="brand-title">
+          오늘의 감정 기록
+        </h1>
+      </div>
+
+      <div class="right-actions">
+        <button
+          class="header-button"
+          type="button"
+          aria-label="알림"
+        >
+          <span class="bell-icon"></span>
+        </button>
+
+        <button
+          class="header-button"
+          type="button"
+          aria-label="달력"
+        >
+          <span class="calendar-icon"></span>
+        </button>
+      </div>
+
+    </header>
+
+    <main class="main">
+
+      <section>
+        <h2 class="section-title">
+          오늘 하루는 어땠나요?
+        </h2>
+
+        <div class="emotion-list">
+
+          <button
+            class="emotion-item"
+            type="button"
+          >
+            <img
+              class="emotion-face"
+              src="./imges/emotion-very-good.png"
+              alt="매우 좋음"
+            >
+            <span class="emotion-name">매우 좋음</span>
+          </button>
+
+          <button
+            class="emotion-item"
+            type="button"
+          >
+            <img
+              class="emotion-face"
+              src="./imges/emotion-good.png"
+              alt="좋음"
+            >
+            <span class="emotion-name">좋음</span>
+          </button>
+
+          <button
+            class="emotion-item"
+            type="button"
+          >
+            <img
+              class="emotion-face"
+              src="./imges/emotion-normal.png"
+              alt="보통이에요"
+            >
+            <span class="emotion-name">보통이에요</span>
+          </button>
+
+          <button
+            class="emotion-item"
+            type="button"
+          >
+            <img
+              class="emotion-face"
+              src="./imges/emotion-sad.png"
+              alt="슬펐어요"
+            >
+            <span class="emotion-name">슬펐어요.</span>
+          </button>
+
+        </div>
+      </section>
+
+      <section>
+
+        <div class="tag-heading">
+          <h2 class="tag-title">감정태그</h2>
+          <p class="tag-guide">복수 선택 가능</p>
+        </div>
+
+        <div class="tag-list">
+
+          <button
+            class="tag-button active"
+            type="button"
+          >
+            기쁨
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            평안
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            평안
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            불안
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            슬픔
+          </button>
+
+          <button
+            class="tag-button active"
+            type="button"
+          >
+            화남
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            지침
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            외로움
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            감사
+          </button>
+
+          <button
+            class="tag-button"
+            type="button"
+          >
+            기타
+          </button>
+
+        </div>
+
+      </section>
+
+      <section>
+
+        <label
+          class="field-label"
+          for="todayDiary"
+        >
+          오늘의 한줄 기록
+        </label>
+
+        <div class="textarea-wrap">
+          <textarea
+            id="todayDiary"
+            class="diary-textarea"
+            maxlength="300"
+            placeholder="지금 느끼는 감정을 자유롭게 적어보세요."
+          ></textarea>
+
+          <span class="text-count">0/300</span>
+        </div>
+
+      </section>
+
+      <section>
+
+        <span class="photo-label">
+          오늘의 사진 (선택)
+        </span>
+
+        <button
+          class="photo-box"
+          type="button"
+          aria-label="사진 추가"
+        >
+          <span class="plus-icon"></span>
+        </button>
+
+      </section>
+
+    </main>
+
+    <nav
+      class="bottom-navigation"
+      aria-label="하단 메뉴"
+    >
+
+      <a
+        class="nav-item active"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/home-icon.png"
+          alt=""
+        >
+        <span>홈</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/diary-icon.png"
+          alt=""
+        >
+        <span>기록</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/statistics-icon.png"
+          alt=""
+        >
+        <span>통계</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/recommend-icon.png"
+          alt=""
+        >
+        <span>추천</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/mypage-icon.png"
+          alt=""
+        >
+        <span>마이</span>
+      </a>
+
+    </nav>
+
+    <div class="home-indicator"></div>
+
+  </div>
+</body>
+</html>

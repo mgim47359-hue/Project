@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>감정 통계</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100svh;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #111111;
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+    }
+
+    button,
+    a {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      color: inherit;
+      font: inherit;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      padding-bottom: calc(108px + env(safe-area-inset-bottom));
+      background-color: #ffffff;
+    }
+
+    /* 상태바 */
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 34px;
+      padding:
+        max(8px, env(safe-area-inset-top))
+        25px
+        0;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 18px;
+      height: 13px;
+    }
+
+    .signal-icon span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background-color: #111111;
+    }
+
+    .signal-icon span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal-icon span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal-icon span:nth-child(3) {
+      height: 10px;
+    }
+
+    .signal-icon span:nth-child(4) {
+      height: 13px;
+    }
+
+    .wifi-icon {
+      position: relative;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi-icon::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #111111;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .wifi-icon::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .battery-icon {
+      position: relative;
+      width: 23px;
+      height: 11px;
+      border: 1.5px solid #111111;
+      border-radius: 3px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 5px;
+      border-radius: 1px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      width: 2px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background-color: #111111;
+      content: "";
+    }
+
+    /* 헤더 */
+
+    .header {
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      width: 100%;
+      min-height: 76px;
+      padding: 10px 24px 8px;
+    }
+
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+    }
+
+    .header-title {
+      margin: 0;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .back-icon {
+      position: relative;
+      display: block;
+      width: 20px;
+      height: 20px;
+    }
+
+    .back-icon::before {
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      width: 11px;
+      height: 11px;
+      border-left: 2px solid #111111;
+      border-bottom: 2px solid #111111;
+      content: "";
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .back-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      width: 15px;
+      height: 2px;
+      background-color: #111111;
+      content: "";
+      transform: translateY(-50%);
+    }
+
+    .bell-icon {
+      position: relative;
+      display: block;
+      width: 17px;
+      height: 19px;
+      border: 2px solid #111111;
+      border-bottom: 0;
+      border-radius: 10px 10px 2px 2px;
+    }
+
+    .bell-icon::before {
+      position: absolute;
+      right: -4px;
+      bottom: -2px;
+      left: -4px;
+      height: 2px;
+      border-radius: 5px;
+      background-color: #111111;
+      content: "";
+    }
+
+    .bell-icon::after {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #111111;
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    /* 메인 콘텐츠 */
+
+    .main {
+      width: 100%;
+      padding: 6px 34px 40px;
+    }
+
+    /* 기간 선택 탭 */
+
+    .period-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      margin: 0 0 48px;
+    }
+
+    .period-tab {
+      height: 33px;
+      border: 1px solid #eee6ff;
+      border-radius: 999px;
+      background-color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .period-tab.active {
+      border-color: #ff617f;
+      background-color: #ff617f;
+      color: #ffffff;
+    }
+
+    /* 주간 감정 추이 */
+
+    .chart-section {
+      position: relative;
+      width: 100%;
+      margin-bottom: 29px;
+    }
+
+    .emotion-axis {
+      position: absolute;
+      top: 19px;
+      left: -25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 123px;
+      z-index: 2;
+    }
+
+    .emotion-axis img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .chart-box {
+      position: relative;
+      width: 100%;
+      height: 172px;
+      overflow: hidden;
+      border: 1px solid #eeeeee;
+      border-radius: 9px;
+      background-color: #ffffff;
+    }
+
+    .chart-title {
+      position: absolute;
+      top: 12px;
+      left: 13px;
+      z-index: 3;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .chart-line {
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background-color: #eeeeee;
+    }
+
+    .chart-line:nth-child(2) {
+      top: 32px;
+    }
+
+    .chart-line:nth-child(3) {
+      top: 63px;
+    }
+
+    .chart-line:nth-child(4) {
+      top: 94px;
+    }
+
+    .chart-line:nth-child(5) {
+      top: 125px;
+    }
+
+    .chart-days {
+      position: absolute;
+      right: 12px;
+      bottom: 13px;
+      left: 12px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .chart-day {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    /* 감정 비율 */
+
+    .ratio-section {
+      width: 100%;
+      margin-bottom: 38px;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .ratio-content {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .donut-chart {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          #d9d9d9 0deg 360deg
+        );
+    }
+
+    .donut-chart::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .donut-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: 75px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.4;
+      transform: translate(-50%, -50%);
+    }
+
+    .ratio-list {
+      display: grid;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .ratio-item {
+      display: grid;
+      grid-template-columns: 12px 1fr 34px;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .ratio-color {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .ratio-item:nth-child(1) .ratio-color {
+      background-color: #ff647e;
+    }
+
+    .ratio-item:nth-child(2) .ratio-color {
+      background-color: #5ed4c3;
+    }
+
+    .ratio-item:nth-child(3) .ratio-color {
+      background-color: #58a7f3;
+    }
+
+    .ratio-item:nth-child(4) .ratio-color {
+      background-color: #a187df;
+    }
+
+    .ratio-item:nth-child(5) .ratio-color {
+      background-color: #d9d9d9;
+    }
+
+    .ratio-name {
+      font-weight: 500;
+    }
+
+    .ratio-value {
+      text-align: right;
+      font-weight: 500;
+    }
+
+    /* 기록 요약 */
+
+    .summary-section {
+      width: 100%;
+    }
+
+    .summary-title {
+      margin: 0 0 14px 15px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .summary-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      width: 100%;
+      padding: 0 14px;
+    }
+
+    .summary-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 71px;
+      padding: 9px 5px;
+      border-radius: 8px;
+      background-color: #f7f5f8;
+      text-align: center;
+    }
+
+    .summary-label {
+      margin-bottom: 8px;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .summary-value {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .summary-emotion {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .summary-emotion img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    /* 하단 내비게이션 */
+
+    .bottom-navigation {
+      position: fixed;
+      z-index: 30;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      min-height: 106px;
+      padding:
+        13px
+        12px
+        calc(20px + env(safe-area-inset-bottom));
+      border-top: 1px solid #ffe5e9;
+      background-color: #ffffff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      min-width: 0;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+      opacity: 0.45;
+    }
+
+    .nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .home-indicator {
+      position: fixed;
+      z-index: 40;
+      bottom: 3px;
+      left: 50%;
+      width: 132px;
+      height: 5px;
+      border-radius: 999px;
+      background-color: #000000;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <span class="wifi-icon" aria-hidden="true"></span>
+        <span class="battery-icon" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <header class="header">
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="이전 화면"
+      >
+        <span class="back-icon"></span>
+      </button>
+
+      <h1 class="header-title">
+        감정 통계
+      </h1>
+
+      <button
+        class="header-button"
+        type="button"
+        aria-label="알림"
+      >
+        <span class="bell-icon"></span>
+      </button>
+
+    </header>
+
+    <main class="main">
+
+      <section
+        class="period-tabs"
+        aria-label="통계 기간 선택"
+      >
+        <button
+          class="period-tab active"
+          type="button"
+        >
+          주간
+        </button>
+
+        <button
+          class="period-tab"
+          type="button"
+        >
+          월간
+        </button>
+
+        <button
+          class="period-tab"
+          type="button"
+        >
+          연간
+        </button>
+      </section>
+
+      <section class="chart-section">
+
+        <div
+          class="emotion-axis"
+          aria-hidden="true"
+        >
+          <img
+            src="./imges/emotion-very-good.png"
+            alt=""
+          >
+
+          <img
+            src="./imges/emotion-good.png"
+            alt=""
+          >
+
+          <img
+            src="./imges/emotion-normal.png"
+            alt=""
+          >
+
+          <img
+            src="./imges/emotion-sad.png"
+            alt=""
+          >
+        </div>
+
+        <div class="chart-box">
+
+          <h2 class="chart-title">
+            주간 감정 추이
+          </h2>
+
+          <span class="chart-line"></span>
+          <span class="chart-line"></span>
+          <span class="chart-line"></span>
+          <span class="chart-line"></span>
+
+          <div class="chart-days">
+            <span class="chart-day">월</span>
+            <span class="chart-day">화</span>
+            <span class="chart-day">수</span>
+            <span class="chart-day">목</span>
+            <span class="chart-day">금</span>
+            <span class="chart-day">토</span>
+            <span class="chart-day">일</span>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="ratio-section">
+
+        <h2 class="section-title">
+          감정 비율
+        </h2>
+
+        <div class="ratio-content">
+
+          <div class="donut-chart">
+            <span class="donut-text">
+              이번 주<br>
+              감정 비율
+            </span>
+          </div>
+
+          <div class="ratio-list">
+
+            <div class="ratio-item">
+              <span class="ratio-color"></span>
+              <span class="ratio-name">기쁨</span>
+              <span class="ratio-value">40%</span>
+            </div>
+
+            <div class="ratio-item">
+              <span class="ratio-color"></span>
+              <span class="ratio-name">평온</span>
+              <span class="ratio-value">25%</span>
+            </div>
+
+            <div class="ratio-item">
+              <span class="ratio-color"></span>
+              <span class="ratio-name">슬픔</span>
+              <span class="ratio-value">15%</span>
+            </div>
+
+            <div class="ratio-item">
+              <span class="ratio-color"></span>
+              <span class="ratio-name">불안</span>
+              <span class="ratio-value">10%</span>
+            </div>
+
+            <div class="ratio-item">
+              <span class="ratio-color"></span>
+              <span class="ratio-name">기타</span>
+              <span class="ratio-value">10%</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="summary-section">
+
+        <h2 class="summary-title">
+          기록 요약
+        </h2>
+
+        <div class="summary-list">
+
+          <article class="summary-card">
+            <span class="summary-label">
+              기록한 날
+            </span>
+            <strong class="summary-value">
+              5일
+            </strong>
+          </article>
+
+          <article class="summary-card">
+            <span class="summary-label">
+              총 기록 수
+            </span>
+            <strong class="summary-value">
+              12건
+            </strong>
+          </article>
+
+          <article class="summary-card">
+            <span class="summary-label">
+              평균 기분
+            </span>
+
+            <strong class="summary-emotion">
+              <img
+                src="./imges/emotion-good.png"
+                alt="좋음"
+              >
+              좋음
+            </strong>
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <nav
+      class="bottom-navigation"
+      aria-label="하단 메뉴"
+    >
+
+      <a
+        class="nav-item active"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/home-icon.png"
+          alt=""
+        >
+        <span>홈</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/diary-icon.png"
+          alt=""
+        >
+        <span>기록</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/statistics-icon.png"
+          alt=""
+        >
+        <span>통계</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/recommend-icon.png"
+          alt=""
+        >
+        <span>추천</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/mypage-icon.png"
+          alt=""
+        >
+        <span>마이</span>
+      </a>
+
+    </nav>
+
+    <div class="home-indicator"></div>
+
+  </div>
+</body>
+</html>
