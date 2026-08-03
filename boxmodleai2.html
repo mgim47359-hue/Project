@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>박스 모델 2개</title>
+<meta charset="UTF-8">
+<title>박스 모델</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    .parent-box {
-      width: 1000px;
-      height: 300px;
-      border: 4px solid red;
+.parent-box{
+    width:1000px;
+    height:300px;
+    border:4px solid red;
+    margin:0 auto;              /* 부모박스 가운데 정렬 */
 
-      display: flex;
-      justify-content: space-between;
-    }
+    display:flex;
+    justify-content:space-between;
+}
 
-    .child-box {
-      width: 480px;
-      height: 300px;
-      background-color: #e768e5;
-      flex-shrink: 0;
-    }
-  </style>
+.child-box{
+    width:480px;
+    height:300px;
+    background:#d866dd;
+    flex-shrink:0;
+}
+
+</style>
 </head>
 
 <body>
-  <div class="parent-box">
+
+<div class="parent-box">
     <div class="child-box">박스1</div>
     <div class="child-box">박스2</div>
-  </div>
+</div>
+
 </body>
 </html>
+
