@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>박스모델</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#ffffff;
+}
+
+/* 부모 */
+.wrap{
+    width:1000px;
+    height:300px;
+    border:5px solid #000;
+}
+
+/* 공통 */
+.wrap ul{
+    list-style:none;
+    display:flex;
+    width:100%;
+    height:145px;
+}
+
+.wrap li{
+    flex:1;
+}
+
+/* 위 영역 */
+.top{
+    border-bottom:5px solid #000;
+}
+
+.top li{
+    background:#dfeaf5;
+}
+
+.top li+li{
+    margin-left:20px;
+}
+
+/* 아래 영역 */
+.bottom{
+    height:145px;
+}
+
+.bottom li{
+    background:#f7b3c1;
+}
+
+.bottom li+li{
+    margin-left:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <ul class="top">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <ul class="bottom">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
