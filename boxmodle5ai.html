@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>박스 모델</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+ul{
+    width:1000px;
+    height:300px;
+    border:5px solid #000;
+    list-style:none;
+    display:flex;
+}
+
+li{
+    flex:1;
+    background:#fff600;
+    padding:4px;
+    font-size:12px;
+    color:#222;
+}
+
+li+li{
+    margin-left:15px;
+}
+</style>
+
+</head>
+<body>
+
+<ul>
+    <li>박스1</li>
+    <li>박스2</li>
+    <li>박스3</li>
+</ul>
+
+</body>
+</html>
