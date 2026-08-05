@@ -1,301 +1,971 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="utf-8"/>
-	<title>Kakao 지도 시작하기</title>
-	<style>
-		#map{
-			width: 1000px;
-			height: 600px;
-			margin: 0; auto;
-		}
-	</style>
-	
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>차박 장소 검색</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-width: 320px;
+      min-height: 100%;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      color: #111;
+      background: #fff;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .app {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    /* ==============================
+       검색 결과 화면
+    ============================== */
+
+    .search-screen {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100svh;
+      background: #fff;
+    }
+
+    .top-header {
+      position: relative;
+      flex-shrink: 0;
+      width: 100%;
+      height: 80px;
+      border-bottom: 1px solid #ededed;
+      background: #fff;
+    }
+
+    .back-button {
+      position: absolute;
+      left: 22px;
+      bottom: 17px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .back-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header-title {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .place-list {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 82px;
+      scrollbar-width: none;
+    }
+
+    .place-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .place-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr) 28px;
+      gap: 14px;
+      width: 100%;
+      min-height: 148px;
+      padding: 24px 24px 22px;
+      border-bottom: 1px solid #ededed;
+      background: #fff;
+      text-align: left;
+    }
+
+    .place-item:active {
+      background: #f8f9fc;
+    }
+
+    .place-thumbnail {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #eee;
+    }
+
+    .place-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .place-info {
+      min-width: 0;
+    }
+
+    .place-name {
+      margin-bottom: 4px;
+      overflow: hidden;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .place-address {
+      min-height: 39px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: #202020;
+    }
+
+    .place-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag-group {
+      display: flex;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 25px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: #5876bc;
+      color: #fff;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .distance {
+      margin-left: auto;
+      color: #4566b2;
+      font-size: 16px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .bookmark-button {
+      align-self: start;
+      width: 26px;
+      height: 26px;
+    }
+
+    .bookmark-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ==============================
+       하단 메뉴
+    ============================== */
+
+    .bottom-nav {
+      position: absolute;
+      z-index: 20;
+      left: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      height: 82px;
+      border-top: 1px solid #ececec;
+      background: #fff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: #111;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav-item img {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+    }
+
+    .nav-item.active {
+      color: #5271b9;
+    }
+
+    /* ==============================
+       지도 상세 화면
+    ============================== */
+
+    .map-screen {
+      position: absolute;
+      z-index: 30;
+      inset: 0;
+      display: none;
+      width: 100%;
+      height: 100svh;
+      background: #fff;
+    }
+
+    .map-screen.active {
+      display: block;
+    }
+
+    .map-area {
+      position: absolute;
+      inset: 0 0 147px;
+      background: #dfe7ea;
+    }
+
+    #kakaoMap {
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-back-button {
+      position: absolute;
+      z-index: 50;
+      top: calc(env(safe-area-inset-top) + 38px);
+      left: 22px;
+      width: 30px;
+      height: 30px;
+      padding: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-back-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .map-control-group {
+      position: absolute;
+      z-index: 50;
+      right: 18px;
+      bottom: 165px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .map-control-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid #e4e4e4;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+    }
+
+    .map-control-button img {
+      width: 23px;
+      height: 23px;
+      object-fit: contain;
+    }
+
+    .selected-place-card {
+      position: absolute;
+      z-index: 45;
+      left: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr) 28px;
+      gap: 14px;
+      width: 100%;
+      min-height: 147px;
+      padding: 22px 24px 20px;
+      border-top: 1px solid #e6e6e6;
+      background: #fff;
+    }
+
+    .selected-place-card .place-thumbnail {
+      width: 100px;
+      height: 100px;
+    }
+
+    .selected-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .route-button {
+      height: 27px;
+      padding: 0 11px;
+      border-radius: 8px;
+      background: #233f82;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .route-button:active {
+      opacity: 0.8;
+    }
+
+    .map-message {
+      position: absolute;
+      z-index: 60;
+      top: calc(env(safe-area-inset-top) + 90px);
+      left: 50%;
+      display: none;
+      max-width: calc(100% - 40px);
+      padding: 10px 15px;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .map-message.show {
+      display: block;
+    }
+
+    /* 화면 전환 애니메이션 */
+    .map-screen.open-animation {
+      animation: mapOpen 0.28s ease-out;
+    }
+
+    @keyframes mapOpen {
+      from {
+        opacity: 0;
+        transform: translateX(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
 </head>
+
 <body>
-	<div ></div>
-	<script >var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.64417, 126.66911), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+  <main class="app">
+    <!-- 검색 결과 화면 -->
+    <section class="search-screen" id="searchScreen">
+      <header class="top-header">
+        <button class="back-button" type="button" aria-label="뒤로 가기">
+          <img src="./images/icon-back.png" alt="" />
+        </button>
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        <h1 class="header-title">검색결과</h1>
+      </header>
 
-var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
-var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
-var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
-var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
-var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+      <div class="place-list" id="placeList">
+        <!-- JavaScript로 목록 생성 -->
+      </div>
 
-// 지도에 클릭 이벤트를 등록합니다
-// 지도를 클릭하면 선 그리기가 시작됩니다 그려진 선이 있으면 지우고 다시 그립니다
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+      <nav class="bottom-nav">
+        <a href="./home.html" class="nav-item">
+          <img src="./images/icon-home.png" alt="" />
+          <span>홈</span>
+        </a>
 
-    // 마우스로 클릭한 위치입니다 
-    var clickPosition = mouseEvent.latLng;
+        <a href="./search.html" class="nav-item active">
+          <img src="./images/icon-search-active.png" alt="" />
+          <span>검색</span>
+        </a>
 
-    // 지도 클릭이벤트가 발생했는데 선을 그리고있는 상태가 아니면
-    if (!drawingFlag) {
+        <a href="./group.html" class="nav-item">
+          <img src="./images/icon-group.png" alt="" />
+          <span>모임</span>
+        </a>
 
-        // 상태를 true로, 선이 그리고있는 상태로 변경합니다
-        drawingFlag = true;
-        
-        // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
-        deleteClickLine();
-        
-        // 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
-        deleteDistnce();
+        <a href="./live.html" class="nav-item">
+          <img src="./images/icon-live.png" alt="" />
+          <span>LIVE</span>
+        </a>
 
-        // 지도 위에 선을 그리기 위해 클릭한 지점과 해당 지점의 거리정보가 표시되고 있다면 지도에서 제거합니다
-        deleteCircleDot();
-    
-        // 클릭한 위치를 기준으로 선을 생성하고 지도위에 표시합니다
-        clickLine = new kakao.maps.Polyline({
-            map: map, // 선을 표시할 지도입니다 
-            path: [clickPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
-            strokeWeight: 3, // 선의 두께입니다 
-            strokeColor: '#db4040', // 선의 색깔입니다
-            strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-        });
-        
-        // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
-        moveLine = new kakao.maps.Polyline({
-            strokeWeight: 3, // 선의 두께입니다 
-            strokeColor: '#db4040', // 선의 색깔입니다
-            strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다    
-        });
-    
-        // 클릭한 지점에 대한 정보를 지도에 표시합니다
-        displayCircleDot(clickPosition, 0);
+        <a href="./mypage.html" class="nav-item">
+          <img src="./images/icon-my.png" alt="" />
+          <span>MY</span>
+        </a>
+      </nav>
+    </section>
 
-            
-    } else { // 선이 그려지고 있는 상태이면
+    <!-- 지도 상세 화면 -->
+    <section class="map-screen" id="mapScreen">
+      <div class="map-area">
+        <div id="kakaoMap"></div>
+      </div>
 
-        // 그려지고 있는 선의 좌표 배열을 얻어옵니다
-        var path = clickLine.getPath();
+      <button
+        type="button"
+        class="map-back-button"
+        id="mapBackButton"
+        aria-label="검색 결과로 돌아가기"
+      >
+        <img src="./images/icon-back.png" alt="" />
+      </button>
 
-        // 좌표 배열에 클릭한 위치를 추가합니다
-        path.push(clickPosition);
-        
-        // 다시 선에 좌표 배열을 설정하여 클릭 위치까지 선을 그리도록 설정합니다
-        clickLine.setPath(path);
+      <div class="map-control-group">
+        <button
+          type="button"
+          class="map-control-button"
+          id="currentLocationButton"
+          aria-label="현재 위치 보기"
+        >
+          <img src="./images/icon-current-location.png" alt="" />
+        </button>
+      </div>
 
-        var distance = Math.round(clickLine.getLength());
-        displayCircleDot(clickPosition, distance);
+      <p class="map-message" id="mapMessage"></p>
+
+      <article class="selected-place-card">
+        <div class="place-thumbnail">
+          <img id="selectedImage" src="" alt="" />
+        </div>
+
+        <div class="place-info">
+          <h2 class="place-name" id="selectedName"></h2>
+          <p class="place-address" id="selectedAddress"></p>
+
+          <div class="place-bottom">
+            <div class="selected-card-actions">
+              <span class="tag" id="selectedTag"></span>
+              <span class="tag">주차장</span>
+
+              <button
+                type="button"
+                class="route-button"
+                id="routeButton"
+              >
+                길찾기
+              </button>
+            </div>
+
+            <strong class="distance" id="selectedDistance"></strong>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="bookmark-button"
+          id="selectedBookmark"
+          aria-label="즐겨찾기"
+        >
+          <img src="./images/icon-bookmark.png" alt="" />
+        </button>
+      </article>
+    </section>
+  </main>
+
+  <!--
+    YOUR_KAKAO_JAVASCRIPT_KEY 부분에
+    카카오 개발자 사이트에서 발급받은 JavaScript 키를 입력하세요.
+  -->
+  <script
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c1150e850c41fd7881e31f1d2ab6391e&autoload=false"
+  ></script>
+
+  <script>
+    const places = [
+      {
+        id: 1,
+        name: "망원한강공원",
+        address: "서울 마포구 망원동 205-4",
+        tag: "차크닉",
+        distance: "11.1km",
+        image: "./images/mangwon-hangang.jpg",
+        latitude: 37.5524,
+        longitude: 126.8994
+      },
+      {
+        id: 2,
+        name: "광교호수공원",
+        address: "경기 수원시 영통구 광교호수로 165",
+        tag: "도심",
+        distance: "26km",
+        image: "./images/gwanggyo-lake.jpg",
+        latitude: 37.2839,
+        longitude: 127.0654
+      },
+      {
+        id: 3,
+        name: "갈론 야반데기",
+        address: "강원특별자치도 정선군 여량면",
+        tag: "오션뷰",
+        distance: "108km",
+        image: "./images/galon-camping.jpg",
+        latitude: 37.4577,
+        longitude: 128.7318
+      },
+      {
+        id: 4,
+        name: "화성 궁평항",
+        address: "경기도 화성시 서신면 궁평항로 1049-24",
+        tag: "차크닉",
+        distance: "58km",
+        image: "./images/gungpyeong-port.jpg",
+        latitude: 37.1159,
+        longitude: 126.6827
+      },
+      {
+        id: 5,
+        name: "서귀포 돈내코",
+        address: "제주특별자치도 서귀포시 돈내코로 114",
+        tag: "이색",
+        distance: "483km",
+        image: "./images/donnaeko.jpg",
+        latitude: 33.3003,
+        longitude: 126.5838
+      },
+      {
+        id: 6,
+        name: "영종도 마시안해변",
+        address: "인천광역시 중구 마시란로 662-9",
+        tag: "수도권",
+        distance: "32km",
+        image: "./images/masian-beach.jpg",
+        latitude: 37.4382,
+        longitude: 126.4112
+      }
+    ];
+
+    const placeList = document.getElementById("placeList");
+    const searchScreen = document.getElementById("searchScreen");
+    const mapScreen = document.getElementById("mapScreen");
+    const mapBackButton = document.getElementById("mapBackButton");
+    const currentLocationButton = document.getElementById(
+      "currentLocationButton"
+    );
+    const routeButton = document.getElementById("routeButton");
+    const mapMessage = document.getElementById("mapMessage");
+
+    let kakaoMap = null;
+    let placeMarker = null;
+    let currentLocationMarker = null;
+    let selectedPlace = null;
+    let currentPosition = null;
+
+    function renderPlaceList() {
+      placeList.innerHTML = places
+        .map((place) => {
+          return `
+            <article
+              class="place-item"
+              data-place-id="${place.id}"
+              tabindex="0"
+              role="button"
+              aria-label="${place.name} 지도에서 보기"
+            >
+              <div class="place-thumbnail">
+                <img
+                  src="${place.image}"
+                  alt="${place.name}"
+                />
+              </div>
+
+              <div class="place-info">
+                <h2 class="place-name">${place.name}</h2>
+                <p class="place-address">${place.address}</p>
+
+                <div class="place-bottom">
+                  <div class="tag-group">
+                    <span class="tag">${place.tag}</span>
+                    <span class="tag">주차장</span>
+                  </div>
+
+                  <span class="distance">${place.distance}</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="bookmark-button"
+                aria-label="${place.name} 즐겨찾기"
+              >
+                <img src="./images/icon-bookmark.png" alt="" />
+              </button>
+            </article>
+          `;
+        })
+        .join("");
     }
-});
-    
-// 지도에 마우스무브 이벤트를 등록합니다
-// 선을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 선의 위치를 동적으로 보여주도록 합니다
-kakao.maps.event.addListener(map, 'mousemove', function (mouseEvent) {
 
-    // 지도 마우스무브 이벤트가 발생했는데 선을 그리고있는 상태이면
-    if (drawingFlag){
-        
-        // 마우스 커서의 현재 위치를 얻어옵니다 
-        var mousePosition = mouseEvent.latLng; 
+    function handlePlaceClick(event) {
+      const bookmarkButton = event.target.closest(".bookmark-button");
 
-        // 마우스 클릭으로 그려진 선의 좌표 배열을 얻어옵니다
-        var path = clickLine.getPath();
-        
-        // 마우스 클릭으로 그려진 마지막 좌표와 마우스 커서 위치의 좌표로 선을 표시합니다
-        var movepath = [path[path.length-1], mousePosition];
-        moveLine.setPath(movepath);    
-        moveLine.setMap(map);
-        
-        var distance = Math.round(clickLine.getLength() + moveLine.getLength()), // 선의 총 거리를 계산합니다
-            content = '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + distance + '</span>m</div>'; // 커스텀오버레이에 추가될 내용입니다
-        
-        // 거리정보를 지도에 표시합니다
-        showDistance(content, mousePosition);   
-    }             
-});                 
+      if (bookmarkButton) {
+        event.stopPropagation();
+        toggleBookmark(bookmarkButton);
+        return;
+      }
 
-// 지도에 마우스 오른쪽 클릭 이벤트를 등록합니다
-// 선을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면 선 그리기를 종료합니다
-kakao.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
+      const placeItem = event.target.closest(".place-item");
 
-    // 지도 오른쪽 클릭 이벤트가 발생했는데 선을 그리고있는 상태이면
-    if (drawingFlag) {
-        
-        // 마우스무브로 그려진 선은 지도에서 제거합니다
-        moveLine.setMap(null);
-        moveLine = null;  
-        
-        // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
-        var path = clickLine.getPath();
-    
-        // 선을 구성하는 좌표의 개수가 2개 이상이면
-        if (path.length > 1) {
+      if (!placeItem) {
+        return;
+      }
 
-            // 마지막 클릭 지점에 대한 거리 정보 커스텀 오버레이를 지웁니다
-            if (dots[dots.length-1].distance) {
-                dots[dots.length-1].distance.setMap(null);
-                dots[dots.length-1].distance = null;    
-            }
+      const placeId = Number(placeItem.dataset.placeId);
+      const place = places.find((item) => item.id === placeId);
 
-            var distance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
-                content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
-                
-            // 그려진 선의 거리정보를 지도에 표시합니다
-            showDistance(content, path[path.length-1]);  
-             
+      if (place) {
+        openMapScreen(place);
+      }
+    }
+
+    function handlePlaceKeyboard(event) {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+
+      if (event.target.closest(".bookmark-button")) {
+        return;
+      }
+
+      const placeItem = event.target.closest(".place-item");
+
+      if (!placeItem) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const placeId = Number(placeItem.dataset.placeId);
+      const place = places.find((item) => item.id === placeId);
+
+      if (place) {
+        openMapScreen(place);
+      }
+    }
+
+    function toggleBookmark(button) {
+      const image = button.querySelector("img");
+      const isActive = button.classList.toggle("active");
+
+      image.src = isActive
+        ? "./images/icon-bookmark-active.png"
+        : "./images/icon-bookmark.png";
+    }
+
+    function openMapScreen(place) {
+      selectedPlace = place;
+
+      document.getElementById("selectedImage").src = place.image;
+      document.getElementById("selectedImage").alt = place.name;
+      document.getElementById("selectedName").textContent = place.name;
+      document.getElementById("selectedAddress").textContent = place.address;
+      document.getElementById("selectedTag").textContent = place.tag;
+      document.getElementById("selectedDistance").textContent =
+        place.distance;
+
+      mapScreen.classList.add("active", "open-animation");
+      searchScreen.setAttribute("aria-hidden", "true");
+
+      initializeOrMoveMap(place);
+
+      window.setTimeout(() => {
+        mapScreen.classList.remove("open-animation");
+      }, 300);
+    }
+
+    function closeMapScreen() {
+      mapScreen.classList.remove("active");
+      searchScreen.removeAttribute("aria-hidden");
+    }
+
+    function initializeOrMoveMap(place) {
+      if (
+        typeof kakao === "undefined" ||
+        !kakao.maps
+      ) {
+        showMessage("카카오 지도 API 키를 확인해 주세요.");
+        return;
+      }
+
+      kakao.maps.load(() => {
+        const destination = new kakao.maps.LatLng(
+          place.latitude,
+          place.longitude
+        );
+
+        if (!kakaoMap) {
+          const mapContainer = document.getElementById("kakaoMap");
+
+          const mapOptions = {
+            center: destination,
+            level: 4
+          };
+
+          kakaoMap = new kakao.maps.Map(mapContainer, mapOptions);
+
+          kakaoMap.addControl(
+            new kakao.maps.ZoomControl(),
+            kakao.maps.ControlPosition.RIGHT
+          );
         } else {
-
-            // 선을 구성하는 좌표의 개수가 1개 이하이면 
-            // 지도에 표시되고 있는 선과 정보들을 지도에서 제거합니다.
-            deleteClickLine();
-            deleteCircleDot(); 
-            deleteDistnce();
-
+          kakaoMap.setCenter(destination);
+          kakaoMap.setLevel(4);
         }
-        
-        // 상태를 false로, 그리지 않고 있는 상태로 변경합니다
-        drawingFlag = false;          
-    }  
-});    
 
-// 클릭으로 그려진 선을 지도에서 제거하는 함수입니다
-function deleteClickLine() {
-    if (clickLine) {
-        clickLine.setMap(null);    
-        clickLine = null;        
+        window.setTimeout(() => {
+          kakaoMap.relayout();
+          kakaoMap.setCenter(destination);
+        }, 50);
+
+        createPlaceMarker(destination, place.name);
+      });
     }
-}
 
-// 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
-// 마우스 오른쪽 클릭으로 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 생성하고 지도에 표시하는 함수입니다
-function showDistance(content, position) {
-    
-    if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
-        
-        // 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
-        distanceOverlay.setPosition(position);
-        distanceOverlay.setContent(content);
-        
-    } else { // 커스텀 오버레이가 생성되지 않은 상태이면
-        
-        // 커스텀 오버레이를 생성하고 지도에 표시합니다
-        distanceOverlay = new kakao.maps.CustomOverlay({
-            map: map, // 커스텀오버레이를 표시할 지도입니다
-            content: content,  // 커스텀오버레이에 표시할 내용입니다
-            position: position, // 커스텀오버레이를 표시할 위치입니다.
-            xAnchor: 0,
-            yAnchor: 0,
-            zIndex: 3  
-        });      
-    }
-}
+    function createPlaceMarker(position, placeName) {
+      if (placeMarker) {
+        placeMarker.setMap(null);
+      }
 
-// 그려지고 있는 선의 총거리 정보와 
-// 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 삭제하는 함수입니다
-function deleteDistnce () {
-    if (distanceOverlay) {
-        distanceOverlay.setMap(null);
-        distanceOverlay = null;
-    }
-}
+      const markerImage = new kakao.maps.MarkerImage(
+        "./images/icon-place-marker.png",
+        new kakao.maps.Size(42, 52),
+        {
+          offset: new kakao.maps.Point(21, 52)
+        }
+      );
 
-// 선이 그려지고 있는 상태일 때 지도를 클릭하면 호출하여 
-// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 표출하는 함수입니다
-function displayCircleDot(position, distance) {
-
-    // 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
-    var circleOverlay = new kakao.maps.CustomOverlay({
-        content: '<span class="dot"></span>',
+      placeMarker = new kakao.maps.Marker({
         position: position,
-        zIndex: 1
-    });
+        map: kakaoMap,
+        image: markerImage,
+        title: placeName
+      });
 
-    // 지도에 표시합니다
-    circleOverlay.setMap(map);
+      const overlayContent = `
+        <div style="
+          padding:7px 10px;
+          border-radius:7px;
+          background:#ffffff;
+          box-shadow:0 2px 8px rgba(0,0,0,.18);
+          color:#111;
+          font-size:13px;
+          font-weight:700;
+          white-space:nowrap;
+        ">
+          ${placeName}
+        </div>
+      `;
 
-    if (distance > 0) {
-        // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
-        var distanceOverlay = new kakao.maps.CustomOverlay({
-            content: '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m</div>',
-            position: position,
-            yAnchor: 1,
-            zIndex: 2
-        });
+      const overlay = new kakao.maps.CustomOverlay({
+        position: position,
+        content: overlayContent,
+        yAnchor: 2.9
+      });
 
-        // 지도에 표시합니다
-        distanceOverlay.setMap(map);
+      overlay.setMap(kakaoMap);
     }
 
-    // 배열에 추가합니다
-    dots.push({circle:circleOverlay, distance: distanceOverlay});
-}
+    function moveToCurrentLocation() {
+      if (!navigator.geolocation) {
+        showMessage("현재 위치 기능을 지원하지 않는 브라우저입니다.");
+        return;
+      }
 
-// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다
-function deleteCircleDot() {
-    var i;
+      showMessage("현재 위치를 확인하고 있습니다.");
 
-    for ( i = 0; i < dots.length; i++ ){
-        if (dots[i].circle) { 
-            dots[i].circle.setMap(null);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          currentPosition = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+
+          const currentLatLng = new kakao.maps.LatLng(
+            currentPosition.latitude,
+            currentPosition.longitude
+          );
+
+          if (currentLocationMarker) {
+            currentLocationMarker.setMap(null);
+          }
+
+          const currentMarkerImage = new kakao.maps.MarkerImage(
+            "./images/icon-my-location-marker.png",
+            new kakao.maps.Size(34, 34),
+            {
+              offset: new kakao.maps.Point(17, 17)
+            }
+          );
+
+          currentLocationMarker = new kakao.maps.Marker({
+            map: kakaoMap,
+            position: currentLatLng,
+            image: currentMarkerImage,
+            title: "현재 위치"
+          });
+
+          kakaoMap.setCenter(currentLatLng);
+          kakaoMap.setLevel(4);
+
+          showMessage("현재 위치로 이동했습니다.");
+        },
+        (error) => {
+          let message = "현재 위치를 불러올 수 없습니다.";
+
+          if (error.code === error.PERMISSION_DENIED) {
+            message = "위치 권한을 허용해 주세요.";
+          } else if (error.code === error.POSITION_UNAVAILABLE) {
+            message = "현재 위치 정보를 사용할 수 없습니다.";
+          } else if (error.code === error.TIMEOUT) {
+            message = "현재 위치 확인 시간이 초과되었습니다.";
+          }
+
+          showMessage(message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 30000
         }
+      );
+    }
 
-        if (dots[i].distance) {
-            dots[i].distance.setMap(null);
+    function startRouteNavigation() {
+      if (!selectedPlace) {
+        return;
+      }
+
+      if (!navigator.geolocation) {
+        openDestinationRouteWithoutStart();
+        return;
+      }
+
+      showMessage("현재 위치를 확인하고 있습니다.");
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          currentPosition = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+
+          const startLatitude = currentPosition.latitude;
+          const startLongitude = currentPosition.longitude;
+          const endLatitude = selectedPlace.latitude;
+          const endLongitude = selectedPlace.longitude;
+
+          /*
+            카카오맵 모바일 웹 길찾기 URL
+            sp = 출발지 좌표
+            ep = 목적지 좌표
+            by = car 자동차 길찾기
+          */
+          const routeUrl =
+            "https://m.map.kakao.com/scheme/route" +
+            `?sp=${startLatitude},${startLongitude}` +
+            `&ep=${endLatitude},${endLongitude}` +
+            "&by=car";
+
+          window.location.href = routeUrl;
+        },
+        () => {
+          openDestinationRouteWithoutStart();
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 30000
         }
+      );
     }
 
-    dots = [];
-}
+    function openDestinationRouteWithoutStart() {
+      const destinationName = encodeURIComponent(selectedPlace.name);
 
-// 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
-// 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
-// HTML Content를 만들어 리턴하는 함수입니다
-function getTimeHTML(distance) {
+      const routeUrl =
+        "https://map.kakao.com/link/to/" +
+        `${destinationName},${selectedPlace.latitude},${selectedPlace.longitude}`;
 
-    // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
-    var walkkTime = distance / 67 | 0;
-    var walkHour = '', walkMin = '';
-
-    // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
-    if (walkkTime > 60) {
-        walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+      window.open(routeUrl, "_blank");
+      showMessage("카카오맵에서 출발 위치를 선택해 주세요.");
     }
-    walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
 
-    // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
-    var bycicleTime = distance / 227 | 0;
-    var bycicleHour = '', bycicleMin = '';
+    function showMessage(message) {
+      mapMessage.textContent = message;
+      mapMessage.classList.add("show");
 
-    // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
-    if (bycicleTime > 60) {
-        bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+      window.clearTimeout(showMessage.timer);
+
+      showMessage.timer = window.setTimeout(() => {
+        mapMessage.classList.remove("show");
+      }, 2500);
     }
-    bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
 
-    // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
-    var content = '<ul class="dotOverlay distanceInfo">';
-    content += '    <li>';
-    content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
-    content += '    </li>';
-    content += '    <li>';
-    content += '        <span class="label">도보</span>' + walkHour + walkMin;
-    content += '    </li>';
-    content += '    <li>';
-    content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
-    content += '    </li>';
-    content += '</ul>'
+    placeList.addEventListener("click", handlePlaceClick);
+    placeList.addEventListener("keydown", handlePlaceKeyboard);
 
-    return content;
-}
-    </script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+    mapBackButton.addEventListener("click", closeMapScreen);
+    currentLocationButton.addEventListener(
+      "click",
+      moveToCurrentLocation
+    );
+    routeButton.addEventListener("click", startRouteNavigation);
 
-		var map = new kakao.maps.Map(container, options);
-	</script>
+    document
+      .getElementById("selectedBookmark")
+      .addEventListener("click", function () {
+        toggleBookmark(this);
+      });
+
+    renderPlaceList();
+  </script>
 </body>
 </html>
