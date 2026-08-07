@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 8px;
+  background-color: #ffffff;
+  color: #111111;
+  font-family: "Times New Roman", "Malgun Gothic", serif;
+  font-size: 16px;
+}
+
+h1 {
+  margin: 15px 0 24px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+form {
+  width: 100%;
+}
+
+fieldset {
+  min-height: 406px;
+  padding: 18px 30px;
+  border: 1px solid #777777;
+}
+
+legend {
+  padding: 0 4px;
+  font-size: 16px;
+}
+
+ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+li {
+  min-height: 43px;
+  padding-left: 2px;
+  line-height: 27px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 173px;
+  height: 21px;
+  margin-left: 4px;
+  border: 1px solid #aaaaaa;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+li label {
+  margin-right: 7px;
+}
+
+select {
+  width: 155px;
+  vertical-align: top;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+textarea {
+  width: 233px;
+  height: 81px;
+  margin-left: 4px;
+  vertical-align: top;
+  resize: both;
+  border: 1px solid #aaaaaa;
+}
+
+input[type="file"] {
+  font-family: inherit;
+}
+
+.button-area {
+  margin-top: 0;
+}
+
+button {
+  height: 25px;
+  padding: 2px 8px;
+  border: 1px solid #999999;
+  background-color: #eeeeee;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}

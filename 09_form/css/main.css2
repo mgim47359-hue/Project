@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background-color: #ffffff;
+  font-family: "Malgun Gothic", sans-serif;
+}
+
+.member-form {
+  width: 428px;
+}
+
+fieldset {
+  width: 100%;
+  height: 132px;
+  margin: 0 0 8px;
+  padding: 20px 30px;
+  border: 1px solid #777777;
+}
+
+legend {
+  padding: 0 3px;
+  font-size: 17px;
+  color: #111111;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-row label {
+  width: 92px;
+  text-align: right;
+  margin-right: 7px;
+  font-size: 17px;
+}
+
+.form-row input {
+  width: 177px;
+  height: 21px;
+  padding: 2px 5px;
+  border: 1px solid #999999;
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+.form-row input:focus {
+  outline: 1px solid #555555;
+}
