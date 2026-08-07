@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>테트리스 게임</title>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <main class="game-container">
+
+    <section class="game-box">
+
+      <header class="game-header">
+        <div>
+          <p class="sub-title">BLOCK PUZZLE</p>
+          <h1>테트리스</h1>
+        </div>
+
+        <button
+          type="button"
+          id="pauseButton"
+          class="pause-button"
+        >
+          일시정지
+        </button>
+      </header>
+
+      <div class="game-content">
+
+        <!-- 테트리스 게임 영역 -->
+        <div class="board-wrap">
+
+          <canvas
+            id="gameCanvas"
+            width="300"
+            height="600"
+          ></canvas>
+
+          <div id="gameOverlay" class="game-overlay">
+            <h2 id="overlayTitle">테트리스</h2>
+
+            <p id="overlayText">
+              게임 시작 버튼을 눌러주세요.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- 게임 정보 영역 -->
+        <aside class="game-info">
+
+          <div class="score-box">
+            <span>점수</span>
+            <strong id="score">0</strong>
+          </div>
+
+          <div class="info-row">
+
+            <div class="score-box">
+              <span>레벨</span>
+              <strong id="level">1</strong>
+            </div>
+
+            <div class="score-box">
+              <span>제거한 줄</span>
+              <strong id="lines">0</strong>
+            </div>
+
+          </div>
+
+          <div class="next-box">
+            <span>다음 블록</span>
+
+            <canvas
+              id="nextCanvas"
+              width="120"
+              height="120"
+            ></canvas>
+          </div>
+
+          <button
+            type="button"
+            id="startButton"
+            class="start-button"
+          >
+            게임 시작
+          </button>
+
+          <div class="control-guide">
+            <h2>조작 방법</h2>
+
+            <p>← → 블록 이동</p>
+            <p>↓ 블록 빠르게 내리기</p>
+            <p>↑ 블록 회전</p>
+            <p>Space 블록 즉시 내리기</p>
+            <p>P 게임 일시정지</p>
+          </div>
+
+        </aside>
+
+      </div>
+
+      <!-- 모바일 조작 버튼 -->
+      <div class="mobile-controls">
+
+        <button
+          type="button"
+          data-action="left"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          data-action="rotate"
+        >
+          ↻
+        </button>
+
+        <button
+          type="button"
+          data-action="right"
+        >
+          →
+        </button>
+
+        <button
+          type="button"
+          data-action="down"
+        >
+          ↓
+        </button>
+
+        <button
+          type="button"
+          data-action="drop"
+          class="drop-button"
+        >
+          빠르게 내리기
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
