@@ -2,149 +2,541 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#ffffff">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
   <title>감정케어 다이어리</title>
+
+  <!-- Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  >
+
+  <!-- 사용자 CSS -->
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
   <div class="app">
-    <header class="app-header">
+
+    <!-- 상태바 -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+
+      <div class="status-icons">
+        <span class="signal-text">●●●●</span>
+        <span>Wi-Fi</span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <!-- 수정된 상단 헤더 -->
+    <header class="header">
+
       <button
+        class="header-button menu-button"
         type="button"
-        class="icon-button hamburger"
-        id="menuOpenButton"
-        aria-label="전체 메뉴 열기"
-        aria-controls="sideMenu"
-        aria-expanded="false"
+        aria-label="메뉴 열기"
       >
-        <span></span><span></span><span></span>
+        <img
+          src="./imges/menu-icon.png"
+          alt=""
+        >
       </button>
 
-      <a href="./index.html" class="brand" aria-label="감정케어 다이어리 홈">
-        <span class="brand-symbol" aria-hidden="true">🌷</span>
-        <strong>감정케어 다이어리</strong>
+      <a
+        class="header-logo"
+        href="./index.html"
+      >
+        <span class="logo-heart">♡</span>
+        <span>감정케어 다이어리</span>
       </a>
 
-      <a href="./notification.html" class="icon-button bell" aria-label="알림 페이지">
-        ♡
-      </a>
+      <button
+        class="header-button notification-button"
+        type="button"
+        aria-label="알림 확인"
+      >
+        <img
+          src="./imges/bell-icon.png"
+          alt=""
+        >
+
+        <span class="notification-dot"></span>
+      </button>
+
     </header>
 
-    <aside
-      class="side-menu"
-      id="sideMenu"
-      aria-label="전체 메뉴"
-      aria-hidden="true"
-    >
-      <div class="side-menu__header">
-        <a href="./index.html" class="side-menu__brand">
-          <span aria-hidden="true">🌷</span>
-          <strong>감정케어 다이어리</strong>
-        </a>
+    <!-- 메인 콘텐츠 -->
+    <main class="main">
 
-        <button
-          type="button"
-          class="close-button"
-          id="menuCloseButton"
-          aria-label="전체 메뉴 닫기"
-        >
-          ×
-        </button>
-      </div>
+      <!-- 메인 배너 -->
+      <section
+        class="main-banner-section"
+        aria-label="감정케어 주요 배너"
+      >
 
-      <nav class="side-menu__nav" aria-label="주요 페이지">
-        <ul>
-          <li><a href="./index.html" aria-current="page"><span>⌂</span>홈</a></li>
-          <li><a href="./emotion-record.html"><span>✎</span>감정 기록</a></li>
-          <li><a href="./emotion-statistics.html"><span>▥</span>감정 통계</a></li>
-          <li><a href="./care.html"><span>♡</span>추천 케어</a></li>
-          <li><a href="./community.html"><span>♧</span>커뮤니티</a></li>
-          <li><a href="./archive.html"><span>▤</span>기록 보관함</a></li>
-          <li><a href="./mypage.html"><span>♙</span>마이 페이지</a></li>
-          <li><a href="./notification.html"><span>♢</span>알림</a></li>
-          <li><a href="./settings.html"><span>⚙</span>설정</a></li>
-          <li><a href="./notice.html"><span>♧</span>공지사항</a></li>
-          <li><a href="./contact.html"><span>?</span>문의하기</a></li>
-        </ul>
-      </nav>
-    </aside>
+        <div class="swiper main-banner-swiper">
 
-    <button
-      type="button"
-      class="overlay"
-      id="menuOverlay"
-      aria-label="메뉴 닫기"
-      tabindex="-1"
-    ></button>
+          <div class="swiper-wrapper">
 
-    <main class="main-content" id="mainContent">
-      <section class="hero">
-        <div class="hero__text">
-          <p class="eyebrow">내 마음을 돌보는 첫걸음</p>
-          <h1>
-            감정을 이해하고,<br>
-            <span>나를 더 사랑하는 시간</span>
-          </h1>
-          <p class="description">
-            하루하루 쌓인 감정을 기록하고,<br>
-            나만의 마음 루틴으로<br>
-            더 건강한 감정 생활을 만들어보세요.
-          </p>
-          <a href="./emotion-record.html" class="primary-button">
-            지금 시작하기 <span aria-hidden="true">›</span>
-          </a>
-        </div>
+            <!-- 슬라이드 1 -->
+            <article class="swiper-slide">
 
-        <div class="diary-visual" aria-hidden="true">
-          <span class="floating-heart heart-a">♥</span>
-          <span class="floating-heart heart-b">♥</span>
-          <span class="floating-heart heart-c">♥</span>
-          <span class="leaf leaf-a"></span>
-          <span class="leaf leaf-b"></span>
-          <span class="leaf leaf-c"></span>
-          <div class="book">
-            <span class="book-line"></span>
-            <span class="book-heart">♡</span>
-            <span class="book-strap"></span>
+              <div class="banner-card">
+                <img
+                  class="banner-image"
+                  src="./imges/banner-01.png"
+                  alt="나의 감정을 돌보는 감정케어 다이어리"
+                >
+
+                <div class="banner-content">
+                  <span class="banner-label">
+                    오늘의 감정 기록
+                  </span>
+
+                  <h1 class="banner-title">
+                    나의 감정을 돌보는<br>
+                    가장 쉬운 습관
+                  </h1>
+
+                  <p class="banner-description">
+                    오늘의 감정을 기록하고<br>
+                    나의 마음을 천천히 이해해 보세요.
+                  </p>
+
+                  <a
+                    class="banner-button"
+                    href="./diary.html"
+                  >
+                    감정 기록하기
+                  </a>
+                </div>
+              </div>
+
+            </article>
+
+            <!-- 슬라이드 2 -->
+            <article class="swiper-slide">
+
+              <div class="banner-card">
+                <img
+                  class="banner-image"
+                  src="./imges/banner-02.png"
+                  alt="AI 감정 분석 서비스"
+                >
+
+                <div class="banner-content">
+                  <span class="banner-label">
+                    AI 감정 분석
+                  </span>
+
+                  <h2 class="banner-title">
+                    기록한 감정을<br>
+                    AI가 분석해 드려요
+                  </h2>
+
+                  <p class="banner-description">
+                    나의 감정 변화와 자주 나타나는<br>
+                    마음의 흐름을 확인해 보세요.
+                  </p>
+
+                  <a
+                    class="banner-button"
+                    href="#emotion-statistics"
+                  >
+                    감정 통계 보기
+                  </a>
+                </div>
+              </div>
+
+            </article>
+
+            <!-- 슬라이드 3 -->
+            <article class="swiper-slide">
+
+              <div class="banner-card">
+                <img
+                  class="banner-image"
+                  src="./imges/banner-03.png"
+                  alt="맞춤 마음 돌봄 콘텐츠"
+                >
+
+                <div class="banner-content">
+                  <span class="banner-label">
+                    맞춤 마음 돌봄
+                  </span>
+
+                  <h2 class="banner-title">
+                    오늘의 나에게 필요한<br>
+                    휴식을 만나보세요
+                  </h2>
+
+                  <p class="banner-description">
+                    음악과 명상, 따뜻한 문장으로<br>
+                    지친 마음을 편안하게 돌보세요.
+                  </p>
+
+                  <a
+                    class="banner-button"
+                    href="./recommend.html"
+                  >
+                    추천 콘텐츠 보기
+                  </a>
+                </div>
+              </div>
+
+            </article>
+
           </div>
+
+          <!-- 배너 표시점 -->
+          <div class="swiper-pagination"></div>
+
         </div>
+
       </section>
 
-      <section class="features" aria-label="주요 기능">
-        <a href="./emotion-statistics.html" class="feature-card">
-          <span class="feature-icon purple">▥</span>
-          <strong>감정 통계 보기</strong>
-          <p>나의 감정 패턴과 변화를<br>한눈에 확인해보세요.</p>
-        </a>
+      <!-- 기존 감정 통계 -->
+      <section
+        class="statistics-section"
+        id="emotion-statistics"
+      >
 
-        <a href="./care.html" class="feature-card">
-          <span class="feature-icon green">♧</span>
-          <strong>감정 케어 받기</strong>
-          <p>당신의 감정에 맞는<br>케어 방법을 추천해드려요.</p>
-        </a>
+        <div class="section-heading">
+          <div>
+            <span class="section-label">
+              EMOTION REPORT
+            </span>
 
-        <a href="./settings.html" class="feature-card feature-card--last">
-          <span class="feature-icon pink">▣</span>
-          <strong>안전한 보안</strong>
-          <p>내 소중한 기록은<br>안전하게 보호돼요.</p>
-        </a>
+            <h2 class="page-title">
+              감정 통계
+            </h2>
+          </div>
+
+          <span class="section-date">
+            이번 주
+          </span>
+        </div>
+
+        <!-- 기간 선택 -->
+        <div
+          class="period-tabs"
+          aria-label="통계 기간 선택"
+        >
+          <button
+            class="period-tab active"
+            type="button"
+            data-period="week"
+          >
+            주간
+          </button>
+
+          <button
+            class="period-tab"
+            type="button"
+            data-period="month"
+          >
+            월간
+          </button>
+
+          <button
+            class="period-tab"
+            type="button"
+            data-period="year"
+          >
+            연간
+          </button>
+        </div>
+
+        <!-- 감정 추이 -->
+        <section class="chart-section">
+
+          <div
+            class="emotion-axis"
+            aria-hidden="true"
+          >
+            <img
+              src="./imges/emotion-very-good.png"
+              alt=""
+            >
+
+            <img
+              src="./imges/emotion-good.png"
+              alt=""
+            >
+
+            <img
+              src="./imges/emotion-normal.png"
+              alt=""
+            >
+
+            <img
+              src="./imges/emotion-sad.png"
+              alt=""
+            >
+          </div>
+
+          <div class="chart-box">
+
+            <h3 class="chart-title">
+              주간 감정 추이
+            </h3>
+
+            <span class="chart-line line-one"></span>
+            <span class="chart-line line-two"></span>
+            <span class="chart-line line-three"></span>
+            <span class="chart-line line-four"></span>
+
+            <div class="chart-bars">
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 46%;"
+                ></span>
+                <span class="chart-day">월</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 68%;"
+                ></span>
+                <span class="chart-day">화</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 40%;"
+                ></span>
+                <span class="chart-day">수</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 76%;"
+                ></span>
+                <span class="chart-day">목</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 58%;"
+                ></span>
+                <span class="chart-day">금</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 86%;"
+                ></span>
+                <span class="chart-day">토</span>
+              </div>
+
+              <div class="chart-bar-item">
+                <span
+                  class="chart-bar"
+                  style="height: 72%;"
+                ></span>
+                <span class="chart-day">일</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- 감정 비율 -->
+        <section class="ratio-section">
+
+          <h3 class="content-title">
+            감정 비율
+          </h3>
+
+          <div class="ratio-content">
+
+            <div class="donut-chart">
+              <span class="donut-text">
+                이번 주<br>
+                감정 비율
+              </span>
+            </div>
+
+            <div class="ratio-list">
+
+              <div class="ratio-item">
+                <span class="ratio-color joy"></span>
+                <span class="ratio-name">기쁨</span>
+                <span class="ratio-value">40%</span>
+              </div>
+
+              <div class="ratio-item">
+                <span class="ratio-color calm"></span>
+                <span class="ratio-name">평온</span>
+                <span class="ratio-value">25%</span>
+              </div>
+
+              <div class="ratio-item">
+                <span class="ratio-color sad"></span>
+                <span class="ratio-name">슬픔</span>
+                <span class="ratio-value">15%</span>
+              </div>
+
+              <div class="ratio-item">
+                <span class="ratio-color anxiety"></span>
+                <span class="ratio-name">불안</span>
+                <span class="ratio-value">10%</span>
+              </div>
+
+              <div class="ratio-item">
+                <span class="ratio-color etc"></span>
+                <span class="ratio-name">기타</span>
+                <span class="ratio-value">10%</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- 기록 요약 -->
+        <section class="summary-section">
+
+          <h3 class="content-title">
+            기록 요약
+          </h3>
+
+          <div class="summary-list">
+
+            <article class="summary-card">
+              <span class="summary-label">
+                기록한 날
+              </span>
+
+              <strong class="summary-value">
+                5일
+              </strong>
+            </article>
+
+            <article class="summary-card">
+              <span class="summary-label">
+                총 기록 수
+              </span>
+
+              <strong class="summary-value">
+                12건
+              </strong>
+            </article>
+
+            <article class="summary-card">
+              <span class="summary-label">
+                평균 기분
+              </span>
+
+              <strong class="summary-emotion">
+                <img
+                  src="./imges/emotion-good.png"
+                  alt=""
+                >
+                좋음
+              </strong>
+            </article>
+
+          </div>
+
+        </section>
+
       </section>
 
-      <section class="security">
-        <div>
-          <h2>소중한 감정을 안전하게</h2>
-          <p>프라이빗 보안으로 보호하세요.</p>
-          <a href="./settings.html">보안 설정 <span aria-hidden="true">›</span></a>
-        </div>
-        <div class="lock" aria-hidden="true">
-          <span class="lock-top"></span>
-          <span class="lock-body">⌁</span>
-        </div>
-      </section>
     </main>
+
+    <!-- 기존 하단 메뉴 -->
+    <nav
+      class="bottom-navigation"
+      aria-label="하단 메뉴"
+    >
+
+      <a
+        class="nav-item active"
+        href="./index.html"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/home-icon.png"
+          alt=""
+        >
+        <span>홈</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="./diary.html"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/diary-icon.png"
+          alt=""
+        >
+        <span>기록</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="#emotion-statistics"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/statistics-icon.png"
+          alt=""
+        >
+        <span>통계</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="./recommend.html"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/recommend-icon.png"
+          alt=""
+        >
+        <span>추천</span>
+      </a>
+
+      <a
+        class="nav-item"
+        href="./mypage.html"
+      >
+        <img
+          class="nav-icon"
+          src="./imges/mypage-icon.png"
+          alt=""
+        >
+        <span>마이</span>
+      </a>
+
+    </nav>
+
+    <div class="home-indicator"></div>
+
   </div>
 
-  <script src="./script.js"></script>
+  <!-- Swiper JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- 사용자 JavaScript -->
+  <script src="./main.js"></script>
 </body>
 </html>
