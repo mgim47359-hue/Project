@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>폼 구성 요소 알아보기</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <h1>[폼 구성 요소 알아보기]</h1>
+
+  <form>
+    <fieldset>
+      <legend>기본 폼 구성 요소</legend>
+
+      <ol>
+        <li>
+          <label for="userId">ID</label>
+          <input type="text" id="userId" name="userId">
+        </li>
+
+        <li>
+          <label for="password">PASSWORD</label>
+          <input type="password" id="password" name="password">
+        </li>
+
+        <li>
+          <label>
+            <input type="radio" name="gender" value="male" checked>
+            남
+          </label>
+
+          <label>
+            <input type="radio" name="gender" value="female">
+            여
+          </label>
+        </li>
+
+        <li>
+          <span>여행</span>
+
+          <label>
+            <input type="checkbox" name="hobby" value="travel">
+            여행
+          </label>
+
+          <label>
+            <input type="checkbox" name="hobby" value="reading" checked>
+            독서
+          </label>
+
+          <label>
+            <input type="checkbox" name="hobby" value="etc">
+          </label>
+        </li>
+
+        <li>
+          <label for="color">칼라선택 :</label>
+
+          <select id="color" name="color" size="4">
+            <option selected>:::::: Color Select::::::</option>
+            <option>빨간색</option>
+            <option>녹색</option>
+            <option>파란색</option>
+          </select>
+        </li>
+
+        <li>
+          <label for="message">MESSAGE</label>
+          <textarea id="message" name="message"></textarea>
+        </li>
+
+        <li>
+          <label for="file">파일 첨부 :</label>
+          <input type="file" id="file" name="file">
+        </li>
+      </ol>
+    </fieldset>
+
+    <div class="button-area">
+      <button type="submit">전송하기</button>
+      <button type="reset">다시작성</button>
+      <button type="button">검색</button>
+    </div>
+  </form>
+
+</body>
+</html>
