@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 8px;
+    background-color: #222;
+    color: #fff;
+    font-family: "맑은 고딕", sans-serif;
+    font-size: 13px;
+}
+
+/* 제목 */
+h1 {
+    margin: 10px 0 28px 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+
+    text-shadow:
+        1px 1px 0 #999,
+        2px 2px 0 #666;
+}
+
+/* 폼 */
+form {
+    width: 100%;
+}
+
+/* 큰 테두리 */
+fieldset {
+    width: 100%;
+    height: 440px;
+    padding: 15px 12px 10px 12px;
+    border: 1px solid #cccccc;
+}
+
+/* HTML5 입력요소 */
+legend {
+    padding: 0 4px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* 목록 */
+ul {
+    margin: 8px 0 15px 20px;
+    padding-left: 20px;
+}
+
+li {
+    height: 27px;
+    line-height: 27px;
+}
+
+/* 입력 요소 공통 */
+input {
+    vertical-align: middle;
+}
+
+/* 아이디 */
+#userId {
+    width: 38px;
+    height: 20px;
+}
+
+/* 패스워드 */
+#password {
+    width: 115px;
+    height: 20px;
+}
+
+/* 이메일 */
+#email {
+    width: 115px;
+    height: 20px;
+}
+
+/* 검색 */
+#search {
+    width: 115px;
+    height: 20px;
+    background-color: #bdbdbd;
+}
+
+/* URL */
+#url {
+    width: 100px;
+    height: 20px;
+}
+
+/* 숫자 */
+#number {
+    width: 48px;
+    height: 20px;
+}
+
+/* 전화번호 */
+#tel {
+    width: 115px;
+    height: 20px;
+}
+
+/* range */
+#range {
+    width: 110px;
+}
+
+/* 날짜 */
+#date {
+    width: 108px;
+    height: 24px;
+}
+
+/* 색상 */
+#color {
+    width: 43px;
+    height: 24px;
+    padding: 2px;
+}
+
+/* 라디오 버튼 */
+input[type="radio"] {
+    margin-left: 3px;
+    margin-right: 5px;
+}
+
+/* progress */
+progress {
+    width: 140px;
+    height: 13px;
+    vertical-align: middle;
+}
+
+/* meter */
+meter {
+    width: 70px;
+    height: 13px;
+    vertical-align: middle;
+}
+
+/* 가로선 */
+hr {
+    margin-top: 4px;
+    border: 0;
+    border-top: 1px solid #dddddd;
+}
+
+/* 하단 버튼 */
+.button-box {
+    margin-top: 7px;
+}
+
+.button-box input {
+    padding: 2px 7px;
+    margin-right: 3px;
+    border: 1px solid #999;
+    background-color: #f5f5f5;
+    color: #111;
+    cursor: pointer;
+}
