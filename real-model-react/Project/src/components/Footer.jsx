@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="footer"><div className="container footer-inner"><div><strong>REAL MODEL</strong><p>리얼모델 모집 랜딩페이지 데모</p></div><p>© 2026 Real Model Landing. All rights reserved.</p></div></footer>}
