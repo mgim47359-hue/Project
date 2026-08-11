@@ -1,0 +1,2 @@
+const steps=['서류심사','개별연락','사전미팅','내원상담','최종선정'];
+export default function Process(){return <section className="section" id="process"><div className="container"><div className="section-head"><div><span className="eyebrow">PROCESS</span><h2>지원은 이렇게 진행됩니다</h2></div><p>지원자가 다음 단계를 예측할 수 있도록 5단계로 단순화했습니다.</p></div><div className="process-row">{steps.map((s,i)=><div className="process-card" key={s}><span>STEP {String(i+1).padStart(2,'0')}</span><strong>{s}</strong></div>)}</div></div></section>}
