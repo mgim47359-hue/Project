@@ -1,0 +1,157 @@
+/* =========================
+   초기화
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+
+/* =========================
+   전체 화면
+========================= */
+
+body {
+  background-color: #111111;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   폼 전체 영역
+========================= */
+
+.contact-wrap {
+  width: 100%;
+  min-height: 908px;
+
+  padding-top: 139px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.contact-form {
+  width: 925px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================
+   NAME / EMAIL
+========================= */
+
+.form-input {
+  display: block;
+
+  width: 925px;
+  height: 58px;
+
+  margin: 0 0 32px 0;
+
+  padding-left: 16px;
+  padding-right: 16px;
+
+  background-color: #262626;
+
+  border: none;
+  border-radius: 0;
+  outline: none;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+/* placeholder */
+
+.form-input::placeholder {
+  color: #696969;
+  opacity: 1;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.form-textarea {
+  display: block;
+
+  width: 925px;
+  height: 185px;
+
+  margin: 0 0 47px 0;
+
+  padding-top: 22px;
+  padding-left: 24px;
+  padding-right: 20px;
+
+  background-color: #262626;
+
+  border: none;
+  border-radius: 0;
+  outline: none;
+
+  resize: none;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+
+/* textarea placeholder */
+
+.form-textarea::placeholder {
+  color: #696969;
+  opacity: 1;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-btn {
+  display: block;
+
+  width: 184px;
+  height: 60px;
+
+  margin: 0;
+
+  background-color: #ff0050;
+
+  border: none;
+  border-radius: 5px;
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
+  text-align: center;
+
+  cursor: pointer;
+}
