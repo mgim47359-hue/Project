@@ -1,47 +1,173 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quick Menu Banner</title>
-  <link rel="stylesheet" href="./style.css">
+  <title>강원천문대</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <section class="quick-menu">
-    <div class="inner">
-      <a href="#" class="menu-item reserve">
-        <div class="text-box">
-          <h2>RESERVE</h2>
-          <p>예약하기</p>
-          <span class="arrow"></span>
-        </div>
-        <div class="reserve-icon" aria-hidden="true">
-          <span class="screen"><b>N</b></span>
-          <span class="stand"></span>
-        </div>
-      </a>
+  <a class="skip-link" href="#main-content">본문 바로가기</a>
 
-      <a href="#" class="menu-item save-point">
-        <div class="text-box">
-          <h2>SAVE POINT</h2>
-          <p>사후 적립</p>
-          <span class="arrow"></span>
-        </div>
-        <div class="point-icon" aria-hidden="true"><span>P</span></div>
-      </a>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="logo">
+        <a href="#" aria-label="강원천문대 메인으로 이동">
+          <img src="Header/logo.png" alt="강원천문대">
+        </a>
+      </h1>
 
-      <a href="#" class="menu-item delivery">
-        <div class="text-box">
-          <h2>DELIVERY</h2>
-          <p>딜리버리</p>
-          <span class="arrow"></span>
-        </div>
-        <div class="delivery-logo" aria-hidden="true">
-          <strong>OUTBACK</strong>
-          <span>Delivery</span>
-        </div>
-      </a>
+      <nav class="gnb" aria-label="주요 메뉴">
+        <div class="submenu-bg" aria-hidden="true"></div>
+        <ul class="main-menu">
+          <li>
+            <a href="#">강원천문대</a>
+            <ul class="sub-menu">
+              <li><a href="#">인사말</a></li>
+              <li><a href="#">오시는길</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">이용안내</a>
+            <ul class="sub-menu">
+              <li><a href="#">프로그램</a></li>
+              <li><a href="#">관람시간표</a></li>
+              <li><a href="#">이달의 별자리</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">천문대예약</a>
+            <ul class="sub-menu">
+              <li><a href="#">예약하기</a></li>
+              <li><a href="#">예약확인</a></li>
+              <li><a href="#">예약취소</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">천문대소개</a>
+            <ul class="sub-menu">
+              <li><a href="#">공지사항</a></li>
+              <li><a href="#">방문후기</a></li>
+              <li><a href="#">자유게시판</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </div>
-  </section>
+  </header>
+
+  <main id="main-content">
+    <section class="visual" aria-label="강원천문대 주요 소식">
+      <div class="slide active">
+        <img src="Slide/slide1.jpg" alt="밤하늘의 별과 강원천문대 관측 체험 이미지">
+        <div class="slide-copy">
+          <p class="eyebrow">GANGWON OBSERVATORY</p>
+          <h2>별빛이 머무는 곳, 강원천문대</h2>
+          <p>도심을 벗어나 선명한 밤하늘을 직접 만나보세요.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Slide/slide2.jpg" alt="망원경으로 밤하늘을 관측하는 체험 이미지">
+        <div class="slide-copy">
+          <p class="eyebrow">OBSERVATION EXPERIENCE</p>
+          <h2>망원경 너머로 만나는 우주</h2>
+          <p>전문 해설과 함께 달과 행성, 별자리를 관측합니다.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="Slide/slide3.jpg" alt="어린이 천문 만들기 활동 이미지">
+        <div class="slide-copy">
+          <p class="eyebrow">SPACE MAKING CLASS</p>
+          <h2>보고, 만들고, 기억하는 천문 체험</h2>
+          <p>가족과 함께 우주를 배우는 특별한 하루를 완성하세요.</p>
+        </div>
+      </div>
+      <div class="slide-count" aria-hidden="true">
+        <span class="current">01</span><span class="bar"></span><span>03</span>
+      </div>
+    </section>
+
+    <section class="contents-wrap" aria-label="강원천문대 콘텐츠">
+      <div class="tab-card">
+        <div class="tab-buttons" role="tablist" aria-label="공지사항과 갤러리">
+          <button type="button" class="tab-btn active" id="tab-notice" role="tab" aria-selected="true" aria-controls="panel-notice">공지사항</button>
+          <button type="button" class="tab-btn" id="tab-gallery" role="tab" aria-selected="false" aria-controls="panel-gallery">갤러리</button>
+        </div>
+
+        <div class="tab-panel active" id="panel-notice" role="tabpanel" aria-labelledby="tab-notice">
+          <ul class="notice-list">
+            <li><a href="#" class="popup-open">2026년 여름 별자리 특별관측 프로그램 안내</a><time datetime="2026-08-10">2026.08.10</time></li>
+            <li><a href="#">강원천문대 관람시간 및 야간 운영 안내</a><time datetime="2026-08-03">2026.08.03</time></li>
+            <li><a href="#">천체망원경 만들기 체험 참가자 모집</a><time datetime="2026-07-28">2026.07.28</time></li>
+            <li><a href="#">기상 악화 시 관측 프로그램 운영 안내</a><time datetime="2026-07-21">2026.07.21</time></li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery" hidden>
+          <div class="gallery-list">
+            <a href="#"><img src="Contents/gallery1.jpg" alt="강원천문대 야간 관측 모습"></a>
+            <a href="#"><img src="Contents/gallery2.jpg" alt="천체망원경 체험 모습"></a>
+            <a href="#"><img src="Contents/gallery3.jpg" alt="별자리 만들기 활동 모습"></a>
+          </div>
+        </div>
+      </div>
+
+      <a class="banner-card" href="#" aria-label="강원천문대 별빛 관측 프로그램 자세히 보기">
+        <img src="Contents/banner.jpg" alt="강원천문대 별빛 관측 프로그램 배너">
+        <span class="banner-text">
+          <strong>STARLIGHT NIGHT</strong>
+          <em>별빛 관측 프로그램</em>
+          <span>자세히 보기 →</span>
+        </span>
+      </a>
+
+      <div class="quick-card">
+        <h2>바로가기</h2>
+        <div class="quick-links">
+          <a href="#"><span class="quick-icon">01</span><strong>예약하기</strong><small>관측 프로그램 신청</small></a>
+          <a href="#"><span class="quick-icon">02</span><strong>관람시간표</strong><small>운영시간 확인</small></a>
+          <a href="#"><span class="quick-icon">03</span><strong>오시는길</strong><small>교통 및 위치 안내</small></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-logo" href="#" aria-label="강원천문대 메인으로 이동">
+        <img src="Footer/footer-logo.png" alt="강원천문대">
+      </a>
+      <div class="footer-info">
+        <nav class="footer-menu" aria-label="하단 메뉴">
+          <a href="#">개인정보처리방침</a>
+          <a href="#">이용약관</a>
+          <a href="#">이메일무단수집거부</a>
+        </nav>
+        <p>강원특별자치도 별빛로 100 · 대표전화 033-000-0000</p>
+        <p>Copyright © Gangwon Observatory. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="popup-overlay" aria-hidden="true">
+    <section class="layer-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" tabindex="-1">
+      <div class="popup-head">
+        <h2 id="popup-title">2026년 여름 별자리 특별관측 프로그램 안내</h2>
+        <button type="button" class="popup-close" aria-label="팝업 닫기">×</button>
+      </div>
+      <div class="popup-body">
+        <p>강원천문대에서는 여름 밤하늘의 대표 별자리와 행성을 관측하는 특별 프로그램을 운영합니다.</p>
+        <p><strong>운영기간</strong> 2026년 8월 15일 ~ 8월 31일</p>
+        <p><strong>운영시간</strong> 20:00 ~ 22:00</p>
+        <p><strong>프로그램</strong> 별자리 해설, 천체망원경 관측, 별자리 만들기 체험</p>
+        <p>기상 상황에 따라 관측 일정이 변경될 수 있으니 방문 전 공지사항을 확인해 주세요.</p>
+      </div>
+      <div class="popup-foot">
+        <button type="button" class="popup-close popup-close-btn">닫기</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
