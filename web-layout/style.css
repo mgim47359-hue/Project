@@ -1,0 +1,102 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+#wrap {
+    width: 1200px;
+    height: 700px;
+    margin: 0;
+}
+
+.header {
+    width: 1200px;
+    height: 100px;
+    display: flex;
+}
+
+.header-left {
+    position: relative;
+    width: 600px;
+    height: 100px;
+    background-color: #faebd7;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: 200px;
+    height: 40px;
+    background-color: #ffe4c4;
+    line-height: 40px;
+}
+
+.header-right {
+    width: 600px;
+    height: 100px;
+    background-color: #5f9ea0;
+}
+
+.slide {
+    width: 1200px;
+    height: 300px;
+    background-color: #00008b;
+}
+
+.contents {
+    width: 1200px;
+    height: 200px;
+    display: flex;
+}
+
+.content {
+    width: 400px;
+    height: 200px;
+}
+
+.notice {
+    background-color: #ffd700;
+}
+
+.banner {
+    background-color: #ff69b4;
+}
+
+.shortcut {
+    background-color: #cd5c5c;
+}
+
+.footer {
+    width: 1200px;
+    height: 100px;
+    display: flex;
+}
+
+.footer-logo {
+    width: 200px;
+    height: 100px;
+    background-color: #e6e6fa;
+}
+
+.copyright {
+    width: 800px;
+    height: 100px;
+    background-color: #ff00ff;
+}
+
+.sns {
+    width: 200px;
+    height: 100px;
+    background-color: #ffdead;
+}
