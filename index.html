@@ -3,28 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Position 응용</title>
+  <title>Quick Menu Banner</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="box purple purple-1" data-color="보라색"></div>
-    <div class="box purple purple-2" data-color="보라색"></div>
-    <div class="box purple purple-3" data-color="보라색"></div>
-    <div class="box purple purple-4" data-color="보라색"></div>
+  <section class="quick-menu">
+    <div class="inner">
+      <a href="#" class="menu-item reserve">
+        <div class="text-box">
+          <h2>RESERVE</h2>
+          <p>예약하기</p>
+          <span class="arrow"></span>
+        </div>
+        <div class="reserve-icon" aria-hidden="true">
+          <span class="screen"><b>N</b></span>
+          <span class="stand"></span>
+        </div>
+      </a>
 
-    <div class="box yellow yellow-1" data-color="노란색"></div>
-    <div class="box yellow yellow-2" data-color="노란색"></div>
-    <div class="box yellow yellow-3" data-color="노란색"></div>
-    <div class="box yellow yellow-4" data-color="노란색"></div>
+      <a href="#" class="menu-item save-point">
+        <div class="text-box">
+          <h2>SAVE POINT</h2>
+          <p>사후 적립</p>
+          <span class="arrow"></span>
+        </div>
+        <div class="point-icon" aria-hidden="true"><span>P</span></div>
+      </a>
 
-    <div class="box red red-1" data-color="빨간색"></div>
-    <div class="box red red-2" data-color="빨간색"></div>
-    <div class="box red red-3" data-color="빨간색"></div>
-    <div class="box red red-4" data-color="빨간색"></div>
-
-    <div class="box black" data-color="검정색"></div>
-  </div>
-  <script src="./script.js"></script>
+      <a href="#" class="menu-item delivery">
+        <div class="text-box">
+          <h2>DELIVERY</h2>
+          <p>딜리버리</p>
+          <span class="arrow"></span>
+        </div>
+        <div class="delivery-logo" aria-hidden="true">
+          <strong>OUTBACK</strong>
+          <span>Delivery</span>
+        </div>
+      </a>
+    </div>
+  </section>
 </body>
 </html>

@@ -1,40 +1,209 @@
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
 body {
-  width:100%;
-  min-height:100vh;
-  background:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  font-family:Arial, sans-serif;
+  background: #fff;
+  font-family: Arial, "Malgun Gothic", sans-serif;
 }
-.container {
-  position:relative;
-  width:1000px;
-  height:1000px;
-  background:rgb(135,206,234);
-  overflow:hidden;
+
+.quick-menu {
+  width: 100%;
 }
-.box {
-  position:absolute;
-  width:200px;
-  height:200px;
-  cursor:pointer;
+
+.inner {
+  width: 1180px;
+  height: 160px;
+  margin: 0 auto;
+  display: flex;
 }
-.purple { background:rgb(129,0,127); z-index:1; }
-.purple-1 { top:0; left:0; }
-.purple-2 { top:0; right:0; }
-.purple-3 { bottom:0; left:0; }
-.purple-4 { bottom:0; right:0; }
-.yellow { background:rgb(255,255,0); z-index:2; }
-.yellow-1 { top:100px; left:100px; }
-.yellow-2 { top:100px; right:100px; }
-.yellow-3 { bottom:100px; left:100px; }
-.yellow-4 { bottom:100px; right:100px; }
-.red { background:rgb(254,0,0); z-index:3; }
-.red-1 { top:200px; left:200px; }
-.red-2 { top:200px; right:200px; }
-.red-3 { bottom:200px; left:200px; }
-.red-4 { bottom:200px; right:200px; }
-.black { width:200px; height:200px; top:400px; left:400px; background:#000; z-index:4; }
-.box.selected { outline:5px solid #fff; outline-offset:-5px; }
+
+.menu-item {
+  position: relative;
+  display: block;
+  width: 33.3333%;
+  height: 160px;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+
+.reserve { background: #907354; }
+.save-point { background: #434343; }
+.delivery { background: #c30606; }
+
+.text-box {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+  z-index: 2;
+}
+
+.text-box h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: #fff;
+}
+
+.text-box p {
+  margin-top: 7px;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #fff;
+}
+
+.arrow {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,.85);
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid #fff;
+  transform: rotate(45deg);
+}
+
+.reserve-icon {
+  position: absolute;
+  top: 49px;
+  right: 89px;
+  width: 70px;
+  height: 70px;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 67px;
+  height: 52px;
+  border: 4px solid #fff;
+  border-radius: 5px;
+}
+
+.screen::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 13px;
+  height: 8px;
+  background: #907354;
+}
+
+.screen b {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 23px;
+  line-height: 24px;
+  color: #d7b58c;
+}
+
+.stand {
+  position: absolute;
+  left: 36px;
+  top: 50px;
+  width: 4px;
+  height: 14px;
+  background: #fff;
+}
+
+.stand::after {
+  content: "";
+  position: absolute;
+  left: -14px;
+  bottom: -1px;
+  width: 31px;
+  height: 4px;
+  background: #fff;
+}
+
+.point-icon {
+  position: absolute;
+  top: 40px;
+  right: 92px;
+  width: 65px;
+  height: 65px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.point-icon span {
+  font-size: 28px;
+  font-weight: 700;
+  color: #d7b58c;
+}
+
+.delivery-logo {
+  position: absolute;
+  top: 61px;
+  right: 70px;
+  width: 110px;
+  text-align: center;
+  color: #fff;
+}
+
+.delivery-logo strong {
+  position: relative;
+  display: block;
+  padding-top: 2px;
+  border-top: 4px solid #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 17px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.delivery-logo strong::before,
+.delivery-logo strong::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.delivery-logo strong::before { left: 5px; }
+.delivery-logo strong::after { right: 5px; }
+
+.delivery-logo span {
+  display: block;
+  margin-top: 0;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 17px;
+  font-style: italic;
+  transform: rotate(-4deg);
+}
+
+@media (max-width: 1180px) {
+  .inner { width: 100%; }
+}
