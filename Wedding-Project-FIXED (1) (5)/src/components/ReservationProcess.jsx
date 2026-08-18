@@ -1,0 +1,2 @@
+import React from 'react';
+export default function ReservationProcess(){const steps=['드레스 둘러보기','예약 신청','담당자 확인','예약 확정','매장 방문 & 피팅'];return <section className="section"><div className="inner"><span className="eyebrow">YOUR BRIDAL APPOINTMENT</span><h2>예약부터 피팅까지<br/>간단하게 진행돼요.</h2><div className="process-row">{steps.map((s,i)=><div className="process-card" key={s}><small>STEP {String(i+1).padStart(2,'0')}</small><strong>{s}</strong></div>)}</div></div></section>}

@@ -1,0 +1,2 @@
+import React from 'react';
+export default function About(){return <section className="section" id="about"><div className="inner about-grid"><div className="about-image"><img src={process.env.PUBLIC_URL+'/images/about.png'} alt="웨딩드레스 브랜드 이미지"/></div><div className="about-copy"><span className="eyebrow">ABOUT MAISON ÉCLAT</span><h2>TIMELESS<br/>BEAUTY</h2><p>시간이 지나도 변하지 않는 아름다움. 섬세한 디테일과 우아한 실루엣을 통해 당신의 가장 특별한 순간을 완성합니다.</p><p>드레스 하나하나가 신부의 개성과 분위기를 자연스럽게 드러낼 수 있도록 상담부터 피팅까지 세심하게 안내합니다.</p></div></div></section>}

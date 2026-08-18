@@ -1,0 +1,2 @@
+import React from 'react';
+export default function Location(){return <section className="section soft" id="contact"><div className="inner location-grid"><div><span className="eyebrow">VISIT US</span><h2>MAISON ÉCLAT<br/>BRIDAL SEOUL</h2><p>서울 강남구 웨딩로 00<br/>T. 02-000-0000</p><p>Tue - Sun 10:00 - 19:00<br/>Monday Closed</p></div><div className="map-placeholder"><span>LOCATION</span><strong>예약 확정 후 상세 위치 안내</strong><p>실제 운영 시 Kakao Map 또는 Google Map을 연결할 수 있습니다.</p></div></div></section>}
