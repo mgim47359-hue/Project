@@ -1,0 +1,7 @@
+@charset "utf-8";
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#efefef;}
+body{font-family:"Noto Sans KR","Malgun Gothic",Arial,sans-serif;}
+.page-wrap{width:100%;display:flex;justify-content:center;padding:0;}
+.fullpage-image{display:block;width:min(100%,760px);height:auto;margin:0 auto;}
+@media (max-width:760px){.fullpage-image{width:100%;}}
