@@ -1,0 +1,313 @@
+/* =========================================
+   RESET
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+}
+
+body {
+    font-family:
+        "Pretendard",
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+
+    color: #222;
+    background: #fff;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* 웹 접근성용 숨김 텍스트 */
+.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+
+/* =========================================
+   HEADER SECTION
+========================================= */
+.header {
+    width: 100%;
+    height: 150px;
+    background-color: #fff;
+}
+
+
+/* =========================================
+   HEADER INNER
+   1200px
+========================================= */
+.header-inner {
+    position: relative;
+
+    width: 1200px;
+    height: 150px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+/* =========================================
+   SEARCH SECTION
+========================================= */
+.header-search {
+    width: 310px;
+}
+
+.search-form {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.search-form input {
+    flex: 1;
+    height: 100%;
+
+    padding: 0 15px;
+
+    border: 0;
+    outline: none;
+
+    font-size: 14px;
+    color: #333;
+
+    background-color: #fff;
+}
+
+.search-form input::placeholder {
+    color: #bbb;
+}
+
+
+/* 검색 버튼 */
+.search-button {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #075d22;
+}
+
+.search-button img {
+    width: 19px;
+    height: 19px;
+
+    object-fit: contain;
+}
+
+
+
+/* =========================================
+   LOGO SECTION
+========================================= */
+.header-logo {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.header-logo a {
+    display: block;
+}
+
+.header-logo img {
+    width: 150px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+
+/* =========================================
+   HEADER RIGHT SECTION
+========================================= */
+.header-right {
+    width: 380px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: 22px;
+}
+
+
+
+/* =========================================
+   MEMBER MENU SECTION
+========================================= */
+.member-menu ul {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.member-menu a {
+    font-size: 17px;
+    font-weight: 400;
+
+    color: #555;
+}
+
+.member-menu a:hover,
+.member-menu a:focus {
+    color: #075d22;
+}
+
+
+
+/* =========================================
+   HEADER MENU SECTION
+========================================= */
+.header-menu ul {
+    display: flex;
+    align-items: center;
+}
+
+.header-menu li {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+}
+
+
+/* 메뉴 사이 구분선 */
+.header-menu li:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    width: 1px;
+    height: 12px;
+
+    background-color: #ddd;
+
+    transform: translateY(-50%);
+}
+
+
+/* 요청사항 : 메뉴바 17px */
+.header-menu a {
+    font-size: 17px;
+    font-weight: 400;
+
+    color: #333;
+
+    white-space: nowrap;
+}
+
+.header-menu a:hover,
+.header-menu a:focus {
+    color: #075d22;
+}
+
+
+/* 고객센터 */
+.header-menu .customer {
+    padding-left: 0;
+
+    gap: 6px;
+}
+
+.header-menu .customer img {
+    width: 17px;
+    height: 17px;
+
+    object-fit: contain;
+}
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: #efeee9;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: #efeee9;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>집반찬연구소</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top inner">
+      <div class="search-box">
+        <input type="text" placeholder="반찬을 검색해주세요." aria-label="반찬 검색" />
+        <button type="button" aria-label="검색">⌕</button>
+      </div>
+
+      <a class="brand" href="#" aria-label="집반찬연구소 홈">
+        <img src="./images/imgi_1_close.gif" alt="집반찬연구소" />
+      </a>
+
+      <div class="member-menu">
+        <a href="#">로그인</a>
+        <a href="#">회원가입</a>
+        <a href="#">내정보</a>
+      </div>
+    </div>
+
+    <nav class="main-nav inner" aria-label="주요 메뉴">
+      <a href="#"><span>◔</span> 전화주문</a>
+      <a href="#"><span>▣</span> 브랜드</a>
+      <a href="#"><span>▤</span> 반찬보기</a>
+      <a href="#"><span>♧</span> 장바구니</a>
+    </nav>
+
+    <section class="hero" aria-label="신규회원 혜택">
+      <div class="hero-inner inner">
+        <p class="eyebrow">신규회원을 위한 쿠폰팩 즉시 발급!</p>
+        <h1>집반찬연구소의 신규회원 혜택</h1>
+
+        <div class="hero-plates" aria-hidden="true">
+          <img class="plate plate-left" src="./images/imgi_11_logo_pc.svg" alt="" />
+          <img class="plate plate-center" src="./images/hero-center.png" alt="" />
+          <img class="plate plate-right" src="./images/hero-right.png" alt="" />
+        </div>
+
+        <div class="hero-arrow left" aria-hidden="true">‹</div>
+        <div class="hero-arrow right" aria-hidden="true">›</div>
+        <div class="pager" aria-label="배너 페이지"><strong>4</strong><span>6</span></div>
+      </div>
+    </section>
+
+    <section class="category-wrap">
+      <div class="category-list inner">
+        <a class="category" href="#"><img src="./images/imgi_256_1833_ZIP_P_9396_A.jpg" alt="숨죽임 정식"/><span>숨죽임 정식</span></a>
+        <a class="category" href="#"><img src="./images/imgi_262_ZIP_P_8079_T.jpg" alt="5분 식탁"/><span>5분 식탁</span></a>
+        <a class="category" href="#"><img src="./images/imgi_268_1631_ZIP_P_9346_T.jpg" alt="정기 식단"/><span>정기 식단</span></a>
+        <a class="category" href="#"><img src="./images/imgi_268_1631_ZIP_P_9346_T.jpg" alt="원디쉬"/><span>원디쉬</span></a>
+        <a class="category" href="#"><img src="./images/imgi_257_1830_ZIP_P_9393_A.jpg="저당 반찬"/><span>저당 반찬</span></a>
+        <a class="category" href="#"><img src="./images/imgi_269_478_ZIP_P_9077_T_2.jpg alt="알뜰 반찬"/><span>알뜰 반찬</span></a>
+        <a class="category" href="#"><img src="./images/imgi_260_ZIP_P_0213_T.jpg="여름 제철반찬"/><span>여름 제철반찬</span></a>
+        <a class="category" href="#"><img src="./images/cat08.png" alt="어린이 반찬"/><span>어린이 반찬</span></a>
+      </div>
+      <button class="more-btn" type="button">더보기 <span>⌄</span></button>
+    </section>
+  </header>
+
+  <main class="demo-space" aria-hidden="true"></main>
+</body>
+</html>
+<!-- =========================================
+     HERO SECTION
+========================================== -->
+<main class="hero-section">
+    <div class="hero-inner">
+
+        <!-- PREMIUM MEAL BANNER SECTION -->
+        <section class="premium-banner">
+            ...
+        </section>
+
+        <!-- MD RECOMMEND TITLE SECTION -->
+        <section class="recommend-heading">
+            ...
+        </section>
+
+        <!-- PRODUCT LIST SECTION -->
+        <section class="product-section">
+            ...
+        </section>
+
+        <!-- PROMOTION BANNER SECTION -->
+        <section class="promotion-section">
+            ...
+        </section>
+
+    </div>
+</main>
+from PIL import Image
+from pathlib import Path
+import zipfile, shutil, os, textwrap
+
+src = Path("/mnt/data/2fdac71e-eff7-4a74-8f7f-527acabf205e.png")
+img = Image.open(src)
+
+root = Path("/mnt/data/jibanchan-hero-new-recommend")
+images = root / "images"
+
+if root.exists():
+    shutil.rmtree(root)
+images.mkdir(parents=True, exist_ok=True)
+
+# 시안에서 실제 음식 이미지 영역을 분리 저장
+crops = {
+    "new-01.png": (108, 114, 241, 294),
+    "new-02.png": (249, 114, 382, 294),
+    "new-03.png": (392, 114, 524, 294),
+    "new-04.png": (534, 114, 667, 294),
+    "recommend-main.png": (108, 522, 340, 756),
+    "pick-01.png": (352, 591, 410, 647),
+    "pick-02.png": (412, 591, 470, 647),
+    "pick-03.png": (472, 591, 530, 647),
+    "pick-04.png": (532, 591, 590, 647),
+    "pick-05.png": (592, 591, 650, 647),
+}
+for filename, box in crops.items():
+    img.crop(box).save(images / filename)
+
+html = """<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>집반찬연구소 - 추천 반찬</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         HERO SECTION
+         width 100% / inner 1280px / height 700px
+    ========================================== -->
+    <main class="hero-section">
+        <div class="hero-inner">
+
+            <!-- =========================================
+                 NEW PRODUCT SECTION
+            ========================================== -->
+            <section class="new-product-section">
+
+                <!-- NEW PRODUCT TITLE SECTION -->
+                <div class="section-heading">
+                    <div>
+                        <h1 class="hero-title">새로 나온 반찬</h1>
+                        <p>따끈따끈한 신메뉴 출시</p>
+                    </div>
+                    <a href="#" class="view-all">전체보기 &gt;</a>
+                </div>
+
+                <!-- NEW PRODUCT LIST SECTION -->
+                <div class="new-product-list">
+
+                    <article class="new-card">
+                        <a href="#">
+                            <div class="image-box">
+                                <img src="./images/" alt="꽃잎 무생채">
+                                <span class="cart-icon">▣</span>
+                            </div>
+                            <span class="badge">채소반찬</span>
+                            <h2 class="middle-title">꽃잎 무생채</h2>
+                            <p>꽃잎 담은, 아삭한 무채가 입맛을 깨워요!</p>
+                            <strong>2,800원</strong>
+                        </a>
+                    </article>
+
+                    <article class="new-card">
+                        <a href="#">
+                            <div class="image-box">
+                                <img src="./images/new-02.png" alt="마늘쫑채 장아찌">
+                                <span class="cart-icon">▣</span>
+                            </div>
+                            <span class="badge">밑반찬</span>
+                            <h2 class="middle-title">마늘쫑채 장아찌</h2>
+                            <p>단짠이 매력인 아삭한 밑반찬</p>
+                            <strong>3,300원</strong>
+                        </a>
+                    </article>
+
+                    <article class="new-card">
+                        <a href="#">
+                            <div class="image-box">
+                                <img src="./images/new-03.png" alt="한돈 사태김치찜">
+                                <span class="cart-icon">▣</span>
+                            </div>
+                            <span class="badge">신제품</span>
+                            <h2 class="middle-title">한돈 사태김치찜</h2>
+                            <p>깊은 맛의 김치와 부드러운 한돈</p>
+                            <strong>10,800원</strong>
+                        </a>
+                    </article>
+
+                    <article class="new-card">
+                        <a href="#">
+                            <div class="image-box">
+                                <img src="./images/new-04.png" alt="매콤 한돈 사태찜">
+                                <span class="cart-icon">▣</span>
+                            </div>
+                            <span class="badge">신제품</span>
+                            <h2 class="middle-title">매콤 한돈 사태찜</h2>
+                            <p>맛있게 매콤한 한돈 사태 요리</p>
+                            <strong>10,800원</strong>
+                        </a>
+                    </article>
+
+                    <button type="button" class="next-button" aria-label="다음 상품">›</button>
+                </div>
+            </section>
+
+
+            <!-- =========================================
+                 CUSTOMER RECOMMEND SECTION
+            ========================================== -->
+            <section class="customer-recommend-section">
+
+                <!-- CUSTOMER RECOMMEND TITLE SECTION -->
+                <div class="recommend-title-wrap">
+                    <h2 class="section-title">고객이 추천하는 찐 추천 반찬</h2>
+
+                    <div class="recommend-tabs">
+                        <button type="button" class="active">고수님 추천</button>
+                        <button type="button">김○○님 추천</button>
+                        <button type="button">장○○님 추천</button>
+                        <button type="button">엄마님 추천</button>
+                    </div>
+                </div>
+
+                <!-- CUSTOMER RECOMMEND CONTENT SECTION -->
+                <div class="recommend-content">
+
+                    <!-- RECOMMEND MAIN IMAGE SECTION -->
+                    <div class="recommend-main">
+                        <img src="./images/recommend-main.png" alt="고객 추천 반찬 한상">
+                    </div>
+
+                    <!-- RECOMMEND BASKET SECTION -->
+                    <div class="recommend-basket">
+                        <div class="basket-heading">
+                            <div>
+                                <h3 class="middle-title">고수님의 장바구니</h3>
+                                <p>매일 먹던 메뉴는 새롭게!<br>건강하고 든든하게 추천해요.</p>
+                            </div>
+                            <div class="customer-emoji">👩‍👧</div>
+                        </div>
+
+                        <div class="basket-products">
+                            <article>
+                                <img src="./images/pick-01.png" alt="옥수수 버무리">
+                                <span>별미</span>
+                                <h4>옥수수 버무리</h4>
+                                <strong>2,900원</strong>
+                            </article>
+
+                            <article>
+                                <img src="./images/pick-02.png" alt="새콤 오이무침">
+                                <span>밑반찬</span>
+                                <h4>새콤 오이무침</h4>
+                                <strong>2,900원</strong>
+                            </article>
+
+                            <article>
+                                <img src="./images/pick-03.png" alt="숙주나물무침">
+                                <span>채소반찬</span>
+                                <h4>숙주나물무침</h4>
+                                <strong>2,900원</strong>
+                            </article>
+
+                            <article>
+                                <img src="./images/pick-04.png" alt="시금치나물">
+                                <span>채소반찬</span>
+                                <h4>시금치나물</h4>
+                                <strong>5,800원</strong>
+                            </article>
+
+                            <article>
+                                <img src="./images/pick-05.png" alt="감자채볶음">
+                                <span>볶음</span>
+                                <h4>감자채볶음</h4>
+                                <strong>2,800원</strong>
+                            </article>
+                        </div>
+
+                        <a href="#" class="basket-button">▣ 장바구니 한 번에 담기</a>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
+"""
+
+css = """/* =========================================
+   RESET
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 1280px
+    <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>집반찬연구소 - 원더스푼 & 정기식단</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         HERO SECTION
+         전체 가로 100% / inner 1280px / 높이 700px
+    ========================================== -->
+    <main class="hero-section">
+        <div class="hero-inner">
+
+            <!-- =========================================
+                 DELIVERY BANNER SECTION
+            ========================================== -->
+            <section class="delivery-section" aria-label="새벽배송 안내">
+                <a href="#" class="delivery-banner">
+                    <img src="./images/delivery-banner.png" alt="우리집은 새벽배송이 가능한가요">
+                </a>
+            </section>
+
+
+            <!-- =========================================
+                 WONDERSPOON SECTION
+            ========================================== -->
+            <section class="wonderspoon-section">
+
+                <!-- WONDERSPOON TITLE SECTION -->
+                <div class="section-heading yellow-heading">
+                    <img class="character" src="./images/character.png" alt="">
+                    <h1 class="hero-title">원더스푼</h1>
+                    <p>[! ] 집반찬 시그니처 우리 아이 반찬</p>
+                    <a class="view-all" href="#">전체보기 &gt;</a>
+                </div>
+
+                <!-- WONDERSPOON PRODUCT SECTION -->
+                <div class="product-list wonderspoon-products">
+
+                    <article class="product-card">
+                        <a href="#">
+                            <div class="product-image">
+                                <img src="./images/wonder-01.png" alt="매콤 우리 장아찌김치마리">
+                                <span class="discount">12%</span>
+                                <span class="cart">▣</span>
+                            </div>
+                            <div class="product-info">
+                                <div class="badges"><span>신제품</span><span>집반찬</span></div>
+                                <h2 class="middle-title">[원더스푼] 매콤 우리 장아찌김치마리</h2>
+                                <p>맛있게 즐기는 우리 아이 한 끼</p>
+                                <strong>12% 3,790원</strong>
+                                <del>4,300원</del>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="product-card">
+                        <a href="#">
+                            <div class="product-image">
+                                <img src="./images/wonder-02.png" alt="한우 버섯볶음">
+                                <span class="cart">▣</span>
+                            </div>
+                            <div class="product-info">
+                                <div class="badges"><span>신제품</span><span>집반찬</span></div>
+                                <h2 class="middle-title">[원더스푼] 한우 버섯볶음</h2>
+                                <p>담백하고 든든한 한우 버섯 반찬</p>
+                                <strong>4,500원</strong>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="product-card">
+                        <a href="#">
+                            <div class="product-image">
+                                <img src="./images/wonder-03.png" alt="뿌리채소 한우찜">
+                                <span class="cart">▣</span>
+                            </div>
+                            <div class="product-info">
+                                <div class="badges"><span>신제품</span><span>집반찬</span></div>
+                                <h2 class="middle-title">[원더스푼] 뿌리채소 한우찜</h2>
+                                <p>채소와 한우를 부드럽게 조린 반찬</p>
+                                <strong>4,500원</strong>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="product-card">
+                        <a href="#">
+                            <div class="product-image">
+                                <img src="./images/wonder-04.png" alt="한우 스테이크소스 덮밥">
+                                <span class="cart">▣</span>
+                            </div>
+                            <div class="product-info">
+                                <div class="badges"><span>신제품</span><span>집반찬</span></div>
+                                <h2 class="middle-title">[원더스푼] 한우 스테이크소스 덮밥</h2>
+                                <p>한우와 풍미 깊은 소스가 어우러진 메뉴</p>
+                                <strong>4,500원</strong>
+                            </div>
+                        </a>
+                    </article>
+
+                    <button class="slider-next" type="button" aria-label="다음 상품">›</button>
+                </div>
+            </section>
+
+
+            <!-- =========================================
+                 REGULAR MEAL SECTION
+            ========================================== -->
+            <section class="regular-meal-section">
+
+                <!-- REGULAR MEAL TITLE SECTION -->
+                <div class="regular-title">
+                    <h2 class="section-title">정기식단</h2>
+                </div>
+
+                <!-- REGULAR MEAL PRODUCT SECTION -->
+                <div class="meal-list">
+
+                    <article class="meal-card">
+                        <a href="#">
+                            <div class="meal-image">
+                                <img src="./images/meal-01.png" alt="골고루반찬식단">
+                                <span class="discount">8%</span>
+                                <span class="cart">▣</span>
+                            </div>
+                            <span class="badge">모락모락</span>
+                            <h3 class="middle-title">골고루반찬식단</h3>
+                            <p>맛과 균형을 챙긴 식단</p>
+                            <strong><em>8%</em> 33,990원</strong>
+                        </a>
+                    </article>
+
+                    <article class="meal-card">
+                        <a href="#">
+                            <div class="meal-image">
+                                <img src="./images/meal-02.png" alt="실속식단">
+                                <span class="discount">11%</span>
+                                <span class="cart">▣</span>
+                            </div>
+                            <span class="badge">모락모락</span>
+                            <h3 class="middle-title">실속식단</h3>
+                            <p>부담 없이 알찬 한 끼</p>
+                            <strong><em>11%</em> 34,590원</strong>
+                        </a>
+                    </article>
+
+                    <article class="meal-card">
+                        <a href="#">
+                            <div class="meal-image">
+                                <img src="./images/meal-03.png" alt="시니어식단">
+                                <span class="discount">14%</span>
+                                <span class="cart">▣</span>
+                            </div>
+                            <span class="badge">모락모락</span>
+                            <h3 class="middle-title">시니어식단</h3>
+                            <p>부드럽고 균형 잡힌 식단</p>
+                            <strong><em>14%</em> 35,990원</strong>
+                        </a>
+                    </article>
+
+                    <article class="meal-card">
+                        <a href="#">
+                            <div class="meal-image">
+                                <img src="./images/meal-04.png" alt="건강한 시니어식단">
+                                <span class="discount">18%</span>
+                                <span class="cart">▣</span>
+                            </div>
+                            <span class="badge">모락모락</span>
+                            <h3 class="middle-title">건강한 시니어식단</h3>
+                            <p>건강까지 생각한 정기식단</p>
+                            <strong><em>18%</em> 39,990원</strong>
+                        </a>
+                    </article>
+
+                    <button class="slider-next meal-next" type="button" aria-label="다음 식단">›</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>집반찬연구소 - 정기식단과 반찬 순위</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         WEEKLY MENU SECTION
+         전체 폭 100% / inner 1280px / 높이 362px
+    ========================================== -->
+    <section class="weekly-section" aria-labelledby="weekly-title">
+        <div class="section-inner">
+
+            <!-- =========================================
+                 WEEKLY TITLE SECTION
+            ========================================== -->
+            <header class="section-title-area">
+                <div>
+                    <h1 id="weekly-title">이번주 정기식단</h1>
+                    <p>반찬 고민되는 분들에게 추천드리는 반찬구독!</p>
+                </div>
+
+                <a href="#" class="view-all" aria-label="이번주 정기식단 전체보기">
+                    전체보기 <span aria-hidden="true">›</span>
+                </a>
+            </header>
+
+            <!-- =========================================
+                 WEEKLY PLAN CARD SECTION
+            ========================================== -->
+            <div class="weekly-card">
+
+                <!-- =========================================
+                     WEEKLY SIDE MENU SECTION
+                ========================================== -->
+                <nav class="weekly-side-menu" aria-label="정기식단 종류">
+                    <a href="#" class="active">골고루반찬식단</a>
+                    <a href="#">실속식단</a>
+                    <a href="#">시니어식단</a>
+                    <a href="#">건강한 시니어식단</a>
+                    <a href="#">가족식단</a>
+                    <a href="#">든든한 가족식단</a>
+                    <a href="#">아이식단</a>
+                    <a href="#">든든한 아이식단</a>
+                </nav>
+
+                <!-- =========================================
+                     WEEKLY MENU CONTENT SECTION
+                ========================================== -->
+                <div class="weekly-content">
+                    <div class="weekly-content-head">
+                        <h2>골고루반찬식단</h2>
+                        <span>메인요리 1, 반찬 5종 구성의 식단이에요.</span>
+                    </div>
+
+                    <!-- =========================================
+                         FIRST WEEK MENU SECTION
+                    ========================================== -->
+                    <div class="meal-row">
+                        <h3>8월 18~20일 (화/수/목)</h3>
+                        <ul class="meal-list">
+                            <li>
+                                <img src="./images/meal-01.png" alt="수제 불고기 식단">
+                                <span>수제 불고기</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-02.png" alt="배추김치">
+                                <span>배추김치</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-03.png" alt="제육볶음">
+                                <span>제육볶음</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-04.png" alt="한입 연근조림">
+                                <span>연근조림</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-05.png" alt="가지나물">
+                                <span>가지나물</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-06.png" alt="계란두부부침">
+                                <span>두부부침</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- =========================================
+                         SECOND WEEK MENU SECTION
+                    ========================================== -->
+                    <div class="meal-row second">
+                        <h3>8월 21~24일 (금/토/일)</h3>
+                        <ul class="meal-list">
+                            <li>
+                                <img src="./images/meal-07.png" alt="매콤 닭볶음">
+                                <span>닭볶음</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-08.png" alt="느타리버섯볶음">
+                                <span>버섯볶음</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-09.png" alt="콩나물무침">
+                                <span>콩나물무침</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-10.png" alt="계란부침">
+                                <span>계란부침</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-11.png" alt="한입 채소무침">
+                                <span>채소무침</span>
+                            </li>
+                            <li>
+                                <img src="./images/meal-12.png" alt="매콤 고추무침">
+                                <span>고추무침</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- =========================================
+                         WEEKLY PURCHASE SECTION
+                    ========================================== -->
+                    <div class="purchase-area">
+                        <div class="price-box">
+                            <span>개별 구매 대신, 반찬 꾸러미</span>
+                            <strong>36,800원</strong>
+                        </div>
+                        <a href="#" class="purchase-button">정기식단 구매하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================================
+         RANKING SECTION
+         전체 폭 100% / inner 1280px / 높이 362px
+    ========================================== -->
+    <section class="ranking-section" aria-labelledby="ranking-title">
+        <div class="section-inner">
+
+            <!-- =========================================
+                 RANKING TITLE SECTION
+            ========================================== -->
+            <header class="ranking-title-area">
+                <h2 id="ranking-title">반찬 순위</h2>
+                <p>최근 2주간 반찬 순위예요!</p>
+            </header>
+
+            <!-- =========================================
+                 RANKING TAB SECTION
+            ========================================== -->
+            <nav class="ranking-tabs" aria-label="반찬 순위 기준">
+                <button type="button" class="active">판매량</button>
+                <button type="button">댓글</button>
+                <button type="button">추천</button>
+            </nav>
+
+            <!-- =========================================
+                 RANKING LIST SECTION
+            ========================================== -->
+            <div class="ranking-grid">
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number">1</span>
+                        <img src="./images/rank-01.png" alt="메추리알 간장조림">
+                    </div>
+                    <div class="rank-content">
+                        <h3>메추리알 간장조림</h3>
+                        <p><em>12%</em> <strong>3,790원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="메추리알 간장조림 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number">2</span>
+                        <img src="./images/rank-02.png" alt="무생채">
+                    </div>
+                    <div class="rank-content">
+                        <span class="small-label">반기</span>
+                        <h3>무생채</h3>
+                        <p><strong>2,900원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="무생채 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number">3</span>
+                        <img src="./images/rank-03.png" alt="콩나물무침">
+                    </div>
+                    <div class="rank-content">
+                        <span class="small-label">반기 베스트</span>
+                        <h3>콩나물무침</h3>
+                        <p><em>15%</em> <strong>2,390원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="콩나물무침 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number gray">4</span>
+                        <img src="./images/rank-04.png" alt="들깨시래기볶음">
+                    </div>
+                    <div class="rank-content">
+                        <span class="small-label">별미채</span>
+                        <h3>들깨시래기볶음</h3>
+                        <p><strong>4,300원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="들깨시래기볶음 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number gray">5</span>
+                        <img src="./images/rank-05.png" alt="유자향 오이무피클">
+                    </div>
+                    <div class="rank-content">
+                        <h3>유자향 오이무피클</h3>
+                        <p><strong>3,900원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="유자향 오이무피클 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+                <article class="rank-item">
+                    <div class="rank-thumb">
+                        <span class="rank-number gray">6</span>
+                        <img src="./images/rank-06.png" alt="소고기유전과 새콤파채">
+                    </div>
+                    <div class="rank-content">
+                        <span class="small-label">반기</span>
+                        <h3>소고기유전과 새콤파채</h3>
+                        <p><em>13%</em> <strong>12,900원</strong></p>
+                    </div>
+                    <a href="#" class="cart-button" aria-label="소고기유전과 새콤파채 장바구니 담기">
+                        <img src="./images/icon-cart.svg" alt="장바구니 아이콘">
+                    </a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- 웹 접근성 및 반응형 설정 -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>집반찬연구소 Footer</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css"
+    >
+</head>
+
+<body>
+
+
+    <!-- =========================================
+         BANNER SECTION
+    ========================================== -->
+    <section
+        class="banner-section"
+        aria-label="집반찬연구소 배너"
+    >
+
+        <div class="banner-inner">
+
+            <!-- 배너 영역 예시 -->
+            <!-- 실제 배너 이미지가 있다면 아래처럼 사용 -->
+            <!--
+            <img
+                src="./images/banner.jpg"
+                alt="집반찬연구소 이벤트 안내 배너"
+            >
+            -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FOOTER SECTION
+    ========================================== -->
+    <footer class="footer">
+
+
+        <!-- =========================================
+             FOOTER INNER SECTION
+             1280px
+        ========================================== -->
+        <div class="footer-inner">
+
+
+            <!-- =========================================
+                 CUSTOMER CENTER SECTION
+            ========================================== -->
+            <section
+                class="footer-customer"
+                aria-labelledby="customer-title"
+            >
+
+                <h2 id="customer-title">
+                    고객센터
+                </h2>
+
+
+                <!-- 전화번호 -->
+                <a
+                    href="tel:15883754"
+                    class="customer-phone"
+                    aria-label="고객센터 1588-3754 전화하기"
+                >
+                    1588-3754
+                </a>
+
+
+                <!-- 이메일 -->
+                <a
+                    href="mailto:jibanchan@hanamchoon.co.kr"
+                    class="customer-email"
+                >
+                    jibanchan@hanamchoon.co.kr
+                </a>
+
+
+                <!-- 운영시간 -->
+                <div class="customer-time">
+
+                    <p>
+                        평일 09:30-17:30
+                        / 토요일 09:30-12:00
+                    </p>
+
+                    <p>
+                        점심시간 12:00-13:00
+                    </p>
+
+                    <p>
+                        일요일, 공휴일은 휴무입니다.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 COMPANY INFORMATION SECTION
+            ========================================== -->
+            <section
+                class="footer-company"
+                aria-labelledby="company-title"
+            >
+
+                <h2 id="company-title">
+                    집반찬연구소
+                </h2>
+
+
+                <!-- =========================================
+                     COMPANY DETAIL SECTION
+                ========================================== -->
+                <div class="company-info">
+
+                    <p>
+                        대표이사 김OO
+                        <span class="divider">|</span>
+                        사업자 등록번호 123-45-67890
+                        <span class="divider">|</span>
+                        통신판매업신고 제2023-서울강남-0000호
+                    </p>
+
+                    <p>
+                        사업장주소 서울특별시 강남구 테헤란로
+                        <span class="divider">|</span>
+                        개인정보관리책임자 홍길동
+                    </p>
+
+                </div>
+
+
+
+                <!-- =========================================
+                     FOOTER MENU SECTION
+                ========================================== -->
+                <nav
+                    class="footer-menu"
+                    aria-label="하단 이용약관 메뉴"
+                >
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                회사소개
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                이용약관
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                개인정보처리방침
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                이용안내
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+
+
+                <!-- =========================================
+                     COPYRIGHT SECTION
+                ========================================== -->
+                <div class="footer-copyright">
+
+                    <p>
+                        Copyright © JIBANCHAN LAB.
+                        All Rights Reserved.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
