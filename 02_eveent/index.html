@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>자바스크립트 이벤트 처리</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <h1>[jQuery 스타일 변경 메서드]</h1>
+
+    <ol>
+        <li>$("선택자").css() → 프로그램적으로 CSS 접근</li>
+        <li>$("선택자").show() → 숨겨져 있는 요소를 보이게 하는 함수</li>
+        <li>$("선택자").hide() → 선택자를 숨기는 함수</li>
+        <li>$("선택자").toggle() → 클릭할 때마다 보이기/숨기기</li>
+        <li>$("선택자").width() → 가로 사이즈 조절</li>
+        <li>$("선택자").height() → 세로 사이즈 조절</li>
+    </ol>
+
+
+    <!-- 버튼 -->
+    <button id="btn1">Hide</button>
+    <button id="btn2">Show</button>
+    <button id="btn3">Toggle</button>
+    <button id="btn4">Big</button>
+    <button id="btn5">Small</button>
+
+
+    <hr>
+
+
+    <!-- 박스 -->
+    <div class="parent">
+
+        <div class="box1">
+            Show/hide
+        </div>
+
+        <div class="box2">
+            toggle
+        </div>
+
+        <div class="box3">
+            width/height
+        </div>
+
+    </div>
+
+
+    <!-- jQuery 라이브러리 -->
+    <script src="./js/jquery-4.0.0.js"></script>
+
+    <!-- 내가 만든 JavaScript -->
+    <script src="./js/script.js"></script>
+
+</body>
+</html>
