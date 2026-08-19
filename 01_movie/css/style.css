@@ -1,0 +1,48 @@
+@charset "utf-8";
+body{
+    font-family: "맑은 고딕","magun gothic";
+}
+/*여백 초기화 */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    <video autoplay :muted loop controls>
+       <source src=".mo"
+    
+
+}
+
+/* 영상 크기 조절 */
+.area{
+    width: 300px%;
+    height: 0 auto;
+}
+    .area video{
+   width: 100%;
+    height: 100vh
+}
+.area2{
+    width: 50%
+    heght: 100px;
+    height: 100vh;
+}
+.area video{
+    width: 100%;
+    height: 100vh;
+}
+
+.youtube{
+    margin: 0;auto ;0
+    width: 600px;
+    hegit: 400px;
+}
+.youtube{
+    margin: 0;auto ;0
+    width: 600px;
+    hegit: 400px
+}
+    
+
+ 
