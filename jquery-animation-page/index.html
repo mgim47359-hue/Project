@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 애니메이션 관련 메서드</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         JQUERY ANIMATION METHOD SECTION
+    ========================================== -->
+    <section class="animation-section">
+
+        <!-- 제목 영역 -->
+        <h1>[ jQuery 애니메이션 관련 메서드 ]</h1>
+
+        <!-- 메서드 목록 영역 -->
+        <ol class="method-list">
+            <li>$("대상").fadeIn();</li>
+            <li>$("대상").fadeOut();</li>
+            <li>$("대상").fadeToggle();</li>
+            <li>$("대상").slideUp();</li>
+            <li>$("대상").slideDown();</li>
+            <li>$("대상").slideToggle();</li>
+            <li>$("대상").animate();</li>
+        </ol>
+
+        <!-- 버튼 영역 -->
+        <div class="button-group" aria-label="jQuery 애니메이션 실행 버튼">
+            <button type="button" id="fadeInBtn">fadeIn</button>
+            <button type="button" id="fadeOutBtn">fadeOut</button>
+            <button type="button" id="fadeToggleBtn">fadeToggle</button>
+            <button type="button" id="slideUpBtn">slideUp</button>
+            <button type="button" id="slideDownBtn">slideDown</button>
+            <button type="button" id="slideToggleBtn">slideToggle</button>
+            <button type="button" id="ani1Btn">ani1</button>
+            <button type="button" id="ani2Btn">ani2</button>
+        </div>
+
+        <hr>
+
+        <!-- Fade 예제 영역 -->
+        <div class="demo-frame fade-frame">
+            <div class="demo-box fade-box">fadeIn / fadeOut</div>
+            <div class="demo-box fade-toggle-box">fadeToggle</div>
+        </div>
+
+        <!-- Slide / Animation 예제 영역 -->
+        <div class="demo-frame slide-frame">
+            <div class="demo-box slide-box">slideUp / slideDown</div>
+            <div class="demo-box slide-toggle-box">slideToggle</div>
+            <div class="demo-box animation-box">Animation</div>
+        </div>
+
+    </section>
+
+    <!-- jQuery 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- 사용자 JavaScript -->
+    <script src="./script.js"></script>
+
+</body>
+</html>
