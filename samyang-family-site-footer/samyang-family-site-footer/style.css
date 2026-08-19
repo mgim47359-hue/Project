@@ -1,0 +1,307 @@
+@charset "utf-8";
+
+/* =========================================
+   RESET
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+}
+
+body {
+    background: #ffffff;
+    color: #666666;
+    font-family: Arial, "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+img {
+    display: block;
+}
+
+
+/* =========================================
+   PAGE SECTION
+   1909×618 첨부 시안의 세로 비율을 그대로 재현
+========================================= */
+.page {
+    width: 100%;
+    min-height: 618px;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    background: #ffffff;
+}
+
+
+/* =========================================
+   FOOTER SECTION
+========================================= */
+.footer {
+    width: 100%;
+    height: 200px;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+}
+
+
+/* =========================================
+   FOOTER INNER SECTION
+========================================= */
+.footer-inner {
+    position: relative;
+    width: 1144px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   LOGO SECTION
+========================================= */
+.footer-logo {
+    position: absolute;
+    left: 0;
+    top: 43px;
+    width: 151px;
+    height: 46px;
+    overflow: hidden;
+}
+
+.footer-logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-logo img {
+    width: 151px;
+    height: 46px;
+    object-fit: contain;
+}
+
+
+/* =========================================
+   COMPANY INFORMATION SECTION
+========================================= */
+.footer-info {
+    position: absolute;
+    left: 180px;
+    top: 40px;
+    width: 590px;
+}
+
+.footer-nav ul {
+    display: flex;
+    align-items: center;
+    height: 25px;
+}
+
+.footer-nav li {
+    position: relative;
+    padding: 0 14px;
+    font-size: 14px;
+    line-height: 1;
+    color: #555555;
+    white-space: nowrap;
+}
+
+.footer-nav li:first-child {
+    padding-left: 0;
+}
+
+.footer-nav li + li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 1px;
+    height: 13px;
+    background: #dddddd;
+}
+
+.footer-nav a {
+    display: block;
+}
+
+.footer-nav .privacy {
+    font-weight: 700;
+    color: #222222;
+}
+
+.company-address {
+    margin-top: 14px;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #999999;
+}
+
+.copyright {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #aaaaaa;
+}
+
+
+/* =========================================
+   SNS SECTION
+========================================= */
+.footer-sns {
+    position: absolute;
+    left: 796px;
+    top: 46px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-sns a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+}
+
+.footer-sns img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+/* =========================================
+   FAMILY SITE SECTION
+========================================= */
+.family-site {
+    position: absolute;
+    right: 4px;
+    top: 37px;
+    width: 240px;
+    z-index: 10;
+}
+
+.family-button {
+    position: relative;
+    z-index: 2;
+    width: 240px;
+    height: 43px;
+    padding: 0 18px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    color: #555555;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 12px;
+    text-align: left;
+}
+
+.family-arrow {
+    margin-top: 1px;
+    font-size: 10px;
+    color: #9a9a9a;
+    transition: transform 0.2s ease;
+}
+
+.family-menu {
+    position: absolute;
+    left: 0;
+    bottom: 42px;
+    width: 240px;
+    border: 1px solid #cccccc;
+    border-bottom: 0;
+    background: #ffffff;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(7px);
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease,
+        visibility 0.18s ease;
+}
+
+.family-menu li {
+    height: 38px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.family-menu li:last-child {
+    border-bottom: 0;
+}
+
+.family-menu a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 18px;
+    font-size: 12px;
+    color: #555555;
+    background: #ffffff;
+}
+
+.family-menu a:hover,
+.family-menu a:focus-visible {
+    background: #fafafa;
+    color: #111111;
+}
+
+.family-site.is-open .family-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.family-site.is-open .family-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================
+   FOCUS ACCESSIBILITY
+========================================= */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #222222;
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   SMALL DESKTOP SAFETY
+   시안 배치가 무너지지 않도록 최소폭을 유지
+========================================= */
+@media (max-width: 1199px) {
+    .page {
+        width: 1200px;
+    }
+}
