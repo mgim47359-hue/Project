@@ -3,60 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kortek</title>
 
-    <title>자바스크립트 이벤트 처리</title>
+    <!-- Noto Sans KR Web Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
 
-    <h1>[jQuery 스타일 변경 메서드]</h1>
+    <!-- =========================================
+         HEADER SECTION
+    ========================================== -->
+    <header class="header">
+        <div class="header-inner">
 
-    <ol>
-        <li>$("선택자").css() → 프로그램적으로 CSS 접근</li>
-        <li>$("선택자").show() → 숨겨져 있는 요소를 보이게 하는 함수</li>
-        <li>$("선택자").hide() → 선택자를 숨기는 함수</li>
-        <li>$("선택자").toggle() → 클릭할 때마다 보이기/숨기기</li>
-        <li>$("선택자").width() → 가로 사이즈 조절</li>
-        <li>$("선택자").height() → 세로 사이즈 조절</li>
-    </ol>
-
-
-    <!-- 버튼 -->
-    <button id="btn1">Hide</button>
-    <button id="btn2">Show</button>
-    <button id="btn3">Toggle</button>
-    <button id="btn4">Big</button>
-    <button id="btn5">Small</button>
+            <!-- LOGO SECTION -->
+            <h1 class="logo">
+                <a href="#" aria-label="코텍 메인으로 이동">
+                    <img src="./images/logo-kortek.png" alt="Kortek 코텍">
+                </a>
+            </h1>
+            <!-- // LOGO SECTION -->
 
 
-    <hr>
+            <!-- =========================================
+                 MAIN NAVIGATION SECTION
+            ========================================== -->
+            <nav class="gnb" aria-label="주 메뉴">
+                <ul class="gnb-list">
+
+                    <!-- MARKET -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">MARKET</a>
+                        <ul class="depth2" aria-label="MARKET 하위 메뉴">
+                            <li><a href="#">Entertainment</a></li>
+                            <li><a href="#">HealthCare</a></li>
+                            <li><a href="#">Retail&amp;Advertising</a></li>
+                            <li><a href="#">Aviation</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- PRODUCTS -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">PRODUCTS</a>
+                        <ul class="depth2" aria-label="PRODUCTS 하위 메뉴">
+                            <li><a href="#">Gaming Display</a></li>
+                            <li><a href="#">Medical Display</a></li>
+                            <li><a href="#">Digital Signage</a></li>
+                            <li><a href="#">Video Wall</a></li>
+                            <li><a href="#">Outdoor Display</a></li>
+                            <li><a href="#">ATC Display</a></li>
+                            <li><a href="#">Touch Solution</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 채용센터 -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">채용센터</a>
+                        <ul class="depth2" aria-label="채용센터 하위 메뉴">
+                            <li><a href="#">인사제도 / 복지제도</a></li>
+                            <li><a href="#">코텍 갤러리</a></li>
+                            <li><a href="#">채용절차</a></li>
+                            <li><a href="#">채용문의</a></li>
+                            <li><a href="#">지원하기</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 투자정보 -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">투자정보</a>
+                        <ul class="depth2" aria-label="투자정보 하위 메뉴">
+                            <li><a href="#">기업공고</a></li>
+                            <li><a href="#">재무정보</a></li>
+                            <li><a href="#">공시정보</a></li>
+                            <li><a href="#">IR자료실</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 고객지원 -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">고객지원</a>
+                        <ul class="depth2" aria-label="고객지원 하위 메뉴">
+                            <li><a href="#">서비스안내</a></li>
+                            <li><a href="#">고객문의</a></li>
+                            <li><a href="#">다운로드</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 기업소개 -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">기업소개</a>
+                        <ul class="depth2" aria-label="기업소개 하위 메뉴">
+                            <li><a href="#">기업개요</a></li>
+                            <li><a href="#">미션·비전·핵심가치</a></li>
+                            <li><a href="#">CEO 인사말</a></li>
+                            <li><a href="#">연혁</a></li>
+                            <li><a href="#">CI</a></li>
+                            <li><a href="#">뉴스/공지</a></li>
+                            <li><a href="#">글로벌네트워크</a></li>
+                            <li><a href="#">찾아오시는 길</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- ESG -->
+                    <li class="gnb-item">
+                        <a href="#" class="gnb-link">ESG</a>
+                        <ul class="depth2" aria-label="ESG 하위 메뉴">
+                            <li><a href="#">ESG 경영 원칙</a></li>
+                            <li><a href="#">ESG 정책 및 보고자료</a></li>
+                            <li><a href="#">중장기 로드맵</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- // MAIN NAVIGATION SECTION -->
 
 
-    <!-- 박스 -->
-    <div class="parent">
+            <!-- LANGUAGE SECTION -->
+            <a href="#" class="lang-btn" aria-label="영문 페이지 보기">ENG</a>
+            <!-- // LANGUAGE SECTION -->
 
-        <div class="box1">
-            Show/hide
         </div>
-
-        <div class="box2">
-            toggle
-        </div>
-
-        <div class="box3">
-            width/height
-        </div>
-
-    </div>
+    </header>
+    <!-- // HEADER SECTION -->
 
 
-    <!-- jQuery 라이브러리 -->
-    <script src="./js/jquery-4.0.0.js"></script>
+    <!-- =========================================
+         MAIN VISUAL SECTION
+    ========================================== -->
+    <main>
+        <section class="main-visual" aria-label="코텍 메인 비주얼">
+            <div class="visual-inner">
 
-    <!-- 내가 만든 JavaScript -->
-    <script src="./js/script.js"></script>
+                <!-- VISUAL TEXT SECTION -->
+                <div class="visual-copy">
+                    <h2>
+                        첨단 산업용 모니터 분야 세계 1위, 코텍!
+                    </h2>
+
+                    <p class="visual-desc">
+                        코텍은 세계를 무대로 1등 제품을 만드는 자랑스러운 대한민국 기업입니다.
+                    </p>
+
+                    <ul class="visual-list">
+                        <li>23개년 연속 산업용모니터 세계일류상품 선정</li>
+                        <li>수출 3억불 달성, 코스닥 라이징스타 명예의 전당 등재</li>
+                    </ul>
+
+                    <a href="#" class="visual-btn">기업정보 바로가기</a>
+                </div>
+                <!-- // VISUAL TEXT SECTION -->
+
+
+                <!-- SCROLL GUIDE SECTION -->
+                <div class="scroll-guide" aria-hidden="true">
+                    <span class="mouse-icon"></span>
+                    <span>스크롤을 내려보세요.</span>
+                </div>
+                <!-- // SCROLL GUIDE SECTION -->
+
+
+                <!-- PAGINATION SECTION -->
+                <div class="visual-pagination" aria-hidden="true">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="play-arrow"></span>
+                </div>
+                <!-- // PAGINATION SECTION -->
+
+            </div>
+        </section>
+    </main>
+    <!-- // MAIN VISUAL SECTION -->
 
 </body>
 </html>
