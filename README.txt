@@ -1,17 +1,15 @@
-강원천문대 웹디자인개발기능사 연습용 프로젝트
+GitHub Pages 업로드 방법
 
-실행:
-1. 압축을 풉니다.
-2. index.html을 Chrome에서 실행합니다.
+아래 4개 항목이 저장소 최상위(root)에 그대로 있어야 합니다.
 
-폴더:
-Header/logo.png
-Slide/slide1.jpg ~ slide3.jpg
-Contents/gallery1.jpg ~ gallery3.jpg
-Contents/banner.jpg
-Footer/footer-logo.png
-css/style.css
-js/script.js
+index.html
+style.css
+images/
+  main-visual.jpg
+  logo-kortek.png
 
-※ 현재 이미지와 공지 문구는 제공 원본 리소스가 없어 임시 제작한 예시입니다.
-실제 시험에서는 제공된 Header / Slide / Contents / Footer 리소스를 같은 위치에 교체하면 됩니다.
+중요:
+- index.html을 폴더 안에 넣지 말고 저장소 최상위에 올리세요.
+- images 폴더 이름은 반드시 소문자 images 그대로 사용하세요.
+- GitHub Pages는 대소문자를 구분합니다.
+- Settings > Pages > Deploy from a branch > main / (root) 로 설정하세요.

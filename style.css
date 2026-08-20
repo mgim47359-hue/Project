@@ -1,209 +1,350 @@
+@charset "utf-8";
+
+/* =========================================
+   RESET SECTION
+========================================= */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-  width: 100%;
-  min-height: 100%;
+html,
+body {
+    width: 100%;
+    min-width: 1100px;
 }
 
 body {
-  background: #fff;
-  font-family: Arial, "Malgun Gothic", sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
+    color: #333;
+    background: #fff;
 }
 
-.quick-menu {
-  width: 100%;
+ul,
+ol {
+    list-style: none;
 }
 
-.inner {
-  width: 1180px;
-  height: 160px;
-  margin: 0 auto;
-  display: flex;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.menu-item {
-  position: relative;
-  display: block;
-  width: 33.3333%;
-  height: 160px;
-  overflow: hidden;
-  color: #fff;
-  text-decoration: none;
+img {
+    display: block;
+    max-width: 100%;
 }
 
-.reserve { background: #907354; }
-.save-point { background: #434343; }
-.delivery { background: #c30606; }
 
-.text-box {
-  position: absolute;
-  top: 28px;
-  left: 30px;
-  z-index: 2;
+/* =========================================
+   HEADER SECTION
+   1100 x 66px / top 38px / position center
+========================================= */
+.header {
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    z-index: 100;
+    width: 1100px;
+    height: 66px;
+    transform: translateX(-50%);
 }
 
-.text-box h2 {
-  margin: 0;
-  font-size: 24px;
-  line-height: 1;
-  font-family: "Arial Narrow", Arial, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.8px;
-  color: #fff;
+.header-inner {
+    display: grid;
+    grid-template-columns: 155px 1fr 48px;
+    align-items: center;
+    width: 100%;
+    height: 66px;
+    background: #fff;
 }
 
-.text-box p {
-  margin-top: 7px;
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 700;
-  color: #fff;
+
+/* =========================================
+   LOGO SECTION
+========================================= */
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 23px;
+    overflow: visible;
 }
 
-.arrow {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  width: 40px;
-  height: 1px;
-  background: rgba(255,255,255,.85);
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 126px;
+    height: 46px;
+    overflow: visible;
 }
 
-.arrow::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  top: -3px;
-  width: 6px;
-  height: 6px;
-  border-top: 1px solid #fff;
-  transform: rotate(45deg);
+.logo img {
+    display: block;
+    width: 120px;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
 }
 
-.reserve-icon {
-  position: absolute;
-  top: 49px;
-  right: 89px;
-  width: 70px;
-  height: 70px;
+
+/* =========================================
+   GNB SECTION
+========================================= */
+.gnb {
+    width: 100%;
+    height: 66px;
 }
 
-.screen {
-  position: absolute;
-  top: 0;
-  left: 5px;
-  width: 67px;
-  height: 52px;
-  border: 4px solid #fff;
-  border-radius: 5px;
+.gnb-list {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 100%;
+    height: 66px;
 }
 
-.screen::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 13px;
-  height: 8px;
-  background: #907354;
+.gnb-item {
+    position: relative;
+    min-width: 0;
+    height: 66px;
 }
 
-.screen b {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  font-size: 23px;
-  line-height: 24px;
-  color: #d7b58c;
+/* 메뉴 사이 세로 구분선 */
+.gnb-item::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 0;
+    width: 1px;
+    height: 28px;
+    background: #d1d1d1;
 }
 
-.stand {
-  position: absolute;
-  left: 36px;
-  top: 50px;
-  width: 4px;
-  height: 14px;
-  background: #fff;
+.gnb-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 66px;
+    padding: 0 10px;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: #4a4a4a;
+    transition: color 0.18s ease;
 }
 
-.stand::after {
-  content: "";
-  position: absolute;
-  left: -14px;
-  bottom: -1px;
-  width: 31px;
-  height: 4px;
-  background: #fff;
+/* 기본값은 선택 상태 없음 */
+.gnb-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 17px;
+    width: 0;
+    height: 2px;
+    background: #1978d4;
+    transform: translateX(-50%);
+    transition: width 0.18s ease;
 }
 
-.point-icon {
-  position: absolute;
-  top: 40px;
-  right: 92px;
-  width: 65px;
-  height: 65px;
-  border: 4px solid #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* 주메뉴 hover시에만 시안처럼 파란색 + 밑줄 */
+.gnb-item:hover > .gnb-link,
+.gnb-item:focus-within > .gnb-link {
+    color: #1978d4;
 }
 
-.point-icon span {
-  font-size: 28px;
-  font-weight: 700;
-  color: #d7b58c;
+.gnb-item:hover > .gnb-link::after,
+.gnb-item:focus-within > .gnb-link::after {
+    width: calc(100% - 28px);
 }
 
-.delivery-logo {
-  position: absolute;
-  top: 61px;
-  right: 70px;
-  width: 110px;
-  text-align: center;
-  color: #fff;
+
+/* =========================================
+   2DEPTH MENU SECTION
+   width: 206px / li center aligned
+========================================= */
+.depth2 {
+    position: absolute;
+    top: 66px;
+    left: 50%;
+    z-index: 110;
+    width: 206px;
+    padding: 8px 0 8px;
+    border-right: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+    border-left: 1px solid #d1d1d1;
+    background: #fff;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-3px);
+    transition:
+        opacity 0.16s ease,
+        visibility 0.16s ease,
+        transform 0.16s ease;
 }
 
-.delivery-logo strong {
-  position: relative;
-  display: block;
-  padding-top: 2px;
-  border-top: 4px solid #fff;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 17px;
-  font-weight: 900;
-  letter-spacing: -1px;
+/* 해당 주메뉴 hover시에만 2단 메뉴 표시 */
+.gnb-item:hover > .depth2,
+.gnb-item:focus-within > .depth2 {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
 }
 
-.delivery-logo strong::before,
-.delivery-logo strong::after {
-  content: "";
-  position: absolute;
-  top: -7px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #fff;
+.depth2 li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
 }
 
-.delivery-logo strong::before { left: 5px; }
-.delivery-logo strong::after { right: 5px; }
-
-.delivery-logo span {
-  display: block;
-  margin-top: 0;
-  font-family: Georgia, serif;
-  font-size: 15px;
-  line-height: 17px;
-  font-style: italic;
-  transform: rotate(-4deg);
+.depth2 li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 12px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: #666;
+    background: #fff;
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease;
 }
 
-@media (max-width: 1180px) {
-  .inner { width: 100%; }
+/* 2단 메뉴 기본값도 선택 상태 없음 */
+.depth2 li a:hover,
+.depth2 li a:focus {
+    color: #1978d4;
+    background: #f7f7f7;
+    outline: none;
 }
+
+
+/* =========================================
+   LANGUAGE SECTION
+========================================= */
+.lang-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 20px;
+    margin-left: 2px;
+    border: 1px solid #d8d8d8;
+    font-size: 12px;
+    font-weight: 400;
+    color: #a1a1a1;
+    background: #fafafa;
+}
+
+
+/* =========================================
+   MAIN VISUAL SECTION
+   background image: ../images/main-visual.jpg
+   original image size: 1920 x 960px
+========================================= */
+.main-visual {
+    position: relative;
+    width: 100%;
+    height: 960px;
+    overflow: hidden;
+    background-image: url("./images/main-visual.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 1920px 960px;
+}
+
+.visual-inner {
+    position: relative;
+    z-index: 1;
+    width: 1100px;
+    height: 960px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   VISUAL TEXT SECTION
+========================================= */
+.visual-copy {
+    position: absolute;
+    top: 198px;
+    left: 56px;
+    width: 820px;
+}
+
+.visual-copy h2 {
+    margin-bottom: 3px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -1.3px;
+    color: #2f2f2f;
+}
+
+.visual-desc {
+    margin-bottom: 18px;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -1.4px;
+    color: #353535;
+}
+
+.visual-list {
+    margin-bottom: 18px;
+}
+
+.visual-list li {
+    position: relative;
+    padding-left: 11px;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: #5b5b5b;
+}
+
+.visual-list li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.visual-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 39px;
+    padding: 0 16px;
+    border: 1px solid #656565;
+    font-size: 14px;
+    font-weight: 400;
+    color: #444;
+    background: rgba(255,255,255,0.1);
+}
+
+.visual-btn::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 9px;
+    height: 9px;
+    border-top: 1px solid #555;
+    border-right: 1px solid #555;
+}
+
+
+/* 스크롤 안내 및 페이지네이션은 main-visual.jpg 이미지에 포함되어 있어 별도 CSS를 사용하지 않습니다. */
