@@ -280,15 +280,18 @@ img {
 
 /* =========================================
    LEFT / RIGHT NAVIGATION BUTTON
-   시안처럼 흰색 꺾쇠 화살표 구현
+   - 배경 이미지에 좌우 꺾쇠가 이미 포함되어 있음
+   - 중복 표시 방지를 위해 별도 화살표는 그리지 않음
+   - 투명 버튼으로 클릭 영역만 제공
 ========================================= */
 .slide-control {
     position: absolute;
     top: 50%;
     z-index: 30;
-    width: 54px;
-    height: 86px;
+    width: 70px;
+    height: 100px;
     transform: translateY(-50%);
+    background: transparent;
 }
 
 .slide-control-prev {
@@ -297,25 +300,6 @@ img {
 
 .slide-control-next {
     right: max(24px, calc(50% - 660px));
-}
-
-.slide-control span {
-    position: absolute;
-    top: 50%;
-    width: 22px;
-    height: 22px;
-    border-top: 3px solid #fff;
-    border-right: 3px solid #fff;
-}
-
-.slide-control-prev span {
-    left: 16px;
-    transform: translateY(-50%) rotate(-135deg);
-}
-
-.slide-control-next span {
-    right: 16px;
-    transform: translateY(-50%) rotate(45deg);
 }
 
 .slide-control:focus-visible {
