@@ -3,168 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kortek</title>
+    <title>Samyang Foods</title>
 
-    <!-- Noto Sans KR Web Font -->
+    <!-- =========================================
+         NOTO SANS KR WEB FONT
+    ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css">
+    <!-- =========================================
+         SWIPER CSS
+    ========================================== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- =========================================
+         CUSTOM CSS
+    ========================================== -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
     <!-- =========================================
          HEADER SECTION
+         - 전체 너비 100%
+         - inner 1140 x 111px
     ========================================== -->
-    <header class="header">
+    <header class="site-header" id="siteHeader">
         <div class="header-inner">
 
-            <!-- LOGO SECTION -->
+            <!-- =========================================
+                 LOGO SECTION
+                 첨부 시안 로고 / 가로 190px
+            ========================================== -->
             <h1 class="logo">
-                <a href="#" aria-label="코텍 메인으로 이동">
-                    <img src="./images/logo-kortek.png" alt="Kortek 코텍">
+                <a href="#" aria-label="Samyang Foods 홈">
+                    <img src="./imges/samyang-foods-logo.png" alt="Samyang Foods">
                 </a>
             </h1>
             <!-- // LOGO SECTION -->
 
-
             <!-- =========================================
                  MAIN NAVIGATION SECTION
             ========================================== -->
-            <nav class="gnb" aria-label="주 메뉴">
+            <nav class="gnb" aria-label="주요 메뉴">
                 <ul class="gnb-list">
-
-                    <!-- MARKET -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">MARKET</a>
-                        <ul class="depth2" aria-label="MARKET 하위 메뉴">
-                            <li><a href="#">Entertainment</a></li>
-                            <li><a href="#">HealthCare</a></li>
-                            <li><a href="#">Retail&amp;Advertising</a></li>
-                            <li><a href="#">Aviation</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- PRODUCTS -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">PRODUCTS</a>
-                        <ul class="depth2" aria-label="PRODUCTS 하위 메뉴">
-                            <li><a href="#">Gaming Display</a></li>
-                            <li><a href="#">Medical Display</a></li>
-                            <li><a href="#">Digital Signage</a></li>
-                            <li><a href="#">Video Wall</a></li>
-                            <li><a href="#">Outdoor Display</a></li>
-                            <li><a href="#">ATC Display</a></li>
-                            <li><a href="#">Touch Solution</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- 채용센터 -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">채용센터</a>
-                        <ul class="depth2" aria-label="채용센터 하위 메뉴">
-                            <li><a href="#">인사제도 / 복지제도</a></li>
-                            <li><a href="#">코텍 갤러리</a></li>
-                            <li><a href="#">채용절차</a></li>
-                            <li><a href="#">채용문의</a></li>
-                            <li><a href="#">지원하기</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- 투자정보 -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">투자정보</a>
-                        <ul class="depth2" aria-label="투자정보 하위 메뉴">
-                            <li><a href="#">기업공고</a></li>
-                            <li><a href="#">재무정보</a></li>
-                            <li><a href="#">공시정보</a></li>
-                            <li><a href="#">IR자료실</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- 고객지원 -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">고객지원</a>
-                        <ul class="depth2" aria-label="고객지원 하위 메뉴">
-                            <li><a href="#">서비스안내</a></li>
-                            <li><a href="#">고객문의</a></li>
-                            <li><a href="#">다운로드</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- 기업소개 -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">기업소개</a>
-                        <ul class="depth2" aria-label="기업소개 하위 메뉴">
-                            <li><a href="#">기업개요</a></li>
-                            <li><a href="#">미션·비전·핵심가치</a></li>
-                            <li><a href="#">CEO 인사말</a></li>
-                            <li><a href="#">연혁</a></li>
-                            <li><a href="#">CI</a></li>
-                            <li><a href="#">뉴스/공지</a></li>
-                            <li><a href="#">글로벌네트워크</a></li>
-                            <li><a href="#">찾아오시는 길</a></li>
-                        </ul>
-                    </li>
-
-                    <!-- ESG -->
-                    <li class="gnb-item">
-                        <a href="#" class="gnb-link">ESG</a>
-                        <ul class="depth2" aria-label="ESG 하위 메뉴">
-                            <li><a href="#">ESG 경영 원칙</a></li>
-                            <li><a href="#">ESG 정책 및 보고자료</a></li>
-                            <li><a href="#">중장기 로드맵</a></li>
-                        </ul>
-                    </li>
-
+                    <li class="gnb-item"><a href="#">회사소개</a></li>
+                    <li class="gnb-item"><a href="#">홍보관</a></li>
+                    <li class="gnb-item"><a href="#">지속가능경영</a></li>
+                    <li class="gnb-item"><a href="#">브랜드</a></li>
+                    <li class="gnb-item"><a href="#">제품</a></li>
+                    <li class="gnb-item"><a href="#">고객지원</a></li>
                 </ul>
             </nav>
             <!-- // MAIN NAVIGATION SECTION -->
 
-
-            <!-- LANGUAGE SECTION -->
-            <a href="#" class="lang-btn" aria-label="영문 페이지 보기">ENG</a>
-            <!-- // LANGUAGE SECTION -->
-
         </div>
+
+        <!-- =========================================
+             2DEPTH / MEGA MENU SECTION
+             - 높이 306px
+             - 주메뉴 hover 시 전체 메뉴 노출
+        ========================================== -->
+        <div class="mega-menu" id="megaMenu" aria-hidden="true">
+            <div class="mega-inner">
+                <div class="mega-logo-space" aria-hidden="true"></div>
+
+                <div class="mega-grid">
+                    <ul class="depth2" aria-label="회사소개 하위 메뉴">
+                        <li><a href="#">삼양식품</a></li>
+                        <li><a href="#">해외법인</a></li>
+                        <li><a href="#">공장</a></li>
+                        <li><a href="#">오시는길</a></li>
+                    </ul>
+
+                    <ul class="depth2" aria-label="홍보관 하위 메뉴">
+                        <li><a href="#">삼양소식</a></li>
+                        <li><a href="#">홍보영상</a></li>
+                        <li><a href="#">삼양역사관</a></li>
+                    </ul>
+
+                    <ul class="depth2" aria-label="지속가능경영 하위 메뉴">
+                        <li><a href="#">ESG 전략체계</a></li>
+                        <li><a href="#">환경경영</a></li>
+                        <li><a href="#">사회적가치경영</a></li>
+                        <li><a href="#">책임경영</a></li>
+                        <li><a href="#">뉴스룸</a></li>
+                        <li><a href="#">보고서 및 정책</a></li>
+                    </ul>
+
+                    <ul class="depth2" aria-label="브랜드 하위 메뉴">
+                        <li><a href="#">삼양1963</a></li>
+                        <li><a href="#">삼양라면</a></li>
+                        <li><a href="#">불닭볶음면</a></li>
+                        <li><a href="#">맵탱</a></li>
+                        <li><a href="#">펄스랩</a></li>
+                        <li><a href="#">짜짜로니</a></li>
+                        <li><a href="#">탱글</a></li>
+                    </ul>
+
+                    <ul class="depth2" aria-label="제품 하위 메뉴">
+                        <li><a href="#">라면</a></li>
+                        <li><a href="#">스낵</a></li>
+                        <li><a href="#">유제품</a></li>
+                        <li><a href="#">소스·간편식</a></li>
+                        <li><a href="#">냉동 간편식</a></li>
+                    </ul>
+
+                    <ul class="depth2" aria-label="고객지원 하위 메뉴">
+                        <li><a href="#">고객만족센터</a></li>
+                        <li><a href="#">고객문의</a></li>
+                        <li><a href="#">사업제안</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- // 2DEPTH / MEGA MENU SECTION -->
     </header>
     <!-- // HEADER SECTION -->
 
 
     <!-- =========================================
-         MAIN VISUAL SECTION
+         MAIN SLIDE SECTION
+         - 전체 너비 100%
+         - 높이 600px
+         - Swiper 사용
     ========================================== -->
     <main>
-        <section class="main-visual" aria-label="코텍 메인 비주얼">
-            <div class="visual-inner">
+        <section class="main-slide-section" aria-label="삼양식품 메인 슬라이드">
 
-                <!-- VISUAL TEXT SECTION -->
-                <div class="visual-copy">
-                    <h2>
-                        첨단 산업용 모니터 분야 세계 1위, 코텍!
-                    </h2>
+            <!-- =========================================
+                 SWIPER CONTAINER
+            ========================================== -->
+            <div class="swiper mainSwiper">
 
-                    <p class="visual-desc">
-                        코텍은 세계를 무대로 1등 제품을 만드는 자랑스러운 대한민국 기업입니다.
-                    </p>
+                <!-- =========================================
+                     SWIPER SLIDE LIST
+                ========================================== -->
+                <div class="swiper-wrapper">
 
-                    <ul class="visual-list">
-                        <li>23개년 연속 산업용모니터 세계일류상품 선정</li>
-                        <li>수출 3억불 달성, 코스닥 라이징스타 명예의 전당 등재</li>
-                    </ul>
+                    <!-- SLIDE 01 : 불닭 -->
+                    <div class="swiper-slide slide-bg slide-bg-01" role="group" aria-label="1번째 슬라이드, 불닭 글로벌 브랜드">
+                        <span class="blind">Global No.1 Spicy Brand, 불닭</span>
+                    </div>
 
-                    <a href="#" class="visual-btn">기업정보 바로가기</a>
+                    <!-- SLIDE 02 : 사용자가 첫 번째로 추가한 삼양라면 이미지 -->
+                    <div class="swiper-slide slide-bg slide-bg-02" role="group" aria-label="2번째 슬라이드, 삼양라면">
+                        <span class="blind">Since 1963 라면의 원조, 삼양라면</span>
+                    </div>
+
+                    <!-- SLIDE 03 : 사용자가 두 번째로 추가한 삼양라운드힐 이미지 -->
+                    <div class="swiper-slide slide-bg slide-bg-03" role="group" aria-label="3번째 슬라이드, 삼양라운드힐">
+                        <span class="blind">삼양라운드힐 전용 앱으로 예약과 이벤트 확인을 한번에</span>
+                    </div>
+
                 </div>
-                <!-- // VISUAL TEXT SECTION -->
+                <!-- // SWIPER SLIDE LIST -->
 
+                <!-- =========================================
+                     LEFT / RIGHT NAVIGATION BUTTON
+                ========================================== -->
+                <button class="slide-control slide-control-prev" type="button" aria-label="이전 슬라이드">
+                    <span aria-hidden="true"></span>
+                </button>
+                <button class="slide-control slide-control-next" type="button" aria-label="다음 슬라이드">
+                    <span aria-hidden="true"></span>
+                </button>
+                <!-- // LEFT / RIGHT NAVIGATION BUTTON -->
 
-                <!-- 스크롤 안내와 페이지 표시기는 배경 이미지에 포함되어 있어 HTML 중복 요소를 제거했습니다. -->
+                <!-- =========================================
+                     FRACTION PAGINATION
+                     1 / 3 형태
+                ========================================== -->
+                <div class="swiper-pagination" aria-label="현재 슬라이드 번호"></div>
+                <!-- // FRACTION PAGINATION -->
 
             </div>
+            <!-- // SWIPER CONTAINER -->
+
         </section>
     </main>
-    <!-- // MAIN VISUAL SECTION -->
+    <!-- // MAIN SLIDE SECTION -->
+
+
+    <!-- =========================================
+         SWIPER JAVASCRIPT
+    ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- =========================================
+         CUSTOM JAVASCRIPT
+    ========================================== -->
+    <script src="./js/script.js"></script>
 
 </body>
 </html>

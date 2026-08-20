@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* =========================================
-   RESET SECTION
+   RESET
 ========================================= */
 * {
     margin: 0;
@@ -12,13 +12,14 @@
 html,
 body {
     width: 100%;
-    min-width: 1100px;
+    min-width: 1140px;
 }
 
 body {
     font-family: "Noto Sans KR", sans-serif;
-    color: #333;
+    color: #222;
     background: #fff;
+    overflow-x: hidden;
 }
 
 ul,
@@ -31,316 +32,321 @@ a {
     text-decoration: none;
 }
 
+button {
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
+}
+
 img {
     display: block;
     max-width: 100%;
 }
 
+/* 웹 접근성용 숨김 텍스트 */
+.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 
 /* =========================================
    HEADER SECTION
-   1100 x 66px / top 38px / position center
+   전체 100% / inner 1140 x 111px
 ========================================= */
-.header {
-    position: absolute;
-    top: 38px;
-    left: 50%;
-    z-index: 100;
-    width: 1100px;
-    height: 66px;
-    transform: translateX(-50%);
+.site-header {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    height: 111px;
+    background: #fff;
+    border-bottom: 1px solid #ededed;
 }
 
 .header-inner {
-    display: grid;
-    grid-template-columns: 155px 1fr 48px;
-    align-items: center;
-    width: 100%;
-    height: 66px;
-    background: #fff;
-}
-
-
-/* =========================================
-   LOGO SECTION
-========================================= */
-.logo {
     display: flex;
     align-items: center;
-    height: 100%;
-    padding-left: 23px;
-    overflow: visible;
-}
-
-.logo a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 126px;
-    height: 46px;
-    overflow: visible;
-}
-
-.logo img {
-    display: block;
-    width: 120px;
-    height: auto;
-    max-width: none;
-    object-fit: contain;
-}
-
-
-/* =========================================
-   GNB SECTION
-========================================= */
-.gnb {
-    width: 100%;
-    height: 66px;
-}
-
-.gnb-list {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    width: 100%;
-    height: 66px;
-}
-
-.gnb-item {
-    position: relative;
-    min-width: 0;
-    height: 66px;
-}
-
-/* 메뉴 사이 세로 구분선 */
-.gnb-item::before {
-    content: "";
-    position: absolute;
-    top: 18px;
-    left: 0;
-    width: 1px;
-    height: 28px;
-    background: #d1d1d1;
-}
-
-.gnb-link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 66px;
-    padding: 0 10px;
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: 500;
-    color: #4a4a4a;
-    transition: color 0.18s ease;
-}
-
-/* 기본값은 선택 상태 없음 */
-.gnb-link::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 17px;
-    width: 0;
-    height: 2px;
-    background: #1978d4;
-    transform: translateX(-50%);
-    transition: width 0.18s ease;
-}
-
-/* 주메뉴 hover시에만 시안처럼 파란색 + 밑줄 */
-.gnb-item:hover > .gnb-link,
-.gnb-item:focus-within > .gnb-link {
-    color: #1978d4;
-}
-
-.gnb-item:hover > .gnb-link::after,
-.gnb-item:focus-within > .gnb-link::after {
-    width: calc(100% - 28px);
-}
-
-
-/* =========================================
-   2DEPTH MENU SECTION
-   width: 206px / li center aligned
-========================================= */
-.depth2 {
-    position: absolute;
-    top: 66px;
-    left: 50%;
-    z-index: 110;
-    width: 206px;
-    padding: 8px 0 8px;
-    border-right: 1px solid #d1d1d1;
-    border-bottom: 1px solid #d1d1d1;
-    border-left: 1px solid #d1d1d1;
-    background: #fff;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateX(-50%) translateY(-3px);
-    transition:
-        opacity 0.16s ease,
-        visibility 0.16s ease,
-        transform 0.16s ease;
-}
-
-/* 해당 주메뉴 hover시에만 2단 메뉴 표시 */
-.gnb-item:hover > .depth2,
-.gnb-item:focus-within > .depth2 {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-}
-
-.depth2 li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-}
-
-.depth2 li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 38px;
-    padding: 7px 12px;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.35;
-    color: #666;
-    background: #fff;
-    transition:
-        color 0.15s ease,
-        background-color 0.15s ease;
-}
-
-/* 2단 메뉴 기본값도 선택 상태 없음 */
-.depth2 li a:hover,
-.depth2 li a:focus {
-    color: #1978d4;
-    background: #f7f7f7;
-    outline: none;
-}
-
-
-/* =========================================
-   LANGUAGE SECTION
-========================================= */
-.lang-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 20px;
-    margin-left: 2px;
-    border: 1px solid #d8d8d8;
-    font-size: 12px;
-    font-weight: 400;
-    color: #a1a1a1;
-    background: #fafafa;
-}
-
-
-/* =========================================
-   MAIN VISUAL SECTION
-   background image: ../images/main-visual.jpg
-   original image size: 1920 x 960px
-========================================= */
-.main-visual {
-    position: relative;
-    width: 100%;
-    height: 960px;
-    overflow: hidden;
-    background-image: url("../images/main-visual.jpg");
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 1920px 960px;
-}
-
-.visual-inner {
-    position: relative;
-    width: 1100px;
-    height: 960px;
+    width: 1140px;
+    height: 111px;
     margin: 0 auto;
 }
 
 
 /* =========================================
-   VISUAL TEXT SECTION
+   LOGO SECTION
+   첨부 시안 로고 그대로 사용 / 190px
 ========================================= */
-.visual-copy {
-    position: absolute;
-    top: 198px;
-    left: 56px;
-    width: 820px;
+.logo {
+    width: 190px;
+    flex: 0 0 190px;
+    margin-right: 58px;
 }
 
-.visual-copy h2 {
-    margin-bottom: 3px;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1.45;
-    letter-spacing: -1.3px;
-    color: #2f2f2f;
+.logo a {
+    display: flex;
+    align-items: center;
+    width: 190px;
+    height: 111px;
 }
 
-.visual-desc {
-    margin-bottom: 18px;
-    font-size: 27px;
-    font-weight: 400;
-    line-height: 1.45;
-    letter-spacing: -1.4px;
-    color: #353535;
+.logo img {
+    display: block;
+    width: 190px;
+    height: auto;
+    object-fit: contain;
 }
 
-.visual-list {
-    margin-bottom: 18px;
+
+/* =========================================
+   MAIN NAVIGATION SECTION
+========================================= */
+.gnb {
+    flex: 1;
+    height: 100%;
 }
 
-.visual-list li {
-    position: relative;
-    padding-left: 11px;
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.55;
-    color: #5b5b5b;
+.gnb-list {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: stretch;
+    height: 100%;
 }
 
-.visual-list li::before {
-    content: "-";
-    position: absolute;
-    left: 0;
-    top: 0;
+.gnb-item {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
-.visual-btn {
+.gnb-item > a {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 39px;
-    padding: 0 16px;
-    border: 1px solid #656565;
-    font-size: 14px;
-    font-weight: 400;
-    color: #444;
-    background: rgba(255,255,255,0.1);
+    height: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
 }
 
-.visual-btn::after {
+/* 기본값에는 선 없음 / hover 시 글자 가로폭만큼 밑줄 */
+.gnb-item > a::after {
     content: "";
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 9px;
-    height: 9px;
-    border-top: 1px solid #555;
-    border-right: 1px solid #555;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: #f36c21;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 180ms ease;
+}
+
+.gnb-item:hover > a::after,
+.gnb-item.is-active > a::after,
+.gnb-item > a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+
+/* =========================================
+   2DEPTH / MEGA MENU SECTION
+   높이 306px
+========================================= */
+.mega-menu {
+    position: absolute;
+    left: 0;
+    top: 111px;
+    z-index: 1001;
+    width: 100%;
+    height: 306px;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid #ededed;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-32px);
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.mega-menu.is-open {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.mega-inner {
+    display: flex;
+    width: 1140px;
+    height: 306px;
+    margin: 0 auto;
+}
+
+/* 헤더 로고 190 + 우측 간격 58 = 메뉴 시작 기준과 동일하게 맞춤 */
+.mega-logo-space {
+    width: 248px;
+    flex: 0 0 248px;
+}
+
+.mega-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    flex: 1;
+    height: 100%;
+}
+
+.depth2 {
+    padding-top: 25px;
+    text-align: center;
+}
+
+.depth2 li + li {
+    margin-top: 13px;
+}
+
+.depth2 a {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #999;
+    transition: color 150ms ease, font-weight 150ms ease;
+}
+
+/* 요청사항: 2단 메뉴 hover 시 #000 */
+.depth2 a:hover,
+.depth2 a:focus-visible {
+    color: #000;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   MAIN SLIDE SECTION
+   width: 100% / height: 600px
+========================================= */
+.main-slide-section {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: #000;
+}
+
+.mainSwiper,
+.swiper-wrapper,
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =========================================
+   SLIDE BACKGROUND IMAGE
+   요청 경로: ../imges/이미지파일명
+========================================= */
+.slide-bg {
+    width: 100%;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.slide-bg-01 {
+    background-image: url("../imges/slide01.png");
+}
+
+.slide-bg-02 {
+    background-image: url("../imges/slide02.png");
+}
+
+.slide-bg-03 {
+    background-image: url("../imges/slide03.png");
+}
+
+
+/* =========================================
+   LEFT / RIGHT NAVIGATION BUTTON
+   시안처럼 흰색 꺾쇠 화살표 구현
+========================================= */
+.slide-control {
+    position: absolute;
+    top: 50%;
+    z-index: 30;
+    width: 54px;
+    height: 86px;
+    transform: translateY(-50%);
+}
+
+.slide-control-prev {
+    left: max(24px, calc(50% - 660px));
+}
+
+.slide-control-next {
+    right: max(24px, calc(50% - 660px));
+}
+
+.slide-control span {
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+}
+
+.slide-control-prev span {
+    left: 16px;
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+.slide-control-next span {
+    right: 16px;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.slide-control:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   FRACTION PAGINATION
+   1 / 3 형태
+========================================= */
+.mainSwiper .swiper-pagination {
+    left: auto;
+    right: max(24px, calc((100vw - 1140px) / 2));
+    bottom: 22px;
+    width: auto;
+    min-width: 70px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    backdrop-filter: blur(4px);
+}
+
+.mainSwiper .swiper-pagination-current,
+.mainSwiper .swiper-pagination-total {
+    color: #fff;
 }
