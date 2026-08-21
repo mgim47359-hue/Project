@@ -1,10 +1,9 @@
 @charset "utf-8";
 
 /* =========================================================
-   집반찬연구소 - 2개 섹션 전용 CSS
-   기존 홈페이지와 충돌을 줄이기 위해 모든 클래스에 jp- 접두사를 사용했습니다.
+   집반찬연구소 : 2개 섹션 전용 CSS
+   기존 홈페이지와 충돌을 줄이기 위해 jp- 접두사 사용
 ========================================================= */
-
 html,
 body {
     margin: 0;
@@ -53,7 +52,7 @@ body {
     -webkit-user-drag: none;
 }
 
-/* 좌우 버튼 : 시안처럼 배너 하단 안쪽에 배치 */
+/* 메인 배너 좌우 버튼 */
 .jp-main-slider__nav {
     position: absolute;
     left: 50%;
@@ -87,7 +86,7 @@ body {
     color: #777;
 }
 
-/* 현재 페이지 표시 */
+/* 현재 배너 번호 */
 .jp-main-slider__counter {
     position: absolute;
     right: max(20px, calc((100% - 1140px) / 2));
@@ -110,23 +109,90 @@ body {
 }
 
 /* =========================================================
-   SECTION 02 : 여름휴가도, 집반찬 상품 화면
+   SECTION 02 : 첨부 이미지 6장 상품 슬라이드
 ========================================================= */
-.jp-product-section {
+.jp-product-slider {
     width: 100%;
+    padding: 0;
     overflow: hidden;
     background: #fff;
 }
 
-.jp-product-section__image {
+/*
+   업로드한 이미지 자체가 완성된 상품 화면이므로
+   이미지 비율을 그대로 유지하면서 중앙에 표시합니다.
+*/
+.jp-product-slider__stage {
+    position: relative;
+    width: 100%;
+    max-width: 1342px;
+    margin: 0 auto;
+    background: #fff;
+    overflow: hidden;
+}
+
+.jp-product-slider__slide {
+    display: none;
+    width: 100%;
+    opacity: 0;
+}
+
+.jp-product-slider__slide.is-active {
+    display: block;
+    animation: jpProductFade 0.28s ease both;
+}
+
+.jp-product-slider__slide img {
     display: block;
     width: 100%;
     height: auto;
     margin: 0 auto;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@keyframes jpProductFade {
+    from {
+        opacity: 0.45;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/*
+   실제 화살표 모양은 첨부 이미지 안에 이미 있습니다.
+   따라서 버튼은 투명한 클릭 영역으로만 사용합니다.
+   중복 화살표가 생기지 않습니다.
+*/
+.jp-product-slider__hit {
+    position: absolute;
+    top: 27%;
+    z-index: 10;
+    width: 80px;
+    height: 100px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.jp-product-slider__hit--prev {
+    left: 0;
+}
+
+.jp-product-slider__hit--next {
+    right: 0;
+}
+
+.jp-product-slider__hit:focus-visible {
+    outline: 2px solid #333;
+    outline-offset: -4px;
 }
 
 /* =========================================================
-   화면 폭이 줄어들 때 배너 비율 유지
+   반응형
 ========================================================= */
 @media (max-width: 900px) {
     .jp-main-slider {
@@ -141,5 +207,11 @@ body {
 
     .jp-main-slider__counter {
         bottom: 15px;
+    }
+
+    .jp-product-slider__hit {
+        top: 24%;
+        width: 60px;
+        height: 80px;
     }
 }

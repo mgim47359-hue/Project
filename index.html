@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>집반찬연구소 - 2개 섹션</title>
+    <title>집반찬연구소 - 배너 + 상품 슬라이드</title>
 
-    <!-- 집반찬연구소 2개 섹션 전용 CSS -->
-    <link rel="stylesheet" href="./css/style.css?v=2.0">
+    <!-- 이 페이지 전용 CSS -->
+    <link rel="stylesheet" href="./css/style.css?v=3.0">
 </head>
 <body>
 
     <!-- =========================================================
          SECTION 01 : 메인 배너 슬라이드
-         - 첨부한 배너 4장이 3초마다 자동으로 변경됩니다.
-         - 기존 홈페이지의 Header / 메뉴 / 카테고리는 포함하지 않았습니다.
+         - 배너 4장
+         - 3초마다 자동으로 다음 화면으로 변경
+         - 좌우 버튼으로 직접 이동 가능
     ========================================================== -->
     <section class="jp-main-slider" aria-label="집반찬연구소 메인 배너">
         <div class="jp-main-slider__viewport">
@@ -33,13 +34,13 @@
             </div>
         </div>
 
-        <!-- 왼쪽 / 오른쪽 이동 버튼 -->
-        <div class="jp-main-slider__nav" aria-label="배너 이동 버튼">
+        <!-- 메인 배너 좌우 이동 버튼 -->
+        <div class="jp-main-slider__nav" aria-label="메인 배너 이동 버튼">
             <button class="jp-main-slider__button jp-main-slider__button--prev" type="button" aria-label="이전 배너">‹</button>
             <button class="jp-main-slider__button jp-main-slider__button--next" type="button" aria-label="다음 배너">›</button>
         </div>
 
-        <!-- 현재 슬라이드 번호 -->
+        <!-- 현재 배너 번호 -->
         <div class="jp-main-slider__counter" aria-live="polite">
             <strong class="jp-main-slider__current">1</strong>
             <span>/</span>
@@ -47,20 +48,57 @@
         </div>
     </section>
 
+
     <!-- =========================================================
-         SECTION 02 : 여름휴가도, 집반찬 상품 화면
-         - 요청한 두 번째 화면만 아래에 배치했습니다.
-         - 이미지를 바꾸려면 ./imges/product-section.png만 교체하세요.
+         SECTION 02 : 상품 슬라이드
+         - 사용자가 첨부한 6개 화면을 순서대로 삽입
+         - 화면 안에 보이는 좌/우 화살표 위치를 클릭하면 변경
+         - 오른쪽 : 1 → 2 → 3 → 4 → 5 → 6 → 1
+         - 왼쪽   : 역순으로 이동
+         - 화면 안 화살표가 이미 이미지에 들어 있으므로
+           클릭 버튼은 투명하게 위에 겹쳐서 중복 화살표가 생기지 않게 처리
     ========================================================== -->
-    <section class="jp-product-section" aria-label="여름휴가도 집반찬 상품 목록">
-        <img
-            class="jp-product-section__image"
-            src="./imges/product-section.png"
-            alt="여름휴가도 집반찬 상품 목록"
-        >
+    <section class="jp-product-slider" aria-label="집반찬 상품 슬라이드">
+        <div class="jp-product-slider__stage">
+            <div class="jp-product-slider__slide is-active">
+                <img src="./imges/product-01.png" alt="집반찬 상품 목록 1">
+            </div>
+            <div class="jp-product-slider__slide">
+                <img src="./imges/product-02.png" alt="집반찬 상품 목록 2">
+            </div>
+            <div class="jp-product-slider__slide">
+                <img src="./imges/product-03.png" alt="집반찬 상품 목록 3">
+            </div>
+            <div class="jp-product-slider__slide">
+                <img src="./imges/product-04.png" alt="집반찬 상품 목록 4">
+            </div>
+            <div class="jp-product-slider__slide">
+                <img src="./imges/product-05.png" alt="집반찬 상품 목록 5">
+            </div>
+            <div class="jp-product-slider__slide">
+                <img src="./imges/product-06.png" alt="집반찬 상품 목록 6">
+            </div>
+
+            <!--
+                이미지 안에 화살표 모양이 이미 있으므로
+                실제 버튼은 투명하게 겹쳐 둡니다.
+                따라서 화살표가 두 개로 보이지 않습니다.
+            -->
+            <button
+                class="jp-product-slider__hit jp-product-slider__hit--prev"
+                type="button"
+                aria-label="이전 상품 화면"
+            ></button>
+
+            <button
+                class="jp-product-slider__hit jp-product-slider__hit--next"
+                type="button"
+                aria-label="다음 상품 화면"
+            ></button>
+        </div>
     </section>
 
-    <!-- 집반찬연구소 2개 섹션 전용 JavaScript -->
-    <script src="./js/script.js?v=2.0"></script>
+    <!-- 이 페이지 전용 JavaScript -->
+    <script src="./js/script.js?v=3.0"></script>
 </body>
 </html>
