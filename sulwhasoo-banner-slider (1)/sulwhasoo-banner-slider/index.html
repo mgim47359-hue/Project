@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설화수 추천 Banner Slider</title>
+
+    <!-- Noto Sans KR 웹폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Swiper CSS : Swiper 라이브러리를 이용한 슬라이드 구현 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- 직접 작성한 CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- =========================================================
+         설화수 추천 BANNER SLIDER SECTION
+         전체 100% / inner 최대 1440px / section 높이 950px
+    ========================================================== -->
+    <section class="recommend-section">
+        <div class="inner">
+
+            <!-- 섹션 제목 : 요청사항 28px -->
+            <h2 class="section-title">설화수 추천</h2>
+
+            <!-- =================================================
+                 슬라이드 영역 : 세로 높이 600px
+                 총 6개 / 한 화면 3개 / 한 번에 1개씩 이동
+            ================================================== -->
+            <div class="slider-area">
+                <div class="swiper product-swiper">
+                    <div class="swiper-wrapper">
+
+                        <!-- slide 01 : 이미지는 imges 폴더에서 자유롭게 교체 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner01.png" alt="탄력크림 EX">
+                                </div>
+                                <div class="product-info">
+                                    <h3>탄력크림 EX</h3>
+                                    <p>Essential Firming Cream EX</p>
+                                    <strong>100,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                        <!-- slide 02 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner02.png" alt="자정기미코렉터">
+                                </div>
+                                <div class="product-info">
+                                    <h3>자정기미코렉터</h3>
+                                    <p>Lumiwise Discoloration Corrector</p>
+                                    <strong>150,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                        <!-- slide 03 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner03.png" alt="퍼펙팅 쿠션 에어리">
+                                </div>
+                                <div class="product-info">
+                                    <h3>퍼펙팅 쿠션 에어리</h3>
+                                    <p>Perfecting Cushion Airy</p>
+                                    <strong>89,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                        <!-- slide 04 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner04.png" alt="윤조에센스">
+                                </div>
+                                <div class="product-info">
+                                    <h3>윤조에센스</h3>
+                                    <p>First Care Activating Serum</p>
+                                    <strong>140,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                        <!-- slide 05 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner05.png" alt="순행클렌징폼">
+                                </div>
+                                <div class="product-info">
+                                    <h3>순행클렌징폼</h3>
+                                    <p>Gentle Cleansing Foam</p>
+                                    <strong>42,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                        <!-- slide 06 -->
+                        <article class="swiper-slide product-card">
+                            <a href="#" class="product-link">
+                                <div class="product-image">
+                                    <img src="./imges/banner06.png" alt="진설크림">
+                                </div>
+                                <div class="product-info">
+                                    <h3>진설크림</h3>
+                                    <p>Ultimate S Cream</p>
+                                    <strong>520,000원</strong>
+                                </div>
+                            </a>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- 왼쪽 이전 버튼 : 첫 번째 카드 왼쪽 가장자리에 겹쳐 배치 -->
+                <button type="button" class="slider-nav slider-prev" aria-label="이전 상품 보기">
+                    <span aria-hidden="true"></span>
+                </button>
+
+                <!-- 오른쪽 다음 버튼 : 세 번째 카드 오른쪽 가장자리에 겹쳐 배치 -->
+                <button type="button" class="slider-nav slider-next" aria-label="다음 상품 보기">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- =================================================
+                 진행 막대 + 일시정지 / 재생 버튼
+                 진행 막대는 현재 슬라이드 번호를 기준으로 표시
+            ================================================== -->
+            <div class="slider-controller" aria-label="슬라이드 재생 제어">
+                <div class="progress-track" aria-hidden="true">
+                    <span class="progress-fill"></span>
+                </div>
+
+                <!-- 버튼 이미지는 ./imges/icon-pause.png 파일로 교체 가능 -->
+                <button type="button" class="control-btn pause-btn" aria-label="자동 슬라이드 일시정지">
+                    <img src="./imges/icon-pause.png" alt="">
+                </button>
+
+                <!-- 버튼 이미지는 ./imges/icon-play.png 파일로 교체 가능 -->
+                <button type="button" class="control-btn play-btn" aria-label="자동 슬라이드 재생">
+                    <img src="./imges/icon-play.png" alt="">
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- 직접 작성한 JavaScript -->
+    <script src="./js/script.js"></script>
+</body>
+</html>

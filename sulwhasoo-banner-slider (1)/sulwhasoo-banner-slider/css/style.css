@@ -1,0 +1,258 @@
+@charset "utf-8";
+
+/* =========================================================
+   기본 초기화
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+}
+
+body {
+    font-family: "Noto Sans KR", sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* =========================================================
+   RECOMMEND SECTION
+   전체 100% / inner 1440px / section 높이 950px
+========================================================= */
+.recommend-section {
+    width: 100%;
+    height: 950px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.recommend-section .inner {
+    width: min(1440px, calc(100% - 40px));
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 54px;
+}
+
+/* 섹션 제목 : 요청사항 28px */
+.section-title {
+    margin-bottom: 31px;
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+}
+
+/* =========================================================
+   SWIPER 영역
+   요청사항 : slide section 세로 600px
+========================================================= */
+.slider-area {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.product-swiper {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* 카드 사이 간격은 JS의 spaceBetween: 24 값과 함께 동작 */
+.product-card {
+    height: 600px;
+}
+
+.product-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* 시안처럼 카드 이미지 영역을 정사각형에 가깝게 구성 */
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #efefef;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 카드 안 텍스트는 요청사항대로 모두 18px */
+.product-info {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.product-info h3,
+.product-info p,
+.product-info strong {
+    font-size: 18px;
+}
+
+.product-info h3 {
+    line-height: 1.45;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.product-info p {
+    margin-top: 5px;
+    line-height: 1.45;
+    font-weight: 400;
+    letter-spacing: -0.35px;
+}
+
+.product-info strong {
+    display: block;
+    margin-top: 17px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+/* =========================================================
+   좌우 네비게이션 버튼
+   시안처럼 첫/세 번째 이미지 양 끝에 흰 박스로 겹쳐 배치
+========================================================= */
+.slider-nav {
+    position: absolute;
+    top: 200px;
+    z-index: 20;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.slider-prev {
+    left: 0;
+}
+
+.slider-next {
+    right: 0;
+}
+
+/* 외부 아이콘 없이 CSS로 얇은 꺾쇠 제작 */
+.slider-nav span {
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #111;
+    border-right: 1px solid #111;
+}
+
+.slider-prev span {
+    transform: rotate(-135deg);
+    margin-left: 5px;
+}
+
+.slider-next span {
+    transform: rotate(45deg);
+    margin-right: 5px;
+}
+
+/* =========================================================
+   진행 막대 + 일시정지 / 재생 버튼
+========================================================= */
+.slider-controller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 52px;
+}
+
+/* 전체 진행 막대 */
+.progress-track {
+    position: relative;
+    width: 360px;
+    height: 2px;
+    overflow: hidden;
+    background: #d4d4d4;
+}
+
+/* 현재 슬라이드 진행 상태 */
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% / 6);
+    height: 100%;
+    background: #111;
+    transition: width 0.35s ease;
+}
+
+/* 일시정지 / 재생 버튼 */
+.control-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.35;
+    transition: opacity 0.2s ease;
+}
+
+.control-btn.is-active,
+.control-btn:hover {
+    opacity: 1;
+}
+
+.control-btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* =========================================================
+   작은 화면에서도 3개 카드 구조가 크게 깨지지 않도록 보정
+   (PC 1440px 시안이 기준)
+========================================================= */
+@media (max-width: 900px) {
+    .recommend-section .inner {
+        width: calc(100% - 24px);
+    }
+
+    .product-info h3,
+    .product-info p,
+    .product-info strong {
+        font-size: 15px;
+    }
+
+    .slider-nav {
+        width: 52px;
+        height: 58px;
+    }
+
+    .progress-track {
+        width: min(280px, 62vw);
+    }
+}
