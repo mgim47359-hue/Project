@@ -3,197 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samyang Foods</title>
+    <title>Samyang Brand Tab</title>
 
-    <!-- =========================================
-         NOTO SANS KR WEB FONT
-    ========================================== -->
+    <!-- Google Font : Noto Sans KR -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
-    <!-- =========================================
-         SWIPER CSS
-    ========================================== -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-    <!-- =========================================
-         CUSTOM CSS
-    ========================================== -->
+    <!-- 내가 만든 CSS 연결 -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
     <!-- =========================================
-         HEADER SECTION
-         - 전체 너비 100%
-         - inner 1140 x 111px
+         BRAND SECTION
     ========================================== -->
-    <header class="site-header" id="siteHeader">
-        <div class="header-inner">
+    <section class="brand-section">
+        <div class="inner">
+
+            <!-- 제목 영역 -->
+            <h2>BRAND</h2>
+            <p class="brand-desc">
+                건강하고 창의적인 미래를 만들기 위한 삼양식품의 다양한 브랜드를 소개합니다.
+            </p>
 
             <!-- =========================================
-                 LOGO SECTION
-                 첨부 시안 로고 / 가로 190px
+                 TAB MENU
             ========================================== -->
-            <h1 class="logo">
-                <a href="#" aria-label="Samyang Foods 홈">
-                    <img src="./imges/samyang-foods-logo.png?v=2" alt="Samyang Foods">
-                </a>
-            </h1>
-            <!-- // LOGO SECTION -->
+            <ul class="tab">
+                <li class="on"><a href="#">삼양1963</a></li>
+                <li><a href="#">삼양라면</a></li>
+                <li><a href="#">불닭볶음면</a></li>
+                <li><a href="#">맵탱</a></li>
+                <li><a href="#">펄스랩</a></li>
+                <li><a href="#">짜짜로니</a></li>
+                <li><a href="#">탱글</a></li>
+            </ul>
 
             <!-- =========================================
-                 MAIN NAVIGATION SECTION
+                 01. 삼양1963 : 이미지 2개
             ========================================== -->
-            <nav class="gnb" aria-label="주요 메뉴">
-                <ul class="gnb-list">
-                    <li class="gnb-item"><a href="#">회사소개</a></li>
-                    <li class="gnb-item"><a href="#">홍보관</a></li>
-                    <li class="gnb-item"><a href="#">지속가능경영</a></li>
-                    <li class="gnb-item"><a href="#">브랜드</a></li>
-                    <li class="gnb-item"><a href="#">제품</a></li>
-                    <li class="gnb-item"><a href="#">고객지원</a></li>
+            <div class="listwrap on">
+                <ul class="product-list">
+                    <li>
+                        <a href="#">
+                            <img src="./imges/20230912173938560414.png" alt="삼양1963 제품 이미지 1">
+                            <h3>삼양1963</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="./imges/20231017135003166448.png" alt="삼양1963 제품 이미지 2">
+                            <h3>짜르르</h3>
+                        </a>
+                    </li>
                 </ul>
-            </nav>
-            <!-- // MAIN NAVIGATION SECTION -->
-
-        </div>
-
-        <!-- =========================================
-             2DEPTH / MEGA MENU SECTION
-             - 높이 306px
-             - 주메뉴 hover 시 전체 메뉴 노출
-        ========================================== -->
-        <div class="mega-menu" id="megaMenu" aria-hidden="true">
-            <div class="mega-inner">
-                <div class="mega-logo-space" aria-hidden="true"></div>
-
-                <div class="mega-grid">
-                    <ul class="depth2" aria-label="회사소개 하위 메뉴">
-                        <li><a href="#">삼양식품</a></li>
-                        <li><a href="#">해외법인</a></li>
-                        <li><a href="#">공장</a></li>
-                        <li><a href="#">오시는길</a></li>
-                    </ul>
-
-                    <ul class="depth2" aria-label="홍보관 하위 메뉴">
-                        <li><a href="#">삼양소식</a></li>
-                        <li><a href="#">홍보영상</a></li>
-                        <li><a href="#">삼양역사관</a></li>
-                    </ul>
-
-                    <ul class="depth2" aria-label="지속가능경영 하위 메뉴">
-                        <li><a href="#">ESG 전략체계</a></li>
-                        <li><a href="#">환경경영</a></li>
-                        <li><a href="#">사회적가치경영</a></li>
-                        <li><a href="#">책임경영</a></li>
-                        <li><a href="#">뉴스룸</a></li>
-                        <li><a href="#">보고서 및 정책</a></li>
-                    </ul>
-
-                    <ul class="depth2" aria-label="브랜드 하위 메뉴">
-                        <li><a href="#">삼양1963</a></li>
-                        <li><a href="#">삼양라면</a></li>
-                        <li><a href="#">불닭볶음면</a></li>
-                        <li><a href="#">맵탱</a></li>
-                        <li><a href="#">펄스랩</a></li>
-                        <li><a href="#">짜짜로니</a></li>
-                        <li><a href="#">탱글</a></li>
-                    </ul>
-
-                    <ul class="depth2" aria-label="제품 하위 메뉴">
-                        <li><a href="#">라면</a></li>
-                        <li><a href="#">스낵</a></li>
-                        <li><a href="#">유제품</a></li>
-                        <li><a href="#">소스·간편식</a></li>
-                        <li><a href="#">냉동 간편식</a></li>
-                    </ul>
-
-                    <ul class="depth2" aria-label="고객지원 하위 메뉴">
-                        <li><a href="#">고객만족센터</a></li>
-                        <li><a href="#">고객문의</a></li>
-                        <li><a href="#">사업제안</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
             </div>
-        </div>
-        <!-- // 2DEPTH / MEGA MENU SECTION -->
-    </header>
-    <!-- // HEADER SECTION -->
-
-
-    <!-- =========================================
-         MAIN SLIDE SECTION
-         - 전체 너비 100%
-         - 높이 600px
-         - Swiper 사용
-    ========================================== -->
-    <main>
-        <section class="main-slide-section" aria-label="삼양식품 메인 슬라이드">
 
             <!-- =========================================
-                 SWIPER CONTAINER
+                 02. 삼양라면 : 이미지 4개
             ========================================== -->
-            <div class="swiper mainSwiper">
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20231017141211454452.png" alt="삼양라면 제품 이미지 1"><h3>삼양라면 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20231117143446801499.png" alt="삼양라면 제품 이미지 2"><h3>삼양라면 2</h3></a></li>
+                    <li><a href="#"><img src="./imges/20231208103836216894.png" alt="삼양라면 제품 이미지 3"><h3>삼양라면 3</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250110104513271125.png" alt="삼양라면 제품 이미지 4"><h3>삼양라면 4</h3></a></li>
+                </ul>
+            </div>
 
-                <!-- =========================================
-                     SWIPER SLIDE LIST
-                ========================================== -->
-                <div class="swiper-wrapper">
+            <!-- =========================================
+                 03. 불닭볶음면 : 이미지 4개
+            ========================================== -->
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20260622144950808477.png" alt="불닭볶음면 제품 이미지 1"><h3>불닭볶음면 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20260622145514434489.png" alt="불닭볶음면 제품 이미지 2"><h3>불닭볶음면 2</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250520092351672181.png" alt="불닭볶음면 제품 이미지 3"><h3>불닭볶음면 3</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151500215046.png" alt="불닭볶음면 제품 이미지 4"><h3>불닭볶음면 4</h3></a></li>
+                </ul>
+            </div>
 
-                    <!-- SLIDE 01 : 불닭 -->
-                    <div class="swiper-slide slide-bg slide-bg-01" role="group" aria-label="1번째 슬라이드, 불닭 글로벌 브랜드">
-                        <span class="blind">Global No.1 Spicy Brand, 불닭</span>
-                    </div>
+            <!-- =========================================
+                 04. 맵탱 : 이미지 3개
+            ========================================== -->
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20250424150538620036.png" alt="맵탱 제품 이미지 1"><h3>맵탱 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151137594041.png" alt="맵탱 제품 이미지 2"><h3>맵탱 2</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151500215046.png" alt="맵탱 제품 이미지 3"><h3>맵탱 3</h3></a></li>
+                </ul>
+            </div>
 
-                    <!-- SLIDE 02 : 사용자가 첫 번째로 추가한 삼양라면 이미지 -->
-                    <div class="swiper-slide slide-bg slide-bg-02" role="group" aria-label="2번째 슬라이드, 삼양라면">
-                        <span class="blind">Since 1963 라면의 원조, 삼양라면</span>
-                    </div>
+            <!-- =========================================
+                 05. 펄스랩 : 이미지 4개
+            ========================================== -->
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20250804110918664238.png" alt="펄스랩 제품 이미지 1"><h3>펄스랩 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250804111013647242.png" alt="펄스랩 제품 이미지 2"><h3>펄스랩 2</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250804111108836246.png" alt="펄스랩 제품 이미지 3"><h3>펄스랩 3</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250804110615710234.png" alt="펄스랩 제품 이미지 4"><h3>펄스랩 4</h3></a></li>
+                </ul>
+            </div>
 
-                    <!-- SLIDE 03 : 사용자가 두 번째로 추가한 삼양라운드힐 이미지 -->
-                    <div class="swiper-slide slide-bg slide-bg-03" role="group" aria-label="3번째 슬라이드, 삼양라운드힐">
-                        <span class="blind">삼양라운드힐 전용 앱으로 예약과 이벤트 확인을 한번에</span>
-                    </div>
+            <!-- =========================================
+                 06. 짜짜로니 : 이미지 2개
+            ========================================== -->
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20231117143446801499.png" alt="짜짜로니 제품 이미지 1"><h3>짜짜로니 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20231208103836216894.png" alt="짜짜로니 제품 이미지 2"><h3>짜짜로니 2</h3></a></li>
+                </ul>
+            </div>
 
+            <!-- =========================================
+                 07. 탱글 : 이미지 4개
+            ========================================== -->
+            <div class="listwrap">
+                <ul class="product-list">
+                    <li><a href="#"><img src="./imges/20250424150538620036.png" alt="탱글 제품 이미지 1"><h3>탱글 1</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151137594041.png" alt="탱글 제품 이미지 2"><h3>탱글 2</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151500215046.png" alt="탱글 제품 이미지 3"><h3>탱글 3</h3></a></li>
+                    <li><a href="#"><img src="./imges/20250424151718717051.png" alt="탱글 제품 이미지 4"><h3>탱글 4</h3></a></li>
+                </ul>
+            </div>
+
+            <!-- 더보기 버튼 -->
+            <div class="more-wrap">
+                <a href="#" class="more-btn">
+                    <span>more</span>
+                    <span class="arrow">⟶</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+    <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samyang Foods Community Section</title>
+
+    <!-- Noto Sans KR 웹폰트 연결 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- COMMUNITY SECTION 전용 CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <!-- =====================================================
+         COMMUNITY SECTION
+         - 전체 너비 : 100%
+         - section 높이 : 1190px
+         - inner 너비 : 1140px
+    ====================================================== -->
+    <section class="community-section">
+        <div class="inner">
+
+            <!-- 섹션 제목 영역 -->
+            <div class="community-heading">
+                <h2>COMMUNITY</h2>
+                <p>
+                    삼양식품은 혁신적인 기술과 포용적인 사고로 여러분과 함께<br>
+                    새로운 식문화를 만들어갑니다.
+                </p>
+            </div>
+
+            <!-- =================================================
+                 커뮤니티 박스 전체 영역
+                 왼쪽 314px / 가운데 474px / 오른쪽 312px
+                 열 사이 간격 20px
+            ================================================== -->
+            <div class="community-grid">
+
+                <!-- =============================================
+                     LEFT : 삼양식품 Facebook 게시물
+                     실제 Facebook Page Plugin을 iframe으로 삽입
+                     인터넷 연결 상태에서 최신 타임라인이 표시됩니다.
+                ============================================== -->
+                <div class="facebook-box" aria-label="삼양식품 Facebook 게시물">
+                    <iframe
+                        title="Samyang Foods Facebook Timeline"
+                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSamyangfoods.Global&tabs=timeline&width=314&height=660&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId="
+                        width="314"
+                        height="660"
+                        style="border:none;overflow:hidden"
+                        scrolling="no"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
                 </div>
-                <!-- // SWIPER SLIDE LIST -->
+                <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samyang Movie Section</title>
 
-                <!-- =========================================
-                     LEFT / RIGHT NAVIGATION BUTTON
-                ========================================== -->
-                <!-- 배경 이미지 안에 화살표가 이미 있으므로
-                     버튼 자체는 클릭 영역만 제공하고 별도 꺾쇠는 그리지 않습니다. -->
-                <button class="slide-control slide-control-prev" type="button" aria-label="이전 슬라이드"></button>
-                <button class="slide-control slide-control-next" type="button" aria-label="다음 슬라이드"></button>
-                <!-- // LEFT / RIGHT NAVIGATION BUTTON -->
+    <!-- 내가 만든 CSS 연결 -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
 
-                <!-- =========================================
-                     FRACTION PAGINATION
-                     1 / 3 형태
-                ========================================== -->
-                <div class="swiper-pagination" aria-label="현재 슬라이드 번호"></div>
-                <!-- // FRACTION PAGINATION -->
+    <!-- =========================================
+         MOVIE SECTION
+         - 전체 가로 100%
+         - 높이 630px
+         - 내부 기준 너비 1140px
+    ========================================== -->
+    <section class="movie-section">
+
+        <!-- =====================================
+             MOVIE
+             실제 동영상 파일은 아래 src 경로의
+             파일명만 사용자의 동영상명으로 변경하면 됩니다.
+             예) ./imges/main-video.mp4
+        ====================================== -->
+        <video
+            class="movie-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="./imges/movie-poster.png"
+        >
+            <!-- 동영상 파일 교체 위치 -->
+            <source src="./imges/video_banner (1).mp4" type="video/mp4">
+
+            <!-- 브라우저가 video 태그를 지원하지 않을 때 표시되는 문구 -->
+            사용 중인 브라우저에서는 동영상을 재생할 수 없습니다.
+        </video>
+
+        <!-- =====================================
+             INNER
+             추후 동영상 위에 텍스트/버튼 등을 올릴 때
+             이 영역 안에 추가하면 1140px 기준으로 정렬됩니다.
+        ====================================== -->
+        <div class="inner">
+            <!-- 현재 시안에는 별도의 텍스트 요소가 없으므로 비워둡니다. -->
+        </div>
+
+    </section>
+
+</body>
+</html>
+
+                <!-- =============================================
+                     CENTER : 홍보영상 + 고객 문의
+                ============================================== -->
+                <div class="center-column">
+
+                    <!-- 홍보영상 박스 -->
+                    <article class="community-box promo-box">
+                        <h3>홍보영상</h3>
+                        <p class="box-text">
+                            삼양식품의 다채로운 스토리를<br>
+                            영상으로 보여드립니다.
+                        </p>
+                        <a href="#" class="more-btn" aria-label="홍보영상 자세히보기">자세히보기</a>
+                    </article>
+
+                    <!-- 고객 문의 박스 -->
+                    <article class="community-box customer-box">
+                        <h3>고객 문의</h3>
+                        <p class="box-text">
+                            삼양식품에게<br>
+                            여러분의 다양한 의견을 남겨주세요.
+                        </p>
+                        <a href="#" class="more-btn" aria-label="고객 문의 자세히보기">자세히보기</a>
+                    </article>
+                </div>
+
+                <!-- =============================================
+                     RIGHT : 맛있는 나눔 + 공지사항 + 공식몰
+                ============================================== -->
+                <div class="right-column">
+
+                    <!-- 맛있는 나눔 박스 -->
+                    <article class="community-box share-box">
+                        <h3>맛있는 나눔</h3>
+                        <p class="box-text">모두가 행복한 맛있는 세상</p>
+                        <a href="#" class="more-btn" aria-label="맛있는 나눔 자세히보기">자세히보기</a>
+                    </article>
+
+                    <!-- 공지사항 박스 -->
+                    <article class="community-box notice-box">
+                        <h3>공지사항</h3>
+                        <p class="box-text">삼양식품 개인정보취급방침 개정 안내</p>
+                        <a href="#" class="more-btn" aria-label="공지사항 자세히보기">자세히보기</a>
+                    </article>
+
+                    <!-- 삼양식품 공식몰 박스 -->
+                    <article class="community-box shop-box">
+                        <h3>삼양식품 공식몰</h3>
+                        <p class="box-text">
+                            삼양식품의<br>
+                            다양한 제품을 만나보세요.
+                        </p>
+                        <a href="#" class="more-btn" aria-label="삼양식품 공식몰 자세히보기">자세히보기</a>
+                    </article>
+                </div>
 
             </div>
-            <!-- // SWIPER CONTAINER -->
+        </div>
+    </section>
 
-        </section>
-    </main>
-    <!-- // MAIN SLIDE SECTION -->
-
-
-    <!-- =========================================
-         SWIPER JAVASCRIPT
-    ========================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- =========================================
-         CUSTOM JAVASCRIPT
-    ========================================== -->
+    <!-- 기본 링크 클릭 시 페이지 상단으로 튀는 것을 막기 위한 간단한 스크립트 -->
     <script src="./js/script.js"></script>
+</body>
+</html>
+
+    <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- 내가 만든 JavaScript 연결 -->
+    <script src="./js/script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samyang Foods Footer</title>
+
+    <!-- Noto Sans KR 웹폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- 내가 만든 CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="demo-page">
+
+  <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samyang Footer</title>
+
+    <!-- Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- 외부 CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="demo-page">
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+    <footer class="footer">
+
+        <div class="footer__inner">
+
+            <!-- 로고 -->
+            <div class="footer__logo">
+                <a href="#">
+                    <img src="./imges/samyang-logo.png" alt="Samyang Foods">
+                </a>
+            </div>
+
+            <!-- 회사 정보 -->
+            <div class="footer__info">
+
+                <ul class="footer__menu">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">고객지원</a></li>
+                    <li><a href="#">IR</a></li>
+                    <li><a href="#">찾아오시는 길</a></li>
+                    <li class="privacy"><a href="#">개인정보처리방침</a></li>
+                </ul>
+
+                <address class="footer__address">
+                    <p>삼양식품(주) 서울특별시 종로구 퇴계로 159(충무로2가)</p>
+                    <p>대표이사 : 김정수, 김동찬</p>
+                    <p>사업자등록번호 : 102-81-05450 | 통신판매신고번호 : 2016-서울성북-0790</p>
+                    <p>고객만족센터 : 080-940-3333(무료상담전화) | 대표전화 : 02-940-3000</p>
+                </address>
+
+                <p class="footer__copyright">
+                    Copyrightⓒ SamyangFoods Inc. All Rights Reserved.
+                </p>
+
+            </div>
+
+            <!-- SNS -->
+            <div class="footer__sns">
+                <a href="#" aria-label="Instagram">
+                    <img src="./imges/instagram.png" alt="">
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <img src="./imges/youtube.png" alt="">
+                </a>
+            </div>
+
+            <!-- ==================================================
+                 FAMILY SITE
+                 - button 클릭 시 .open 추가/제거
+                 - 목록은 버튼 위쪽으로 펼쳐짐
+            =================================================== -->
+            <div class="family-site" id="familySite">
+
+                <button
+                    type="button"
+                    class="family-site__button"
+                    id="familySiteButton"
+                    aria-expanded="false"
+                >
+                    <span>FamilySite</span>
+                    <span class="family-site__arrow" aria-hidden="true"></span>
+                </button>
+
+                <ul class="family-site__list" id="familySiteList">
+                    <li><a href="#">삼양라운드스퀘어</a></li>
+                    <li><a href="#">삼양식품 공식몰</a></li>
+                    <li><a href="#">삼양라운드힐</a></li>
+                    <li><a href="#">삼양이건장학재단</a></li>
+                    <li><a href="#">삼양로지스틱스</a></li>
+                    <li><a href="#">삼양제분</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- 상담 아이콘 -->
+        <button type="button" class="chat-button" aria-label="고객 상담">
+            <img src="./imges/logo_w186.png" alt="">
+        </button>
+
+    </footer>
+
+    <!-- 외부 JS -->
+    <script src="./js/script.js"></script>
+
+    <!-- ==================================================
+         FALLBACK SCRIPT
+         외부 script.js가 연결되지 않아도 FamilySite가 작동하도록
+         같은 동작을 한 번 더 안전하게 넣어둠
+    =================================================== -->
+    <script>
+        (function () {
+            const wrap = document.getElementById("familySite");
+            const btn = document.getElementById("familySiteButton");
+
+            if (!wrap || !btn) return;
+
+            // 이미 외부 JS에서 이벤트 연결 완료된 경우 중복 연결 방지
+            if (btn.dataset.bound === "true") return;
+
+            btn.dataset.bound = "true";
+
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                wrap.classList.toggle("open");
+
+                const opened = wrap.classList.contains("open");
+                btn.setAttribute("aria-expanded", opened ? "true" : "false");
+            });
+
+            wrap.addEventListener("click", function (e) {
+                e.stopPropagation();
+            });
+
+            document.addEventListener("click", function () {
+                wrap.classList.remove("open");
+                btn.setAttribute("aria-expanded", "false");
+            });
+        })();
+    </script>
 
 </body>
 </html>
