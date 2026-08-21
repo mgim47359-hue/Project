@@ -1,25 +1,14 @@
 [GitHub Pages 업로드 방법]
 
-1. 기존 테스트용 index.html / css/style.css / js/script.js가 있다면 삭제하거나 새 파일로 교체하세요.
-2. 이 압축 안의 폴더 구조를 그대로 유지해서 저장소에 올리세요.
+1. 기존 GitHub 저장소의 이전 slider 파일과 섞지 말고 이번 폴더의 파일로 교체합니다.
+2. index.html / css / js / imges 폴더를 저장소의 같은 위치에 업로드합니다.
+3. 이미지 파일명은 대소문자까지 정확히 맞춥니다.
+4. 배포 후 브라우저에서 Ctrl + F5로 강력 새로고침합니다.
 
-index.html
-css/
-  sulwhasoo-slider.css
-js/
-  sulwhasoo-slider.js
-imges/
-  banner01.png ~ banner06.png
-  icon-pause.png
-  icon-play.png
-
-3. 중요: 이미지 경로는 /imges/...가 아니라 ./imges/...로 작성되어 있습니다.
-   GitHub Project Pages에서는 앞에 /를 붙이면 저장소 경로가 빠져 이미지가 깨질 수 있습니다.
-
-4. 이번 버전은 CSS/JS 파일명을 새로 바꿨고 ?v=20260821-2 값을 붙여
-   GitHub/브라우저의 이전 캐시가 섞이는 문제를 줄였습니다.
-
-5. 업로드 후 브라우저에서 Ctrl + F5로 강력 새로고침하세요.
-
-6. 다른 홈페이지 코드에 이 섹션을 합칠 때도 클래스명이 sul- 로 시작하도록 만들어
-   기존 header/footer/section CSS와 충돌을 최소화했습니다.
+이번 수정본 핵심
+- 왼쪽 버튼: productSwiper.slidePrev() 직접 호출
+- 오른쪽 버튼: productSwiper.slideNext() 직접 호출
+- 오른쪽 버튼 z-index / pointer-events 보강
+- 3초 자동재생 유지
+- 한 화면 3개, 한 번에 1개씩 이동
+- 첨부한 윤조아이세럼 / 여윤팩 / 순행클렌징폼 이미지를 banner04~06에 반영

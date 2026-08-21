@@ -150,7 +150,8 @@
 .sul-recommend-section .sul-slider-nav {
     position: absolute;
     top: 200px;
-    z-index: 30;
+    z-index: 9999;
+    pointer-events: auto !important;
     display: flex;
     align-items: center;
     justify-content: center;
