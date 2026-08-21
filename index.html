@@ -1,14 +1,137 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>집반찬연구소</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>집반찬연구소 - 메인 슬라이드</title>
+
+    <!-- Noto Sans KR 웹폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- 사용자 CSS -->
+    <link rel="stylesheet" href="./css/style.css?v=1.0">
 </head>
 <body>
-  <main class="page-wrap">
-    <img src="./images/fullpage-clean.png" alt="집반찬연구소 홈페이지 전체 시안" class="fullpage-image">
-  </main>
+
+    <!-- ========================================
+         상단 신규회원 혜택 바
+    ========================================= -->
+    <div class="top-banner">
+        <button class="top-banner__link" type="button">
+            신규회원 1만원 즉시 할인
+            <span class="top-banner__arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="top-banner__close" type="button" aria-label="상단 배너 닫기">×</button>
+    </div>
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+    <header class="header">
+        <div class="header__inner">
+
+            <!-- 검색 영역 -->
+            <form class="search" action="#" onsubmit="return false;">
+                <label class="blind" for="searchInput">반찬 검색</label>
+                <input id="searchInput" type="search" placeholder="반찬을 입력해주세요.">
+                <button type="submit" aria-label="검색">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="6.5"></circle>
+                        <path d="M16 16l4 4"></path>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- 로고 -->
+            <a class="logo" href="#" aria-label="집반찬연구소 홈">
+                <img src="./imges/logo.png" alt="집반찬연구소">
+            </a>
+
+            <!-- 오른쪽 메뉴 -->
+            <div class="header__right">
+                <nav class="member-menu" aria-label="회원 메뉴">
+                    <a href="#">로그인</a>
+                    <a href="#">회원가입</a>
+                    <a href="#">내정보</a>
+                </nav>
+
+                <nav class="quick-menu" aria-label="빠른 메뉴">
+                    <a href="#"><span class="quick-icon">☎</span>전화주문</a>
+                    <a href="#"><span class="quick-icon">▣</span>브랜드</a>
+                    <a href="#"><span class="quick-icon">◈</span>반찬보기</a>
+                    <a href="#"><span class="quick-icon">▱</span>장바구니</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========================================
+             MAIN VISUAL SLIDER
+             ./imges/slide-01.png ~ slide-04.png만
+             교체하면 배너 이미지를 바꿀 수 있습니다.
+        ========================================= -->
+        <section class="visual-slider" aria-label="메인 배너">
+            <div class="visual-slider__viewport">
+                <div class="visual-slider__track">
+                    <article class="visual-slide">
+                        <img src="./imges/slide-01.png" alt="불 없이 만드는 시원한 한상, 간편 5분 식탁">
+                    </article>
+                    <article class="visual-slide">
+                        <img src="./imges/slide-02.png" alt="집반찬연구소 신규회원 혜택">
+                    </article>
+                    <article class="visual-slide">
+                        <img src="./imges/slide-03.png" alt="문 앞까지 오는 정기식단">
+                    </article>
+                    <article class="visual-slide">
+                        <img src="./imges/slide-04.png" alt="무라벨 생수 안내">
+                    </article>
+                </div>
+            </div>
+
+            <!-- 좌우 이동 버튼 -->
+            <div class="visual-slider__controls">
+                <button class="slider-button slider-button--prev" type="button" aria-label="이전 배너">‹</button>
+                <button class="slider-button slider-button--next" type="button" aria-label="다음 배너">›</button>
+            </div>
+
+            <!-- 현재 슬라이드 번호 -->
+            <div class="visual-slider__counter" aria-live="polite">
+                <strong class="current-slide">1</strong>
+                <span class="counter-divider"></span>
+                <span class="total-slide">4</span>
+            </div>
+        </section>
+
+        <!-- ========================================
+             밑으로 스크롤하면 보이는 카테고리 영역
+             첨부 시안의 하단 화면을 그대로 배치했습니다.
+        ========================================= -->
+        <section class="category-section" aria-label="반찬 카테고리">
+            <div class="category-section__inner">
+                <img src="./imges/category.png" alt="홈캉스 정식, 5분 식탁, 정기 식단, 원더스푼, 저당 반찬, 알뜰 반찬, 여름 제철반찬, 어린이 반찬 카테고리">
+            </div>
+        </section>
+
+        <!-- ========================================
+             여름휴가도, 집반찬 상품 섹션
+             사용자가 추가로 요청한 하단 화면입니다.
+             화면 이미지를 그대로 사용하여 시안과 동일하게 보이도록 했습니다.
+             이미지를 바꾸려면 ./imges/product-section.png 파일만 교체하면 됩니다.
+        ========================================= -->
+        <section class="product-showcase" aria-label="여름휴가도 집반찬 상품 목록">
+            <div class="product-showcase__inner">
+                <img src="./imges/product-section.png" alt="여름휴가도 집반찬 상품 목록 - 깻잎무생채, 마늘쫑채 장아찌, 맑은 한우 배추국 냉동, 콩나물 황태국 냉동">
+            </div>
+        </section>
+
+        <!-- 페이지 하단 여백 -->
+        <section class="page-space" aria-hidden="true"></section>
+    </main>
+
+    <!-- 사용자 JavaScript -->
+    <script src="./js/script.js?v=1.0"></script>
 </body>
 </html>
