@@ -1,16 +1,22 @@
-집반찬연구소 메인 페이지 수정본
+집반찬연구소 - 2개 섹션 전용 버전
 
-1. 메인 배너 4장이 3초마다 자동으로 바뀝니다.
-2. 좌/우 버튼으로 직접 슬라이드를 이동할 수 있습니다.
-3. 메인 아래에 카테고리 화면이 있습니다.
-4. 그 아래에 요청하신 "여름휴가도, 집반찬" 상품 화면을 추가했습니다.
+포함된 것은 딱 2개입니다.
+1. 메인 배너 슬라이드 (4장 / 3초 자동변경 / 좌우 버튼)
+2. 여름휴가도, 집반찬 상품 화면
 
-이미지 교체 위치
-- ./imges/slide-01.png
-- ./imges/slide-02.png
-- ./imges/slide-03.png
-- ./imges/slide-04.png
-- ./imges/category.png
-- ./imges/product-section.png
+포함하지 않은 것:
+- 상단 초록 배너
+- Header / 검색창 / 로고 / 메뉴
+- 반찬 카테고리 영역
+- Footer
 
-index.html을 더블클릭해서 확인하면 됩니다.
+이미지 교체 위치:
+./imges/slide-01.png
+./imges/slide-02.png
+./imges/slide-03.png
+./imges/slide-04.png
+./imges/product-section.png
+
+기존 홈페이지에 붙일 때는 index.html의 두 section 부분과
+css/style.css, js/script.js를 사용하면 됩니다.
+클래스는 jp- 접두사를 사용하여 기존 CSS와의 충돌을 줄였습니다.

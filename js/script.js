@@ -1,88 +1,74 @@
-/* ========================================
-   집반찬연구소 메인 슬라이더
-   - 3초마다 다음 화면으로 자동 이동
-   - 좌/우 버튼 수동 이동
-   - 마지막 화면 다음에는 첫 화면으로 반복
-======================================== */
+/* =========================================================
+   집반찬연구소 메인 배너 슬라이드
+   - 3초마다 자동으로 다음 화면 이동
+   - 좌/우 버튼 클릭 가능
+   - 마지막 배너 다음에는 첫 번째 배너로 반복
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
-    const track = document.querySelector(".visual-slider__track");
-    const slides = document.querySelectorAll(".visual-slide");
-    const prevButton = document.querySelector(".slider-button--prev");
-    const nextButton = document.querySelector(".slider-button--next");
-    const currentText = document.querySelector(".current-slide");
-    const totalText = document.querySelector(".total-slide");
-    const closeTopBanner = document.querySelector(".top-banner__close");
-    const topBanner = document.querySelector(".top-banner");
+    const slider = document.querySelector(".jp-main-slider");
+
+    // 해당 섹션이 없는 페이지에서는 실행하지 않음
+    if (!slider) return;
+
+    const track = slider.querySelector(".jp-main-slider__track");
+    const slides = slider.querySelectorAll(".jp-main-slider__slide");
+    const prevButton = slider.querySelector(".jp-main-slider__button--prev");
+    const nextButton = slider.querySelector(".jp-main-slider__button--next");
+    const currentText = slider.querySelector(".jp-main-slider__current");
+    const totalText = slider.querySelector(".jp-main-slider__total");
 
     let currentIndex = 0;
-    let autoTimer = null;
+    let timer = null;
 
-    // 총 슬라이드 개수 표시
     totalText.textContent = slides.length;
 
-    // 현재 순서에 맞춰 슬라이드 위치와 숫자를 갱신
-    function renderSlide() {
-        track.style.transform = `translate3d(-${currentIndex * 25}%, 0, 0)`;
+    // 현재 슬라이드 위치와 번호를 화면에 반영
+    function showSlide(index) {
+        currentIndex = (index + slides.length) % slides.length;
+        const movePercent = currentIndex * (100 / slides.length);
+
+        track.style.transform = `translate3d(-${movePercent}%, 0, 0)`;
         currentText.textContent = currentIndex + 1;
     }
 
-    // 다음 슬라이드
-    function goNext() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        renderSlide();
+    // 다음 화면
+    function nextSlide() {
+        showSlide(currentIndex + 1);
     }
 
-    // 이전 슬라이드
-    function goPrev() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        renderSlide();
+    // 이전 화면
+    function prevSlide() {
+        showSlide(currentIndex - 1);
     }
 
     // 3초 자동재생 시작
     function startAutoPlay() {
         stopAutoPlay();
-        autoTimer = window.setInterval(goNext, 3000);
+        timer = window.setInterval(nextSlide, 3000);
     }
 
-    // 기존 타이머 중복 방지
+    // 중복 타이머 방지
     function stopAutoPlay() {
-        if (autoTimer !== null) {
-            window.clearInterval(autoTimer);
-            autoTimer = null;
+        if (timer !== null) {
+            window.clearInterval(timer);
+            timer = null;
         }
     }
 
-    // 오른쪽 버튼: 다음 화면으로 이동 후 3초 타이머 다시 시작
+    // 오른쪽 버튼 클릭
     nextButton.addEventListener("click", function () {
-        goNext();
+        nextSlide();
         startAutoPlay();
     });
 
-    // 왼쪽 버튼: 이전 화면으로 이동 후 3초 타이머 다시 시작
+    // 왼쪽 버튼 클릭
     prevButton.addEventListener("click", function () {
-        goPrev();
+        prevSlide();
         startAutoPlay();
     });
 
-    // 키보드 방향키도 지원
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "ArrowRight") {
-            goNext();
-            startAutoPlay();
-        }
-        if (event.key === "ArrowLeft") {
-            goPrev();
-            startAutoPlay();
-        }
-    });
-
-    // 상단 초록 배너 닫기
-    closeTopBanner.addEventListener("click", function () {
-        topBanner.style.display = "none";
-    });
-
-    // 페이지가 보일 때만 자동재생해서 불필요한 타이머를 줄임
+    // 브라우저 탭을 벗어나면 자동재생 정지 / 돌아오면 재시작
     document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
             stopAutoPlay();
@@ -91,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 초기 실행
-    renderSlide();
+    showSlide(0);
     startAutoPlay();
 });
