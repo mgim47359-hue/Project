@@ -1,146 +1,159 @@
-/* =========================================
-   2DEPTH MEGA MENU
-   - 주메뉴에 마우스를 올리면 전체 2단 메뉴 노출
-   - JavaScript로 위 → 아래 드롭 애니메이션
-========================================= */
-const siteHeader = document.querySelector("#siteHeader");
-const megaMenu = document.querySelector("#megaMenu");
-const gnbItems = document.querySelectorAll(".gnb-item");
+/* =========================================================
+   설화수 추천 Swiper Slider
+   - 총 6개 슬라이드
+   - 한 화면에 3개
+   - 한 번 클릭할 때 1개씩 이동
+   - 3초마다 자동으로 1개씩 이동
+   - 진행 막대 / 일시정지 / 재생 기능
+========================================================= */
 
-let megaAnimation = null;
-let closeTimer = null;
+window.addEventListener("DOMContentLoaded", function () {
+    const progressFill = document.querySelector(".progress-fill");
+    const pauseButton = document.querySelector(".pause-btn");
+    const playButton = document.querySelector(".play-btn");
+    const totalSlides = 6;
 
-function openMegaMenu() {
-    clearTimeout(closeTimer);
-
-    megaMenu.classList.add("is-open");
-    megaMenu.setAttribute("aria-hidden", "false");
-
-    if (megaAnimation) {
-        megaAnimation.cancel();
+    /* 현재 슬라이드 번호에 맞춰 진행 막대 길이 변경 */
+    function updateProgress(index) {
+        const progress = ((index + 1) / totalSlides) * 100;
+        progressFill.style.width = progress + "%";
     }
 
-    megaAnimation = megaMenu.animate(
-        [
-            { opacity: 0, transform: "translateY(-32px)" },
-            { opacity: 1, transform: "translateY(0)" }
-        ],
-        {
-            duration: 330,
-            easing: "cubic-bezier(.22,.75,.2,1)",
-            fill: "forwards"
-        }
-    );
-}
+    /* =====================================================
+       Swiper가 정상 로드되었을 때 실행
+    ====================================================== */
+    if (typeof Swiper !== "undefined") {
+        const productSwiper = new Swiper(".product-swiper", {
+            /* 한 화면에 3개 표시 */
+            slidesPerView: 3,
 
-function closeMegaMenu() {
-    clearTimeout(closeTimer);
+            /* 카드 사이 간격 */
+            spaceBetween: 24,
 
-    closeTimer = setTimeout(() => {
-        if (megaAnimation) {
-            megaAnimation.cancel();
-        }
+            /* 버튼 클릭 시 1개씩 이동 */
+            slidesPerGroup: 1,
 
-        megaAnimation = megaMenu.animate(
-            [
-                { opacity: 1, transform: "translateY(0)" },
-                { opacity: 0, transform: "translateY(-22px)" }
-            ],
-            {
-                duration: 190,
-                easing: "ease-in",
-                fill: "forwards"
+            /* 마지막에서 처음으로 자연스럽게 반복 */
+            loop: true,
+
+            /* 3초마다 자동으로 한 개씩 이동 */
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false
+            },
+
+            /* 좌우 네비게이션 버튼 연결 */
+            navigation: {
+                prevEl: ".slider-prev",
+                nextEl: ".slider-next"
+            },
+
+            /* 슬라이드 변경 시 현재 위치를 막대로 표시 */
+            on: {
+                init: function () {
+                    updateProgress(this.realIndex);
+                },
+                slideChange: function () {
+                    updateProgress(this.realIndex);
+                }
             }
-        );
+        });
 
-        megaAnimation.onfinish = () => {
-            megaMenu.classList.remove("is-open");
-            megaMenu.setAttribute("aria-hidden", "true");
-        };
-    }, 70);
-}
+        /* 초기 상태는 자동재생 중이므로 pause 버튼을 활성 표시 */
+        pauseButton.classList.add("is-active");
 
-/* =========================================
-   MAIN MENU MOUSE / KEYBOARD EVENT
-========================================= */
-gnbItems.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-        gnbItems.forEach((menu) => menu.classList.remove("is-active"));
-        item.classList.add("is-active");
-        openMegaMenu();
-    });
+        /* 일시정지 버튼 클릭 */
+        pauseButton.addEventListener("click", function () {
+            productSwiper.autoplay.stop();
+            pauseButton.classList.add("is-active");
+            playButton.classList.remove("is-active");
+        });
 
-    item.addEventListener("focusin", () => {
-        gnbItems.forEach((menu) => menu.classList.remove("is-active"));
-        item.classList.add("is-active");
-        openMegaMenu();
-    });
-});
+        /* 재생 버튼 클릭 */
+        playButton.addEventListener("click", function () {
+            productSwiper.autoplay.start();
+            playButton.classList.add("is-active");
+            pauseButton.classList.remove("is-active");
+        });
 
-siteHeader.addEventListener("mouseleave", () => {
-    gnbItems.forEach((menu) => menu.classList.remove("is-active"));
-    closeMegaMenu();
-});
-
-siteHeader.addEventListener("focusout", (event) => {
-    if (!siteHeader.contains(event.relatedTarget)) {
-        gnbItems.forEach((menu) => menu.classList.remove("is-active"));
-        closeMegaMenu();
+        return;
     }
-});
 
-megaMenu.addEventListener("mouseenter", () => {
-    clearTimeout(closeTimer);
-});
+    /* =====================================================
+       CDN 연결이 안 되는 환경을 위한 간단한 로컬 폴백
+       (인터넷 없이 열어도 기본 슬라이드 기능은 동작)
+    ====================================================== */
+    const wrapper = document.querySelector(".swiper-wrapper");
+    const slides = Array.from(document.querySelectorAll(".swiper-slide"));
+    const prevButton = document.querySelector(".slider-prev");
+    const nextButton = document.querySelector(".slider-next");
+    let currentIndex = 0;
+    let timer = null;
 
+    /* 폴백용 레이아웃 구성 */
+    wrapper.style.display = "flex";
+    wrapper.style.gap = "24px";
+    wrapper.style.transition = "transform 0.45s ease";
 
-/* =========================================
-   SWIPER SLIDE INITIALIZE
-   - 가로 방향
-   - 로딩 후 3초마다 자동 이동
-   - 무한 반복
-   - 좌우 버튼
-   - 1 / 3 페이지 표시
-========================================= */
-const mainSwiper = new Swiper(".mainSwiper", {
-    direction: "horizontal",
-    loop: true,
-    speed: 900,
-    slidesPerView: 1,
-    spaceBetween: 0,
+    slides.forEach(function (slide) {
+        slide.style.flex = "0 0 calc((100% - 48px) / 3)";
+    });
 
-    /* =========================================
-       AUTO PLAY
-       3초마다 자동 실행
-    ========================================== */
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: false
-    },
+    function renderFallback() {
+        const slideWidth = slides[0].getBoundingClientRect().width + 24;
+        wrapper.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        updateProgress(currentIndex);
+    }
 
-    /* =========================================
-       LEFT / RIGHT BUTTON
-    ========================================== */
-    navigation: {
-        prevEl: ".slide-control-prev",
-        nextEl: ".slide-control-next"
-    },
+    function nextFallback() {
+        currentIndex = (currentIndex + 1) % totalSlides;
 
-    /* =========================================
-       PAGINATION
-       1 / 3 형식
-    ========================================== */
-    pagination: {
-        el: ".swiper-pagination",
-        type: "fraction",
-        renderFraction: function (currentClass, totalClass) {
-            return `<span class="${currentClass}"></span> / <span class="${totalClass}"></span>`;
+        /* 마지막 부분에서도 3개가 유지되도록 시작 위치를 보정 */
+        if (currentIndex > totalSlides - 3) {
+            currentIndex = 0;
         }
-    },
+        renderFallback();
+    }
 
-    /* =========================================
-       USER INTERACTION
-    ========================================== */
-    grabCursor: true
+    function prevFallback() {
+        currentIndex -= 1;
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 3;
+        }
+        renderFallback();
+    }
+
+    function startFallbackAutoplay() {
+        stopFallbackAutoplay();
+        timer = setInterval(nextFallback, 3000);
+    }
+
+    function stopFallbackAutoplay() {
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    prevButton.addEventListener("click", prevFallback);
+    nextButton.addEventListener("click", nextFallback);
+
+    pauseButton.addEventListener("click", function () {
+        stopFallbackAutoplay();
+        pauseButton.classList.add("is-active");
+        playButton.classList.remove("is-active");
+    });
+
+    playButton.addEventListener("click", function () {
+        startFallbackAutoplay();
+        playButton.classList.add("is-active");
+        pauseButton.classList.remove("is-active");
+    });
+
+    window.addEventListener("resize", renderFallback);
+
+    pauseButton.classList.add("is-active");
+    renderFallback();
+    startFallbackAutoplay();
 });
