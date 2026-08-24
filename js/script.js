@@ -1,129 +1,125 @@
-/* =========================================================
-   SECTION 01 : 메인 배너
-   - 3초 자동재생
-   - 좌우 버튼 이동
-========================================================= */
+// =========================
+// LOTTE Eatz 자동 슬라이드
+// 3초마다 이미지 변경
+// =========================
+
+const lotteSlides = document.querySelectorAll(".lotte-slide");
+
+let lotteIndex = 0;
+
+function changeSlide() {
+
+    // 모든 이미지 숨기기
+    lotteSlides.forEach(function (slide) {
+        slide.style.display = "none";
+    });
+
+    // 다음 이미지
+    lotteIndex++;
+
+    // 마지막 다음에는 첫 번째로
+    if (lotteIndex >= lotteSlides.length) {
+        lotteIndex = 0;
+    }
+
+    // 현재 이미지만 표시
+    lotteSlides[lotteIndex].style.display = "block";
+}
+
+// 3초마다 변경
+setInterval(changeSlide, 3000);
+/* =========================================
+   쿠폰 Slider
+========================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
-    const mainSlider = document.querySelector(".jp-main-slider");
 
-    if (mainSlider) {
-        const track = mainSlider.querySelector(".jp-main-slider__track");
-        const slides = mainSlider.querySelectorAll(".jp-main-slider__slide");
-        const prevButton = mainSlider.querySelector(".jp-main-slider__button--prev");
-        const nextButton = mainSlider.querySelector(".jp-main-slider__button--next");
-        const currentText = mainSlider.querySelector(".jp-main-slider__current");
-        const totalText = mainSlider.querySelector(".jp-main-slider__total");
+    const track = document.querySelector(".lotte-coupon-track");
 
-        let currentIndex = 0;
-        let timer = null;
+    const cards = document.querySelectorAll(".lotte-coupon-card");
 
-        totalText.textContent = slides.length;
+    const prevButton = document.querySelector(".lotte-coupon-prev");
 
-        // 선택한 번째 배너를 화면에 표시
-        function showMainSlide(index) {
-            currentIndex = (index + slides.length) % slides.length;
-            const movePercent = currentIndex * (100 / slides.length);
+    const nextButton = document.querySelector(".lotte-coupon-next");
 
-            track.style.transform = `translate3d(-${movePercent}%, 0, 0)`;
-            currentText.textContent = currentIndex + 1;
-        }
 
-        // 다음 배너
-        function nextMainSlide() {
-            showMainSlide(currentIndex + 1);
-        }
+    /* 현재 위치 */
+    let currentIndex = 0;
 
-        // 이전 배너
-        function prevMainSlide() {
-            showMainSlide(currentIndex - 1);
-        }
 
-        // 3초 자동재생 시작
-        function startMainAutoPlay() {
-            stopMainAutoPlay();
-            timer = window.setInterval(nextMainSlide, 3000);
-        }
+    /* 한 화면에 보여줄 카드 개수 */
+    const visibleCount = 4;
 
-        // 자동재생 중복 방지
-        function stopMainAutoPlay() {
-            if (timer !== null) {
-                window.clearInterval(timer);
-                timer = null;
-            }
-        }
 
-        nextButton.addEventListener("click", function () {
-            nextMainSlide();
-            startMainAutoPlay();
-        });
+    /* 카드 사이 간격 */
+    const gap = 14;
 
-        prevButton.addEventListener("click", function () {
-            prevMainSlide();
-            startMainAutoPlay();
-        });
 
-        document.addEventListener("visibilitychange", function () {
-            if (document.hidden) {
-                stopMainAutoPlay();
-            } else {
-                startMainAutoPlay();
-            }
-        });
+    /* =====================================
+       Slider 이동 함수
+    ===================================== */
 
-        showMainSlide(0);
-        startMainAutoPlay();
+    function moveSlider() {
+
+        const cardWidth = cards[0].offsetWidth;
+
+        const moveX =
+            currentIndex * (cardWidth + gap);
+
+        track.style.transform =
+            `translateX(-${moveX}px)`;
+
     }
 
 
-    /* =========================================================
-       SECTION 02 : 상품 화면 슬라이드
-       - 오른쪽 화살표 : 1 → 2 → 3 → 4 → 5 → 6 → 1
-       - 왼쪽 화살표   : 1 ← 2 ← 3 ← 4 ← 5 ← 6
-       - 자동재생 없음, 화살표 클릭으로만 변경
-    ========================================================== */
-    const productSlider = document.querySelector(".jp-product-slider");
+    /* =====================================
+       오른쪽 버튼
+    ===================================== */
 
-    if (productSlider) {
-        const productSlides = productSlider.querySelectorAll(".jp-product-slider__slide");
-        const productPrev = productSlider.querySelector(".jp-product-slider__hit--prev");
-        const productNext = productSlider.querySelector(".jp-product-slider__hit--next");
+    nextButton.addEventListener("click", function () {
 
-        let productIndex = 0;
+        /*
+        마지막 카드까지 이동하면
+        다시 첫 번째 카드로 이동
+        */
 
-        // 현재 상품 화면만 표시
-        function showProductSlide(index) {
-            productIndex = (index + productSlides.length) % productSlides.length;
+        if (
+            currentIndex <
+            cards.length - visibleCount
+        ) {
 
-            productSlides.forEach(function (slide, slideIndex) {
-                slide.classList.toggle("is-active", slideIndex === productIndex);
-            });
+            currentIndex++;
+
+        } else {
+
+            currentIndex = 0;
+
         }
 
-        // 오른쪽 화살표 클릭 : 다음 화면
-        productNext.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            showProductSlide(productIndex + 1);
-        });
+        moveSlider();
 
-        // 왼쪽 화살표 클릭 : 이전 화면
-        productPrev.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            showProductSlide(productIndex - 1);
-        });
+    });
 
-        // 키보드 방향키로도 테스트 가능
-        productSlider.addEventListener("keydown", function (event) {
-            if (event.key === "ArrowRight") {
-                showProductSlide(productIndex + 1);
-            }
 
-            if (event.key === "ArrowLeft") {
-                showProductSlide(productIndex - 1);
-            }
-        });
+    /* =====================================
+       왼쪽 버튼
+    ===================================== */
 
-        showProductSlide(0);
-    }
+    prevButton.addEventListener("click", function () {
+
+        if (currentIndex > 0) {
+
+            currentIndex--;
+
+        } else {
+
+            currentIndex =
+                cards.length - visibleCount;
+
+        }
+
+        moveSlider();
+
+    });
+
 });

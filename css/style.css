@@ -1,217 +1,1787 @@
+style-fixed.css
+
+
 @charset "utf-8";
 
-/* =========================================================
-   집반찬연구소 : 2개 섹션 전용 CSS
-   기존 홈페이지와 충돌을 줄이기 위해 jp- 접두사 사용
-========================================================= */
-html,
-body {
+/* ================================
+   초기화
+================================ */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* =========================================================
-   SECTION 01 : 메인 배너 슬라이드
-========================================================= */
-.jp-main-slider {
-    position: relative;
+html,
+body {
     width: 100%;
-    height: 480px;
-    overflow: hidden;
-    background: #f4f5f7;
 }
 
-.jp-main-slider__viewport {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+body {
+    font-family: Arial, "Noto Sans KR", "Malgun Gothic", sans-serif;
+    color: #111;
+    background: #fff;
 }
 
-.jp-main-slider__track {
-    display: flex;
-    width: 400%;
-    height: 100%;
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.65s ease;
-    will-change: transform;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.jp-main-slider__slide {
-    flex: 0 0 25%;
-    width: 25%;
-    height: 100%;
+ul,
+li {
+    list-style: none;
 }
 
-.jp-main-slider__slide img {
+img {
     display: block;
+    max-width: 100%;
+}
+
+/* ================================
+   HEADER
+   - 전체 가로 100%
+   - inner 1150px
+   - 높이 63px
+================================ */
+.lotta-header {
+    width: 100%;
+    height: 63px;
+    border-bottom: 1px solid #ececec;
+    background: #fff;
+}
+
+.lotta-header__inner {
+    width: 1150px;
+    height: 63px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+/* 로고 */
+.lotta-logo {
+    flex: 0 0 auto;
+    width: 118px;
+    margin-right: 44px;
+}
+
+.lotta-logo a,
+.lotta-logo img {
+    display: block;
+    width: 100%;
+}
+
+/* ================================
+   MENU
+   요청사항: 글자크기 36px
+================================ */
+.lotta-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.lotta-nav__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 34px;
+    white-space: nowrap;
+}
+
+.lotta-nav__list a {
+    display: flex;
+    align-items: center;
+    height: 63px;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -1.8px;
+    transition: font-weight 0.15s ease;
+}
+
+/* 요청사항: 메뉴 hover 시 글자를 굵게 */
+.lotta-nav__list a:hover,
+.lotta-nav__list a:focus-visible {
+    font-weight: 800;
+}
+
+/* ================================
+   오른쪽 장바구니 / 주문하기
+================================ */
+.lotta-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: 30px;
+}
+
+.lotta-bag {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+}
+
+.lotta-bag img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.lotta-order {
+    height: 44px;
+    padding: 0 18px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: #05a9bd;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 0 7px 16px rgba(0, 169, 189, 0.22);
+}
+
+.lotta-order img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* ================================
+   미리보기용 영역
+================================ */
+.preview-area {
+    width: 100%;
+    min-height: 360px;
+    background: #f7f8f9;
+}
+
+.preview-area__inner {
+    width: 1150px;
+    margin: 0 auto;
+    padding-top: 70px;
+    color: #888;
+    font-size: 18px;
+}
+
+/* 1150px보다 작은 화면에서는 데스크탑 레이아웃 유지 */
+@media (max-width: 1190px) {
+    body {
+        min-width: 1190px;
+    }
+}
+
+    /* ==============================
+   LOTTE Eatz 배너 슬라이드
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.eatz-banner {
+    width: 100%;
+}
+
+.eatz-banner__inner {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 슬라이드 영역 */
+.eatz-slider {
+    position: relative;
+
+    width: 100%;
+
+    /* 이미지 비율 유지 */
+    aspect-ratio: 814 / 351;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+/* 각각의 이미지 */
+.eatz-slide {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.6s ease;
+}
+
+/* 현재 보여줄 이미지 */
+.eatz-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 이미지 */
+.eatz-slide img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+/* =========================
+   LOTTE Eatz 슬라이드
+========================= */
+
+.lotte-slider {
+    width: 814px;
+    height: 351px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+/* 모든 이미지 숨기기 */
+.lotte-slide {
+    display: none;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    user-select: none;
-    -webkit-user-drag: none;
 }
 
-/* 메인 배너 좌우 버튼 */
-.jp-main-slider__nav {
-    position: absolute;
-    left: 50%;
-    bottom: 24px;
-    width: min(1140px, calc(100% - 40px));
-    transform: translateX(-50%);
+/* 첫 번째 이미지만 처음에 표시 */
+.lotte-slide:first-child {
+    display: block;
+}
+.eatz-promo-inner {
+    width: 1110px;
+    margin: 0 auto;
+
     display: flex;
-    gap: 14px;
-    pointer-events: none;
+    align-items: flex-start;
+    gap: 20px;
+}
+/* =========================================
+   EATZ 마일 사이드 영역
+========================================= */
+
+.lotte-mile-panel {
+    /* 기존 CSS에 의해 숨겨지는 것 방지 */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    width: 290px;
+    height: 354px;
+
+    flex-shrink: 0;
+
+    padding: 28px 24px;
+
+    background: #414141;
+
+    border-radius: 20px;
+
+    color: #fff;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+
+    position: relative;
+    z-index: 100;
 }
 
-.jp-main-slider__button {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.94);
-    color: #b8b8b8;
-    font-size: 34px;
-    font-family: Arial, sans-serif;
-    font-weight: 300;
-    line-height: 38px;
-    text-align: center;
-    cursor: pointer;
-    pointer-events: auto;
-}
 
-.jp-main-slider__button:hover {
-    background: #fff;
-    color: #777;
-}
+/* =========================================
+   EATZ 마일 제목
+========================================= */
 
-/* 현재 배너 번호 */
-.jp-main-slider__counter {
-    position: absolute;
-    right: max(20px, calc((100% - 1140px) / 2));
-    bottom: 25px;
-    min-width: 50px;
-    height: 29px;
-    padding: 0 11px;
+.lotte-mile-title {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-    border-radius: 999px;
-    background: rgba(74, 74, 74, 0.72);
-    color: #fff;
-    font: 500 13px/1 Arial, sans-serif;
-}
 
-.jp-main-slider__current {
+    height: 25px;
+
+    color: #fff;
+
+    font-size: 16px;
     font-weight: 700;
 }
 
-/* =========================================================
-   SECTION 02 : 첨부 이미지 6장 상품 슬라이드
-========================================================= */
-.jp-product-slider {
-    width: 100%;
-    padding: 0;
+
+/* 노란색 M 아이콘 */
+
+.lotte-mile-m {
+    width: 20px;
+    height: 20px;
+
+    margin-right: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffd600;
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 900;
+}
+
+
+/* 오른쪽 화살표 */
+
+.lotte-mile-arrow {
+    margin-left: 8px;
+
+    font-size: 27px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   내 쿠폰 / 스탬프
+========================================= */
+
+.lotte-mile-tabs {
+    width: 242px;
+    height: 42px;
+
+    margin-top: 19px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1px 1fr;
+
+    align-items: center;
+
+    background: #595959;
+
+    border-radius: 10px;
+
     overflow: hidden;
-    background: #fff;
 }
 
-/*
-   업로드한 이미지 자체가 완성된 상품 화면이므로
-   이미지 비율을 그대로 유지하면서 중앙에 표시합니다.
-*/
-.jp-product-slider__stage {
-    position: relative;
+
+/* 버튼 */
+
+.lotte-mile-tabs button {
     width: 100%;
-    max-width: 1342px;
-    margin: 0 auto;
-    background: #fff;
-    overflow: hidden;
-}
+    height: 100%;
 
-.jp-product-slider__slide {
-    display: none;
-    width: 100%;
-    opacity: 0;
-}
-
-.jp-product-slider__slide.is-active {
-    display: block;
-    animation: jpProductFade 0.28s ease both;
-}
-
-.jp-product-slider__slide img {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-@keyframes jpProductFade {
-    from {
-        opacity: 0.45;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/*
-   실제 화살표 모양은 첨부 이미지 안에 이미 있습니다.
-   따라서 버튼은 투명한 클릭 영역으로만 사용합니다.
-   중복 화살표가 생기지 않습니다.
-*/
-.jp-product-slider__hit {
-    position: absolute;
-    top: 27%;
-    z-index: 10;
-    width: 80px;
-    height: 100px;
-    padding: 0;
     border: 0;
-    outline: 0;
+
     background: transparent;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
     cursor: pointer;
 }
 
-.jp-product-slider__hit--prev {
+
+/* 가운데 선 */
+
+.lotte-mile-line {
+    width: 1px;
+    height: 22px;
+
+    background: #444;
+}
+
+
+/* =========================================
+   멤버십 정보 박스
+========================================= */
+
+.lotte-mile-info {
+    width: 242px;
+    height: 212px;
+
+    margin-top: 8px;
+
+    padding: 16px 12px;
+
+    background: #595959;
+
+    border-radius: 10px;
+
+    position: relative;
+}
+
+
+/* 멤버십 등급 */
+
+.lotte-mile-grade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.lotte-mile-grade strong {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.lotte-mile-grade a {
+    text-decoration: none;
+
+    color: #b7b7b7;
+
+    font-size: 11px;
+}
+
+
+/* 로그인 안내 문구 */
+
+.lotte-mile-info p {
+    margin-top: 18px;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.7;
+
+    text-align: left;
+}
+
+
+/* =========================================
+   하단 브랜드 아이콘
+========================================= */
+
+.lotte-mile-brands {
+    position: absolute;
+
+    left: 12px;
+    bottom: 14px;
+
+    display: flex;
+}
+
+
+.lotte-brand {
+    width: 29px;
+    height: 29px;
+
+    margin-right: -3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #454545;
+    border-radius: 50%;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* 첫 번째 */
+
+.lotte-brand01 {
+    background: #ece8df;
+    color: #333;
+}
+
+
+/* 두 번째 */
+
+.lotte-brand02 {
+    background: #2da46c;
+    color: #fff;
+}
+
+
+/* 세 번째 */
+
+.lotte-brand03 {
+    background: #f04b3e;
+    color: #fff;
+}
+/* =========================================
+   지금 바로 쓸 수 있는 쿠폰 SECTION
+========================================= */
+
+.lotta-coupon-section {
+    width: 100%;
+
+    padding: 62px 0 95px;
+
+    background: #f5f6f7;
+}
+
+
+/* inner */
+
+.lotta-coupon-inner {
+    width: 1110px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   제목
+========================================= */
+
+.lotta-coupon-title {
+    margin-bottom: 20px;
+
+    color: #111;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.lotta-coupon-title span {
+    display: inline-block;
+
+    margin-left: 3px;
+
+    font-size: 32px;
+    font-weight: 300;
+
+    vertical-align: -2px;
+}
+
+
+/* =========================================
+   슬라이더 전체
+========================================= */
+
+.lotta-coupon-slider {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+/* 움직이는 영역 */
+
+.lotta-coupon-track {
+    display: flex;
+
+    gap: 14px;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* =========================================
+   쿠폰 카드
+========================================= */
+
+.lotta-coupon-card {
+    position: relative;
+
+    min-width: 267px;
+    height: 273px;
+
+    flex: 0 0 267px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #fff;
+}
+
+
+/* =========================================
+   상품 이미지
+========================================= */
+
+.lotta-coupon-image {
+    width: 100%;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 18px;
+}
+
+
+.lotta-coupon-image img {
+    display: block;
+
+    width: 120px;
+    height: 100px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   상품 내용
+========================================= */
+
+.lotta-coupon-content {
+    padding: 2px 24px 0;
+}
+
+
+/* 브랜드 */
+
+.lotta-coupon-brand {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff382c;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* 상품 이름 */
+
+.lotta-coupon-content h3 {
+    margin-bottom: 8px;
+
+    color: #222;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   가격
+========================================= */
+
+.lotta-coupon-price {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    white-space: nowrap;
+}
+
+
+/* 할인율 */
+
+.lotta-coupon-price strong {
+    color: #ff382c;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* 판매 가격 */
+
+.lotta-coupon-price b {
+    color: #111;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+
+/* 기존 가격 */
+
+.lotta-coupon-price del {
+    color: #999;
+
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
+/* =========================================
+   쿠폰 받기 버튼
+========================================= */
+
+.lotta-coupon-download {
+    position: absolute;
+
     left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 48px;
+
+    border: 0;
+    border-top: 1px dashed #eee;
+
+    background: #fff;
+
+    color: #222;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
 }
 
-.jp-product-slider__hit--next {
-    right: 0;
+
+/* 다운로드 아이콘 */
+
+.download-icon {
+    display: inline-flex;
+
+    width: 18px;
+    height: 18px;
+
+    margin-left: 3px;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+    font-weight: 700;
 }
 
-.jp-product-slider__hit:focus-visible {
-    outline: 2px solid #333;
-    outline-offset: -4px;
+
+/* =========================================
+   카드 옆 반원 효과
+========================================= */
+
+.lotta-coupon-card::before,
+.lotta-coupon-card::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 34px;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #f5f6f7;
+
+    z-index: 3;
 }
 
-/* =========================================================
+
+/* 왼쪽 */
+
+.lotta-coupon-card::before {
+    left: -14px;
+}
+
+
+/* 오른쪽 */
+
+.lotta-coupon-card::after {
+    right: -14px;
+}
+
+
+/* =========================================
+   좌우 화살표
+========================================= */
+
+.lotta-coupon-prev,
+.lotta-coupon-next {
+    position: absolute;
+
+    top: 115px;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    color: #ccc;
+
+    font-size: 31px;
+    font-weight: 300;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+}
+
+
+/* 왼쪽 화살표 */
+
+.lotta-coupon-prev {
+    left: -23px;
+}
+
+
+/* 오른쪽 화살표 */
+
+.lotta-coupon-next {
+    right: -23px;
+}
+
+
+/* hover */
+
+.lotta-coupon-prev:hover,
+.lotta-coupon-next:hover {
+    color: #333;
+
+    border-color: #ccc;
+}
+
+
+/* =========================================
+   지금 바로 쓸 수 있는 쿠폰
+========================================= */
+
+.lotte-coupon-section {
+    width: 100%;
+    padding: 34px 0 44px;
+
+    background: #f5f6f7;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+
+/* 내부 영역 */
+
+.lotte-coupon-inner {
+    width: 1124px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   제목
+========================================= */
+
+.lotte-coupon-title {
+    margin: 0 0 20px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    color: #111;
+}
+
+.lotte-coupon-title span {
+    margin-left: 5px;
+
+    font-size: 30px;
+    font-weight: 300;
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   초기화
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, "Noto Sans KR", sans-serif;
+    color: #111;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   이달의 핫메뉴 - 수정 완료
+===================================================== */
+
+.eatz-hot-section {
+    width: 100%;
+    padding: 35px 0 80px;
+    background: #fff;
+}
+
+.eatz-hot-inner {
+    width: 1030px;
+    margin: 0 auto;
+}
+
+/* 제목 */
+.eatz-hot-title {
+    margin: 0 0 24px;
+    color: #111;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* 브랜드 탭 */
+.eatz-hot-tabs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.eatz-hot-tab {
+    padding: 0 14px;
+    border: 0;
+    background: transparent;
+    color: #888;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.eatz-hot-tab:first-child {
+    padding-left: 0;
+}
+
+.eatz-hot-tab.active {
+    color: #111;
+    font-weight: 700;
+}
+
+.eatz-hot-tab:hover {
+    color: #111;
+}
+
+.eatz-hot-divider {
+    display: block;
+    width: 1px;
+    height: 12px;
+    background: #ddd;
+}
+
+/* 각 브랜드 상품 화면 */
+.eatz-hot-panel {
+    display: none;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.eatz-hot-panel.active {
+    display: flex !important;
+}
+
+/* 왼쪽 세로 배너 */
+.eatz-hot-banner {
+    width: 180px;
+    height: 290px;
+    flex: 0 0 180px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.eatz-hot-banner img {
+    display: block !important;
+    width: 180px !important;
+    height: 290px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+    min-height: 290px !important;
+    max-height: 290px !important;
+    object-fit: cover !important;
+}
+
+/* 오른쪽 상품 */
+.eatz-hot-product {
+    display: block;
+    width: 170px;
+    flex: 0 0 170px;
+    color: #111;
+    text-decoration: none;
+}
+
+.eatz-hot-product-image {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    border-radius: 15px;
+    background: #fff;
+}
+
+.eatz-hot-product-image img {
+    display: block !important;
+    width: 145px !important;
+    height: 145px !important;
+    min-width: 145px !important;
+    max-width: 145px !important;
+    min-height: 145px !important;
+    max-height: 145px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+}
+
+/* BEST / NEW */
+.eatz-hot-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: #009b50;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 14px;
+}
+
+.eatz-hot-badge.new {
+    background: #ff3b30;
+}
+
+/* 상품명 */
+.eatz-hot-name {
+    margin: 12px 0 7px;
+    color: #111;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+/* 가격 */
+.eatz-hot-price {
+    display: block;
+    color: #000;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 20px;
+}
+
+@media (max-width: 1060px) {
+    .eatz-hot-inner {
+        width: calc(100% - 40px);
+    }
+
+    .eatz-hot-panel.active {
+        overflow-x: auto;
+    }
+}
+/* =========================================
+   브랜드 바로가기 SECTION
+========================================= */
+
+.brand-slider-section {
+    width: 100%;
+
+    padding: 45px 0 55px;
+
+    background: #f5f6f7;
+}
+
+
+/* 가운데 영역 */
+.brand-slider-inner {
+    width: 1085px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   제목
+========================================= */
+
+.brand-slider-title {
+    margin: 0 0 25px;
+
+    color: #111;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   슬라이더 전체
+========================================= */
+
+.brand-slider-wrap {
+    position: relative;
+
+    width: 100%;
+}
+
+
+/* 실제 카드가 보이는 영역 */
+.brand-slider-viewport {
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+/* 실제 움직이는 영역 */
+.brand-slider-track {
+    display: flex;
+
+    gap: 20px;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* =========================================
+   브랜드 카드
+========================================= */
+
+.brand-slider-card {
+    display: block;
+
+    width: 201px;
+    height: 262px;
+
+    min-width: 201px;
+    flex: 0 0 201px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+}
+
+
+/* 이미지 */
+.brand-slider-card img {
+    display: block !important;
+
+    width: 201px !important;
+    height: 262px !important;
+
+    min-width: 201px !important;
+    max-width: 201px !important;
+
+    min-height: 262px !important;
+    max-height: 262px !important;
+
+    object-fit: cover !important;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* hover */
+.brand-slider-card:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   좌우 화살표
+========================================= */
+
+.brand-slider-prev,
+.brand-slider-next {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 20;
+
+    width: 46px;
+    height: 46px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e6e6e6;
+    border-radius: 50%;
+
+    background: #fff;
+
+    color: #c7c7c7;
+
+    font-size: 34px;
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* 왼쪽 */
+.brand-slider-prev {
+    left: -22px;
+}
+
+
+/* 오른쪽 */
+.brand-slider-next {
+    right: -22px;
+}
+
+
+/* hover */
+.brand-slider-prev:hover,
+.brand-slider-next:hover {
+    color: #111;
+}
+
+
+/* =========================================
+   하단 페이지 표시
+========================================= */
+
+.brand-slider-pagination {
+    margin-top: 37px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+}
+
+
+/* 점 */
+.brand-dot {
+    display: block;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #888;
+
+    transition: 0.3s;
+}
+
+
+/* 현재 페이지 */
+.brand-dot.active {
+    width: 20px;
+
+    border-radius: 10px;
+
+    background: #111;
+}
+
+
+/* 재생/정지 */
+.brand-slider-play {
+    margin-left: 3px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #111;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+/* =========================================
+   EATZ TV SECTION
+========================================= */
+
+.eatz-tv-section {
+    width: 100%;
+
+    padding: 68px 0 95px;
+
+    background: #20272c;
+}
+
+
+/* 가운데 영역 */
+.eatz-tv-inner {
+    width: 1030px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   제목
+========================================= */
+
+.eatz-tv-title {
+    margin: 0 0 22px;
+
+    display: flex;
+    align-items: center;
+
+    color: #fff;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+.eatz-tv-title span {
+    margin-left: 5px;
+
+    font-size: 31px;
+    font-weight: 300;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   영상 카드 목록
+========================================= */
+
+.eatz-tv-list {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+
+/* 카드 */
+.eatz-tv-card {
+    display: block;
+
+    width: 268px;
+
+    flex: 0 0 268px;
+
+    color: #fff;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   영상 썸네일
+========================================= */
+
+.eatz-tv-image {
+    width: 268px;
+    height: 150px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #111;
+}
+
+
+/* 이미지 */
+.eatz-tv-image img {
+    display: block !important;
+
+    width: 268px !important;
+    height: 150px !important;
+
+    min-width: 268px !important;
+    max-width: 268px !important;
+
+    min-height: 150px !important;
+    max-height: 150px !important;
+
+    object-fit: cover !important;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* hover */
+.eatz-tv-card:hover .eatz-tv-image img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   영상 제목
+========================================= */
+
+.eatz-tv-text {
+    margin: 12px 0 0;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.55;
+
+    word-break: keep-all;
+}
+
+
+/* =========================================
    반응형
-========================================================= */
-@media (max-width: 900px) {
-    .jp-main-slider {
-        height: auto;
-        aspect-ratio: 4 / 1;
-        min-height: 220px;
+========================================= */
+
+@media (max-width: 1080px) {
+
+    .eatz-tv-inner {
+        width: calc(100% - 40px);
     }
 
-    .jp-main-slider__nav {
-        bottom: 14px;
+    .eatz-tv-list {
+        overflow-x: auto;
     }
 
-    .jp-main-slider__counter {
-        bottom: 15px;
-    }
+}
+/* =========================================
+   EATZ FOOTER
+========================================= */
 
-    .jp-product-slider__hit {
-        top: 24%;
-        width: 60px;
-        height: 80px;
-    }
+.eatz-footer {
+    width: 100%;
+
+    padding: 25px 0 30px;
+
+    background: #f7f8f9;
+
+    border-bottom: 1px solid #111;
+
+    color: #555;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+
+/* 전체 inner */
+.eatz-footer-inner {
+    position: relative;
+
+    width: 1080px;
+
+    margin: 0 auto;
+}
+
+
+/* 왼쪽 정보 영역 */
+.eatz-footer-content {
+    width: 900px;
+}
+
+
+/* =========================================
+   상단 링크
+========================================= */
+
+.eatz-footer-links {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+
+.eatz-footer-links a {
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.eatz-footer-links a.blue {
+    color: #0099b5;
+
+    font-weight: 800;
+}
+
+
+/* 가운데 구분선 */
+.eatz-footer-links span {
+    width: 1px;
+    height: 11px;
+
+    margin: 0 9px;
+
+    background: #ddd;
+}
+
+
+/* =========================================
+   각 정보 줄
+========================================= */
+
+.eatz-footer-row {
+    display: flex;
+
+    margin-bottom: 20px;
+}
+
+
+/* 왼쪽 제목 */
+.eatz-footer-label {
+    width: 135px;
+
+    flex: 0 0 135px;
+
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   버튼
+========================================= */
+
+.eatz-footer-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.eatz-footer-buttons a {
+    height: 33px;
+
+    padding: 0 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    background: #fff;
+
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+/* hover */
+.eatz-footer-buttons a:hover {
+    border-color: #999;
+}
+
+
+/* =========================================
+   사업자 / 문의 정보
+========================================= */
+
+.eatz-footer-info {
+    font-size: 11px;
+
+    line-height: 1.8;
+
+    color: #6d7479;
+}
+
+
+.eatz-footer-info p {
+    margin: 0;
+}
+
+
+.eatz-footer-info a {
+    color: #111;
+
+    font-weight: 700;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   인증
+========================================= */
+
+.eatz-footer-cert {
+    display: flex;
+    align-items: center;
+
+    gap: 50px;
+
+    margin-top: 18px;
+}
+
+
+.eatz-cert-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.cert-logo {
+    width: 55px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #42849a;
+
+    font-size: 13px;
+    font-weight: 900;
+
+    font-style: italic;
+}
+
+
+.cert-logo.green {
+    color: #5b9851;
+}
+
+
+.eatz-cert-item p {
+    margin: 0;
+
+    color: #6d7479;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   copyright
+========================================= */
+
+.eatz-footer-bottom {
+    margin-top: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.eatz-footer-bottom p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* SNS */
+.eatz-footer-sns {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.eatz-footer-sns a {
+    color: #888;
+
+    text-decoration: none;
+
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   FAMILY SITE
+========================================= */
+
+.eatz-family-site {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 180px;
+}
+
+
+/* select */
+.eatz-family-site select {
+    width: 180px;
+    height: 44px;
+
+    padding: 0 15px;
+
+    border: 1px solid #d9dde0;
+
+    border-radius: 4px;
+
+    background: #f2f4f5;
+
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+/* focus */
+.eatz-family-site select:focus {
+    border-color: #aaa;
 }
