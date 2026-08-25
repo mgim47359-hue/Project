@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열</title>
+</head>
+<body>
+    <script>
+        // 배열을 사용하지 않을 경우
+        let fruit1 = "바나나";
+        let fruit2 = "포도";
+        let fruit3 = "수박";
+
+        document.write(
+            "올해의 제철 과일은 " +
+            fruit1 + ", " +
+            fruit2 + ", " +
+            fruit3 +
+            "입니다.<br>"
+        );
+
+        // 백틱을 사용하여 변수 출력
+        document.write(
+            `올해의 제철 과일은 ${fruit1}, ${fruit2}, ${fruit3}입니다.<br>`
+        );
+
+        // 배열을 사용하여 과일 저장
+        let fruit = ["바나나", "포도", "수박"];
+
+        document.write(
+            `오늘의 추천 과일은 ${fruit[0]}, ${fruit[1]}, ${fruit[2]}입니다!<br>`
+        );
+
+        // 배열을 사용하지 않고 요일 저장
+        let day1 = "월";
+        let day2 = "화";
+        let day3 = "수";
+        let day4 = "목";
+        let day5 = "금";
+        let day6 = "토";
+        let day7 = "일";
+
+        document.write(`오늘은 ${day2}요일입니다.<br>`);
+        document.write(`내일은 ${day3}요일입니다.<br>`);
+
+        // 배열을 사용하여 요일 저장
+        let days = ["월", "화", "수", "목", "금", "토", "일"];
+
+        document.write(`오늘은 ${days[1]}요일입니다.<br>`);
+        document.write(`내일은 ${days[2]}요일입니다.<br>`);
+
+        // 배열 선언 방법: 배열 변수 = []
+        let week = ["월", "화", "수", "목", "금", "토", "일"];
+
+        document.write(`오늘은 ${week[1]}요일입니다.<br>`);
+        document.write(`내일은 ${week[2]}요일입니다.<br>`);
+
+        // 개발자 도구 콘솔에 배열 전체 출력
+        console.log(week);
+
+        // 배열의 원하는 값에 접근하는 방법: 배열 변수[index]
+        alert(week[5]);
+    </script>
+</body>
+</html>
