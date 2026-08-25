@@ -16,7 +16,7 @@
             <!-- 로고: 이미지는 ./images/이미지파일명 형태로 교체 가능 -->
             <h1 class="lotta-logo">
                 <a href="#" aria-label="24시간 lotta 홈">
-                    <img src="./images/lotte-eatz-logo.png" alt="24시간 lotta">
+                    <img src="./images/d55445be-ae42-46fd-894a-63875676c345.png" alt="24시간 lotta">
                 </a>
             </h1>
 
@@ -34,7 +34,7 @@
             <!-- 우측 액션 영역 -->
             <div class="lotta-actions">
                 <a class="lotta-bag" href="#" aria-label="장바구니">
-                    <img src="./images/lotte-eatz-logo (1).png" alt="">
+                    <img src="./images/comm_ico_cart.svg" alt="">
                 </a>
 
                 <a class="lotta-order" href="#">
@@ -588,130 +588,4581 @@
 
 
 </div>
+ <style>
+        /* =========================================
+           기본 설정
+        ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, "Noto Sans KR", sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           쿠폰 SECTION
+        ========================================= */
+        .coupon-section {
+            width: 100%;
+            min-width: 1200px;
+            padding: 38px 0 42px;
+            background: #f4f5f6;
+        }
+
+        .coupon-inner {
+            width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* 제목 */
+        .coupon-title {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+
+            color: #111;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .coupon-title span {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        /* =========================================
+           Slider
+        ========================================= */
+        .coupon-slider {
+            position: relative;
+            width: 100%;
+        }
+
+        .coupon-viewport {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .coupon-track {
+            display: flex;
+            gap: 14px;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .coupon-track.is-animating {
+            transition: transform 0.42s ease;
+        }
+
+        /* =========================================
+           Card
+        ========================================= */
+        .coupon-card {
+            position: relative;
+
+            width: 269px;
+            height: 273px;
+            flex: 0 0 269px;
+
+            overflow: hidden;
+            background: #fff;
+            border-radius: 20px;
+        }
+
+        /* 티켓 양옆 반원 */
+        .coupon-card::before,
+        .coupon-card::after {
+            content: "";
+            position: absolute;
+            bottom: 34px;
+            z-index: 4;
+
+            width: 28px;
+            height: 28px;
+
+            border-radius: 50%;
+            background: #f4f5f6;
+        }
+
+        .coupon-card::before {
+            left: -14px;
+        }
+
+        .coupon-card::after {
+            right: -14px;
+        }
+
+        /* 이미지 */
+        .coupon-image {
+            width: 100%;
+            height: 119px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coupon-image img {
+            display: block;
+
+            width: 125px !important;
+            height: 105px !important;
+
+            max-width: 125px !important;
+            max-height: 105px !important;
+
+            object-fit: contain;
+        }
+
+        /* 내용 */
+        .coupon-content {
+            padding: 0 23px;
+        }
+
+        .coupon-brand {
+            display: block;
+            margin-bottom: 6px;
+
+            color: #ff3b30;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .coupon-name {
+            margin: 0 0 7px;
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            color: #111;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+        }
+
+        .coupon-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .coupon-rate {
+            color: #ff3b30;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .coupon-sale {
+            color: #111;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .coupon-original {
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* 쿠폰 받기 */
+        .coupon-download {
+            position: absolute;
+
+            left: 23px;
+            right: 23px;
+            bottom: 0;
+
+            width: calc(100% - 46px);
+            height: 47px;
+
+            border: 0;
+            border-top: 1px dashed #ededed;
+
+            background: transparent;
+            color: #111;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .coupon-download-icon {
+            margin-left: 3px;
+            font-size: 16px;
+        }
+
+        /* =========================================
+           Arrow buttons
+        ========================================= */
+        .coupon-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 50;
+
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transform: translateY(-50%);
+
+            border: 1px solid #e6e6e6;
+            border-radius: 50%;
+
+            background: #fff;
+            color: #d1d1d1;
+
+            font-size: 31px;
+            line-height: 1;
+
+            cursor: pointer;
+        }
+
+        .coupon-prev {
+            left: -23px;
+        }
+
+        .coupon-next {
+            right: -23px;
+        }
+
+        .coupon-arrow:hover {
+            color: #777;
+        }
+    </style>
+
+
+<section class="coupon-section">
+
+    <div class="coupon-inner">
+
+        <!-- 제목 -->
+        <h2 class="coupon-title">
+            지금 바로 쓸 수 있는 쿠폰
+            <span>›</span>
+        </h2>
+
+        <!-- 슬라이더 -->
+        <div class="coupon-slider">
+
+            <!-- 이전 -->
+            <button
+                type="button"
+                class="coupon-arrow coupon-prev"
+                aria-label="이전 쿠폰"
+            >
+                ‹
+            </button>
+
+            <!-- 보이는 영역 -->
+            <div class="coupon-viewport">
+
+                <!-- JS가 이 안의 카드를 복제해서 무한 슬라이드 구현 -->
+                <div class="coupon-track">
+
+                    <!-- 1 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_2_x360.png" alt="더블치킨버거">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]더블치킨버거</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">17%</span>
+                                <span class="coupon-sale">5,000원</span>
+                                <del class="coupon-original">6,000원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 2 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_3_x360.png" alt="핫크리스피 콤보">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]핫크리스피 콤보</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">20%</span>
+                                <span class="coupon-sale">6,800원</span>
+                                <del class="coupon-original">8,500원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 3 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_4_x360.png" alt="리아 새우 베이컨 콤보">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]리아 새우 베이컨 콤보</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">22%</span>
+                                <span class="coupon-sale">6,500원</span>
+                                <del class="coupon-original">8,300원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 4 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_5_x360.png" alt="1인팩">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]1인팩</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">26%</span>
+                                <span class="coupon-sale">7,800원</span>
+                                <del class="coupon-original">10,500원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 5 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/coupon05.png" alt="2인팩">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]2인팩</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">32%</span>
+                                <span class="coupon-sale">10,000원</span>
+                                <del class="coupon-original">14,700원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 6 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_7_x360.png" alt="치즈스틱">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]치즈스틱</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">21%</span>
+                                <span class="coupon-sale">2,300원</span>
+                                <del class="coupon-original">2,900원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 7 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_8_x360.png" alt="화이어윙 2조각">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]화이어윙 2조각</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">24%</span>
+                                <span class="coupon-sale">2,600원</span>
+                                <del class="coupon-original">3,400원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 8 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_9_x360.png" alt="아이스 아메리카노">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]아이스아메리카노</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">31%</span>
+                                <span class="coupon-sale">1,800원</span>
+                                <del class="coupon-original">2,600원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                    <!-- 9 -->
+                    <article class="coupon-card">
+                        <div class="coupon-image">
+                            <img src="./images/imgi_10_x360.png" alt="레몬에이드">
+                        </div>
+
+                        <div class="coupon-content">
+                            <span class="coupon-brand">롯데리아</span>
+                            <h3 class="coupon-name">[EATZ]레몬에이드</h3>
+
+                            <div class="coupon-price">
+                                <span class="coupon-rate">31%</span>
+                                <span class="coupon-sale">2,000원</span>
+                                <del class="coupon-original">2,900원</del>
+                            </div>
+                        </div>
+
+                        <button type="button" class="coupon-download">
+                            쿠폰 받기
+                            <span class="coupon-download-icon">⇩</span>
+                        </button>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- 다음 -->
+            <button
+                type="button"
+                class="coupon-arrow coupon-next"
+                aria-label="다음 쿠폰"
+            >
+                ›
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slider = document.querySelector(".coupon-slider");
+    const track = slider.querySelector(".coupon-track");
+    const prevBtn = slider.querySelector(".coupon-prev");
+    const nextBtn = slider.querySelector(".coupon-next");
+
+    const visibleCount = 4;
+    const gap = 14;
+
+    /* 원본 카드 저장 */
+    const originalCards = Array.from(track.children);
+    const originalCount = originalCards.length;
+
+    /*
+        무한 반복을 자연스럽게 만들기 위해
+        앞/뒤에 4장씩 복제
+    */
+    const firstClones = originalCards
+        .slice(0, visibleCount)
+        .map(card => card.cloneNode(true));
+
+    const lastClones = originalCards
+        .slice(-visibleCount)
+        .map(card => card.cloneNode(true));
+
+    lastClones.forEach(card => {
+        track.insertBefore(card, track.firstChild);
+    });
+
+    firstClones.forEach(card => {
+        track.appendChild(card);
+    });
+
+    /*
+        처음 시작 위치:
+        앞에 복제된 4장을 건너뛰고
+        실제 첫 번째 카드부터 보이게 함
+    */
+    let index = visibleCount;
+    let isMoving = false;
+
+    function getStep() {
+        const card = track.querySelector(".coupon-card");
+        return card.getBoundingClientRect().width + gap;
+    }
+
+    function setPosition(animate = true) {
+        if (animate) {
+            track.classList.add("is-animating");
+        } else {
+            track.classList.remove("is-animating");
+        }
+
+        const x = index * getStep();
+        track.style.transform = `translate3d(-${x}px, 0, 0)`;
+    }
+
+    /* 첫 화면 위치 */
+    setPosition(false);
+
+    /*
+        오른쪽 버튼:
+        클릭할 때 index가 딱 1씩 증가
+        => 카드가 정확히 한 칸씩 왼쪽으로 이동
+    */
+    nextBtn.addEventListener("click", function () {
+
+        if (isMoving) return;
+
+        isMoving = true;
+        index += 1;
+
+        setPosition(true);
+    });
+
+    /*
+        왼쪽 버튼:
+        클릭할 때 index가 딱 1씩 감소
+        => 카드가 정확히 한 칸씩 오른쪽으로 이동
+    */
+    prevBtn.addEventListener("click", function () {
+
+        if (isMoving) return;
+
+        isMoving = true;
+        index -= 1;
+
+        setPosition(true);
+    });
+
+    /*
+        애니메이션이 끝난 뒤
+        복제 카드 영역에 도착하면
+        같은 모양의 실제 카드 위치로 순간 이동
+        사용자는 끊김 없이 무한 반복처럼 보임
+    */
+    track.addEventListener("transitionend", function () {
+
+        track.classList.remove("is-animating");
+
+        /* 오른쪽 끝 복제 영역 */
+        if (index >= originalCount + visibleCount) {
+            index = visibleCount;
+            setPosition(false);
+        }
+
+        /* 왼쪽 끝 복제 영역 */
+        if (index < visibleCount) {
+            index = originalCount + visibleCount - 1;
+            setPosition(false);
+        }
+
+        isMoving = false;
+    });
+
+    /* 창 크기 변경 시 위치 재계산 */
+    window.addEventListener("resize", function () {
+        setPosition(false);
+    });
+
+});
+</script>
+
+
+
 
 
 
 <!-- =========================================
      3초 자동 슬라이더
 ========================================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // =====================================
+    // 슬라이드 / 버튼 가져오기
+    // =====================================
+    const slides = document.querySelectorAll(".lotta-main-slide");
+    const prev = document.getElementById("lottaPrev");
+    const next = document.getElementById("lottaNext");
+    const pause = document.getElementById("lottaPause");
+    const currentText = document.getElementById("lottaCurrent");
+    const totalText = document.getElementById("lottaTotal");
+
+    let current = 0;
+    let timer = null;
+    let playing = true;
+
+    // 슬라이드가 없는 경우 오류 방지
+    if (slides.length === 0) {
+        return;
+    }
+
+    // 전체 슬라이드 개수 표시
+    if (totalText) {
+        totalText.textContent = slides.length;
+    }
+
+    // =====================================
+    // 슬라이드 보여주기
+    // =====================================
+    function showSlide(index) {
+
+        // 마지막 다음 → 첫 번째
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+        // 첫 번째 이전 → 마지막
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        // 모든 슬라이드 숨기기
+        slides.forEach(function (slide) {
+            slide.classList.remove("on");
+        });
+
+        // 현재 슬라이드만 표시
+        slides[index].classList.add("on");
+
+        current = index;
+
+        // 현재 페이지 번호 표시
+        if (currentText) {
+            currentText.textContent = current + 1;
+        }
+    }
+
+    // =====================================
+    // 3초 자동재생 시작
+    // =====================================
+    function startAutoPlay() {
+
+        // 기존 타이머 중복 실행 방지
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+
+            if (playing) {
+                showSlide(current + 1);
+            }
+
+        }, 3000);
+    }
+
+    // =====================================
+    // 이전 버튼
+    // =====================================
+    if (prev) {
+        prev.addEventListener("click", function () {
+            showSlide(current - 1);
+
+            // 버튼 클릭 후 3초를 다시 계산
+            if (playing) {
+                startAutoPlay();
+            }
+        });
+    }
+
+    // =====================================
+    // 다음 버튼
+    // =====================================
+    if (next) {
+        next.addEventListener("click", function () {
+            showSlide(current + 1);
+
+            // 버튼 클릭 후 3초를 다시 계산
+            if (playing) {
+                startAutoPlay();
+            }
+        });
+    }
+
+    // =====================================
+    // 일시정지 / 재생 버튼
+    // =====================================
+    if (pause) {
+        pause.addEventListener("click", function () {
+
+            playing = !playing;
+
+            if (playing) {
+                pause.textContent = "Ⅱ";
+                startAutoPlay();
+            } else {
+                pause.textContent = "▶";
+                clearInterval(timer);
+            }
+        });
+    }
+
+    // 처음 화면 표시
+    showSlide(0);
+
+    // 페이지가 열리면 자동재생 시작
+    startAutoPlay();
+});
+</script>
+
+<!-- =========================================
+     이달의 핫메뉴 SECTION 시작
+========================================= -->
+<section class="hot-menu-section">
+
+    <div class="hot-menu-inner">
+
+        <!-- 제목 -->
+        <h2 class="hot-menu-title">
+            이달의 핫메뉴
+        </h2>
+
+
+        <!-- =========================================
+             브랜드 탭 메뉴
+        ========================================= -->
+        <ul class="hot-menu-tabs">
+
+            <li class="active">
+                <button type="button" data-tab="angelinus">
+                    엔제리너스
+                </button>
+            </li>
+
+            <li>
+                <button type="button" data-tab="lotteria">
+                    롯데리아
+                </button>
+            </li>
+
+            <li>
+                <button type="button" data-tab="pleating">
+                    플레:이팅
+                </button>
+            </li>
+
+            <li>
+                <button type="button" data-tab="krispy">
+                    크리스피크림 도넛
+                </button>
+            </li>
+
+        </ul>
+
+
+        <!-- =========================================
+             메뉴 전체 영역
+        ========================================= -->
+        <div class="hot-menu-content">
+
+
+            <!-- =========================================
+                 왼쪽 브랜드 이미지
+            ========================================= -->
+            <a href="#" class="hot-menu-banner">
+
+                <!-- 이미지 직접 교체 -->
+                <img
+                    src="./images/0dd0d5eb-2b00-4757-b2df-3223c9404aca.png"
+                    alt="엔제리너스 메뉴 배너"
+                >
+
+                <!--
+                이미지 안에 글자가 없는 이미지를 사용할 경우
+                아래 텍스트를 사용하면 됨
+                -->
+                <div class="hot-menu-banner-text">
+
+                    <strong>
+                        ALWAYS<br>
+                        AROUND US<br>
+                        ANGELINUS
+                    </strong>
+
+                    <span>
+                        메뉴 더보기 ›
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- =========================================
+                 상품 슬라이더
+            ========================================= -->
+            <div class="hot-product-slider">
+
+                <!-- 이전 버튼 -->
+                <button
+                    type="button"
+                    class="hot-slider-btn hot-slider-prev"
+                    aria-label="이전 상품"
+                >
+                    ‹
+                </button>
+
+
+                <!-- 상품이 보이는 영역 -->
+                <div class="hot-product-viewport">
+
+                    <!-- 실제 움직이는 영역 -->
+                    <div class="hot-product-track">
+
+
+                        <!-- =========================
+                             상품 01
+                        ========================== -->
+                        <article class="hot-product-card">
+
+                            <div class="hot-product-image">
+
+                                <span class="hot-product-badge new">
+                                    NEW
+                                </span>
+
+                                <img
+                                    src="./images/e913b2b4-06a5-405b-97a5-46a3df5e8f46.png"
+                                    alt="텐션젤리에이드"
+                                >
+
+                            </div>
+
+                            <div class="hot-product-info">
+
+                                <h3>
+                                    텐션젤리에이드
+                                </h3>
+
+                                <strong>
+                                    6,600원
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- =========================
+                             상품 02
+                        ========================== -->
+                        <article class="hot-product-card">
+
+                            <div class="hot-product-image">
+
+                                <span class="hot-product-badge new">
+                                    NEW
+                                </span>
+
+                                <img
+                                    src="./images/905c21b5-3bce-4124-9527-5a8509323fe7.png"
+                                    alt="텐션젤리에이드티"
+                                >
+
+                            </div>
+
+                            <div class="hot-product-info">
+
+                                <h3>
+                                    텐션젤리에이드티
+                                </h3>
+
+                                <strong>
+                                    5,500원
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- =========================
+                             상품 03
+                        ========================== -->
+                        <article class="hot-product-card">
+
+                            <div class="hot-product-image">
+
+                                <span class="hot-product-badge best">
+                                    BEST
+                                </span>
+
+                                <img
+                                    src="./images/imgi_9_x360.png"
+                                    alt="아메리카노"
+                                >
+
+                            </div>
+
+                            <div class="hot-product-info">
+
+                                <h3>
+                                    아메리카노
+                                </h3>
+
+                                <strong>
+                                    4,700원
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- =========================
+                             상품 04
+                        ========================== -->
+                        <article class="hot-product-card">
+
+                            <div class="hot-product-image">
+
+                                <span class="hot-product-badge best">
+                                    BEST
+                                </span>
+
+                                <img
+                                    src="./images/797ed810-fc15-4904-b2a8-f262304690ab.png"
+                                    alt="오리지널불고기"
+                                >
+
+                            </div>
+
+                            <div class="hot-product-info">
+
+                                <h3>
+                                    오리지널불고기
+                                </h3>
+
+                                <strong>
+                                    7,600원
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- =========================
+                             상품 05
+                        ========================== -->
+                        <article class="hot-product-card">
+
+                            <div class="hot-product-image">
+
+                                <span class="hot-product-badge best">
+                                    BEST
+                                </span>
+
+                                <img
+                                    src="./images/cd87130e-17c2-489f-bb99-6fb49cf03cb4.png"
+                                    alt="에그햄치즈오븐토스트"
+                                >
+
+                            </div>
+
+                            <div class="hot-product-info">
+
+                                <h3>
+                                    에그햄치즈오븐토스트
+                                </h3>
+
+                                <strong>
+                                    5,200원
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+                    <!-- /.hot-product-track -->
+                </div>
+                <!-- /.hot-product-viewport -->
+
+                <button
+                    type="button"
+                    class="hot-slider-btn hot-slider-next"
+                    aria-label="다음 상품"
+                >
+                    ›
+                </button>
+
+            </div>
+            <!-- /.hot-product-slider -->
+
+        </div>
+        <!-- /.hot-menu-content -->
+
+    </div>
+</section>
+<!-- /이달의 핫메뉴 -->
+
+
+<style>
+
+/* =========================================================
+   기본 설정
+========================================================= */
+
+.hot-menu-section,
+.hot-menu-section * {
+    box-sizing: border-box;
+}
+
+.hot-menu-section {
+    width: 100%;
+    padding: 70px 0 90px;
+
+    background: #fff;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+
+/* 가운데 영역 */
+.hot-menu-inner {
+    width: 1150px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.hot-menu-title {
+    margin: 0 0 32px;
+
+    color: #111;
+
+    font-size: 34px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   브랜드 탭
+========================================================= */
+
+.hot-menu-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 42px;
+
+    margin: 0 0 34px;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.hot-menu-tabs li {
+    position: relative;
+}
+
+
+.hot-menu-tabs button {
+    padding: 0 0 12px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #999;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+
+/* 선택된 브랜드 */
+.hot-menu-tabs li.active button {
+    color: #111;
+    font-weight: 800;
+}
+
+
+/* 선택된 브랜드 하단 선 */
+.hot-menu-tabs li.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #111;
+}
+
+
+/* =========================================================
+   전체 콘텐츠
+========================================================= */
+
+.hot-menu-content {
+    display: flex;
+    align-items: stretch;
+
+    gap: 25px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   왼쪽 브랜드 배너
+========================================================= */
+
+.hot-menu-banner {
+    position: relative;
+
+    flex: 0 0 270px;
+
+    width: 270px;
+    height: 355px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: #eee;
+}
+
+
+.hot-menu-banner img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* 배너 위 텍스트 */
+.hot-menu-banner-text {
+    position: absolute;
+
+    left: 28px;
+    bottom: 30px;
+
+    color: #fff;
+}
+
+
+.hot-menu-banner-text strong {
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+
+.hot-menu-banner-text span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   상품 슬라이더
+========================================================= */
+
+.hot-product-slider {
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* 실제 상품이 보이는 부분 */
+.hot-product-viewport {
+    width: 100%;
+    height: 355px;
+
+    overflow: hidden;
+}
+
+
+/* 움직이는 영역 */
+.hot-product-track {
+    display: flex;
+
+    gap: 16px;
+
+    height: 100%;
+
+    transition: transform 0.45s ease;
+}
+
+
+/* =========================================================
+   상품 카드
+========================================================= */
+
+.hot-product-card {
+    flex: 0 0 196px;
+
+    width: 196px;
+    height: 355px;
+
+    padding: 14px 14px 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #ededed;
+
+    border-radius: 20px;
+
+    background: #fff;
+}
+
+
+/* 상품 이미지 */
+.hot-product-image {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 225px;
+}
+
+
+.hot-product-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   NEW / BEST 뱃지
+========================================================= */
+
+.hot-product-badge {
+    position: absolute;
+
+    top: 4px;
+    left: 4px;
+
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* NEW */
+.hot-product-badge.new {
+    background: #ff5d56;
+}
+
+
+/* BEST */
+.hot-product-badge.best {
+    background: #111;
+}
+
+
+/* =========================================================
+   상품 정보
+========================================================= */
+
+.hot-product-info {
+    padding-top: 13px;
+}
+
+
+.hot-product-info h3 {
+    min-height: 42px;
+
+    margin: 0 0 9px;
+
+    overflow: hidden;
+
+    color: #222;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    line-height: 21px;
+}
+
+
+.hot-product-info strong {
+    color: #111;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   좌우 버튼
+========================================================= */
+
+.hot-slider-btn {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    color: #222;
+
+    font-size: 32px;
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.hot-slider-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+
+/* 왼쪽 */
+.hot-slider-prev {
+    left: -21px;
+}
+
+
+/* 오른쪽 */
+.hot-slider-next {
+    right: -21px;
+}
+
+
+/* 사용할 수 없는 버튼 */
+.hot-slider-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+
+.hot-slider-btn:disabled:hover {
+    background: #fff;
+    color: #222;
+}
+
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const hotSection = document.querySelector(".hot-menu-section");
+
+    if (!hotSection) return;
+
+    const hotMenuData = {
+        angelinus: {
+            banner: "./images/0dd0d5eb-2b00-4757-b2df-3223c9404aca.png",
+            title: "ALWAYS<br>AROUND US<br>ANGELINUS",
+            products: [
+                { image: "./images/e913b2b4-06a5-405b-97a5-46a3df5e8f46.png", name: "텐션젤리에이드", price: "6,600원", badge: "NEW" },
+                { image: "./images/905c21b5-3bce-4124-9527-5a8509323fe7.png", name: "텐션젤리에이드티", price: "5,500원", badge: "NEW" },
+                { image: "./images/imgi_9_x360.png", name: "아메리카노", price: "4,700원", badge: "BEST" },
+                { image: "./images/797ed810-fc15-4904-b2a8-f262304690ab.png", name: "오리지널불고기", price: "7,600원", badge: "BEST" },
+                { image: "./images/cd87130e-17c2-489f-bb99-6fb49cf03cb4.png", name: "에그햄치즈오븐토스트", price: "5,200원", badge: "BEST" }
+            ]
+        },
+
+        lotteria: {
+            banner: "./images/lotteria-banner.png",
+            title: "LOTTERIA<br>HOT MENU",
+            products: [
+                { image: "./images/lotteria01.png", name: "리아 불고기", price: "5,000원", badge: "BEST" },
+                { image: "./images/lotteria02.png", name: "리아 새우", price: "5,000원", badge: "BEST" },
+                { image: "./images/lotteria03.png", name: "한우불고기", price: "8,400원", badge: "BEST" },
+                { image: "./images/lotteria04.png", name: "모짜렐라 인 더 버거", price: "7,600원", badge: "NEW" }
+            ]
+        },
+
+        pleating: {
+            banner: "./images/pleating-banner.png",
+            title: "PLE:EATING<br>HOT MENU",
+            products: [
+                { image: "./images/pleating01.png", name: "플레:이팅 메뉴01", price: "9,900원", badge: "NEW" },
+                { image: "./images/pleating02.png", name: "플레:이팅 메뉴02", price: "10,900원", badge: "BEST" },
+                { image: "./images/pleating03.png", name: "플레:이팅 메뉴03", price: "11,900원", badge: "NEW" },
+                { image: "./images/pleating04.png", name: "플레:이팅 메뉴04", price: "12,900원", badge: "BEST" }
+            ]
+        },
+
+        krispy: {
+            banner: "./images/krispy-banner.png",
+            title: "KRISPY KREME<br>DOUGHNUTS",
+            products: [
+                { image: "./images/krispy01.png", name: "오리지널 글레이즈드", price: "2,000원", badge: "BEST" },
+                { image: "./images/krispy02.png", name: "초콜릿 아이스드", price: "2,500원", badge: "BEST" },
+                { image: "./images/krispy03.png", name: "딸기 도넛", price: "2,800원", badge: "NEW" },
+                { image: "./images/krispy04.png", name: "초코 도넛", price: "2,800원", badge: "NEW" }
+            ]
+        }
+    };
+
+    const tabs = hotSection.querySelector(".hot-menu-tabs");
+    const bannerImage = hotSection.querySelector(".hot-menu-banner img");
+    const bannerTitle = hotSection.querySelector(".hot-menu-banner-text strong");
+    const productTrack = hotSection.querySelector(".hot-product-track");
+    const viewport = hotSection.querySelector(".hot-product-viewport");
+    const prevButton = hotSection.querySelector(".hot-slider-prev");
+    const nextButton = hotSection.querySelector(".hot-slider-next");
+
+    let currentBrand = "angelinus";
+    let currentIndex = 0;
+
+    function renderBrand(brand) {
+        const data = hotMenuData[brand];
+        if (!data || !productTrack) return;
+
+        currentBrand = brand;
+        currentIndex = 0;
+
+        if (bannerImage) bannerImage.src = data.banner;
+        if (bannerTitle) bannerTitle.innerHTML = data.title;
+
+        productTrack.innerHTML = "";
+
+        data.products.forEach(function (product) {
+            const card = document.createElement("article");
+            const badgeClass = product.badge === "NEW" ? "new" : "best";
+
+            card.className = "hot-product-card";
+            card.innerHTML = `
+                <div class="hot-product-image">
+                    <span class="hot-product-badge ${badgeClass}">
+                        ${product.badge}
+                    </span>
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="hot-product-info">
+                    <h3>${product.name}</h3>
+                    <strong>${product.price}</strong>
+                </div>
+            `;
+
+            productTrack.appendChild(card);
+        });
+
+        productTrack.style.transform = "translateX(0px)";
+    }
+
+    if (tabs) {
+        tabs.addEventListener("click", function (event) {
+            const button = event.target.closest("button[data-tab]");
+            if (!button) return;
+
+            const brand = button.dataset.tab;
+            if (!hotMenuData[brand]) return;
+
+            tabs.querySelectorAll("li").forEach(function (li) {
+                li.classList.remove("active");
+            });
+
+            button.closest("li").classList.add("active");
+            renderBrand(brand);
+        });
+    }
+
+    function getStep() {
+        const card = productTrack && productTrack.querySelector(".hot-product-card");
+        if (!card) return 0;
+        const style = getComputedStyle(productTrack);
+        const gap = parseFloat(style.gap) || 16;
+        return card.offsetWidth + gap;
+    }
+
+    function getMaxIndex() {
+        if (!productTrack || !viewport) return 0;
+
+        const cards = productTrack.querySelectorAll(".hot-product-card");
+        const step = getStep();
+
+        if (!cards.length || !step) return 0;
+
+        const totalWidth =
+            cards.length * (step - 16) +
+            Math.max(0, cards.length - 1) * 16;
+
+        return Math.max(
+            0,
+            Math.ceil((totalWidth - viewport.clientWidth) / step)
+        );
+    }
+
+    function moveHotSlider() {
+        const step = getStep();
+        if (!step) return;
+
+        productTrack.style.transform =
+            `translateX(-${currentIndex * step}px)`;
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", function () {
+            const maxIndex = getMaxIndex();
+            currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
+            moveHotSlider();
+        });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener("click", function () {
+            const maxIndex = getMaxIndex();
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
+            moveHotSlider();
+        });
+    }
+
+    renderBrand("angelinus");
+});
+</script>
+
+
+<!-- =========================================
+     브랜드 바로가기
+========================================= -->
+<style>
+.brand-section,
+.brand-section * {
+    box-sizing: border-box;
+}
+
+.brand-section {
+    width: 100%;
+    padding: 50px 0 70px;
+    overflow: hidden;
+    background: #f5f6f7;
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+.brand-inner {
+    width: 1060px;
+    margin: 0 auto;
+}
+
+.brand-title {
+    margin: 0 0 22px;
+    color: #111;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.brand-slider {
+    position: relative;
+    width: 100%;
+}
+
+.brand-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.brand-track {
+    display: flex;
+    gap: 19px;
+    width: max-content;
+    transition: transform 0.45s ease;
+}
+
+.brand-card {
+    position: relative;
+    flex: 0 0 196px;
+    width: 196px;
+    height: 262px;
+    overflow: hidden;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.brand-card:nth-child(1) { background: #df342d; }
+.brand-card:nth-child(2) { background: #ce1e3d; }
+.brand-card:nth-child(3) { background: #369b62; }
+.brand-card:nth-child(4) { background: #2358a8; }
+.brand-card:nth-child(5) { background: #222; }
+.brand-card:nth-child(6) { background: #8f684c; }
+.brand-card:nth-child(7) { background: #ee8c23; }
+
+.brand-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.brand-card span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 75px;
+    z-index: 3;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    pointer-events: none;
+}
+
+.brand-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 20;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    background: #fff;
+    color: #ccc;
+    font-size: 35px;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.brand-prev { left: -22px; }
+.brand-next { right: -22px; }
+
+.brand-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 35px;
+}
+
+.brand-pagination {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.brand-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #8d8d8d;
+    cursor: pointer;
+}
+
+.brand-dot.active {
+    width: 20px;
+    border-radius: 10px;
+    background: #000;
+}
+
+.brand-play-button {
+    min-width: 18px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #111;
+    font-size: 17px;
+    cursor: pointer;
+}
+</style>
+
+<section class="brand-section">
+    <div class="brand-inner">
+
+        <h2 class="brand-title">브랜드 바로가기</h2>
+
+        <div class="brand-slider">
+
+            <button
+                type="button"
+                class="brand-arrow brand-prev"
+                aria-label="이전 브랜드"
+            >
+                ‹
+            </button>
+
+            <div class="brand-viewport">
+                <div class="brand-track">
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-lotteria.png" alt="롯데리아"
+                             onerror="this.style.display='none'">
+                        <span>롯데리아</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-marugame.png" alt="마루가메우동"
+                             onerror="this.style.display='none'">
+                        <span>마루가메우동</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-krispy.png" alt="크리스피크림 도넛"
+                             onerror="this.style.display='none'">
+                        <span>크리스피크림 도넛</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-stanbrew.png" alt="스탠브루"
+                             onerror="this.style.display='none'">
+                        <span>스탠브루</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-pleating.png" alt="플레:이팅"
+                             onerror="this.style.display='none'">
+                        <span>플레:이팅</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-angelinus.png" alt="엔제리너스"
+                             onerror="this.style.display='none'">
+                        <span>엔제리너스</span>
+                    </a>
+
+                    <a href="#" class="brand-card">
+                        <img src="./images/brand-grs.png" alt="롯데GRS"
+                             onerror="this.style.display='none'">
+                        <span>롯데GRS</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="brand-arrow brand-next"
+                aria-label="다음 브랜드"
+            >
+                ›
+            </button>
+
+        </div>
+
+        <div class="brand-control">
+            <div class="brand-pagination" id="brandPagination"></div>
+
+            <button
+                type="button"
+                class="brand-play-button"
+                id="brandPlayButton"
+                aria-label="자동재생 정지"
+            >
+                Ⅱ
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const track = document.querySelector(".brand-track");
+    const cards = document.querySelectorAll(".brand-card");
+    const viewport = document.querySelector(".brand-viewport");
+    const prevButton = document.querySelector(".brand-prev");
+    const nextButton = document.querySelector(".brand-next");
+    const pagination = document.querySelector("#brandPagination");
+    const playButton = document.querySelector("#brandPlayButton");
+
+    if (
+        !track ||
+        cards.length === 0 ||
+        !viewport ||
+        !prevButton ||
+        !nextButton ||
+        !pagination ||
+        !playButton
+    ) {
+        return;
+    }
+
+    let currentIndex = 0;
+    let playing = true;
+    let timer = null;
+
+    function getGap() {
+        const style = getComputedStyle(track);
+        return parseFloat(style.gap) || 19;
+    }
+
+    function getVisibleCount() {
+        const cardWidth = cards[0].offsetWidth;
+        const gap = getGap();
+
+        return Math.max(
+            1,
+            Math.floor(
+                (viewport.clientWidth + gap) /
+                (cardWidth + gap)
+            )
+        );
+    }
+
+    function getMaxIndex() {
+        return Math.max(
+            0,
+            cards.length - getVisibleCount()
+        );
+    }
+
+    function updateDots() {
+        pagination
+            .querySelectorAll(".brand-dot")
+            .forEach(function (dot, index) {
+                dot.classList.toggle(
+                    "active",
+                    index === currentIndex
+                );
+            });
+    }
+
+    function moveSlider() {
+        const cardWidth = cards[0].offsetWidth;
+        const gap = getGap();
+
+        track.style.transform =
+            `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+
+        updateDots();
+    }
+
+    function createDots() {
+        pagination.innerHTML = "";
+
+        const maxIndex = getMaxIndex();
+
+        for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+            dot.className = "brand-dot";
+            dot.setAttribute(
+                "aria-label",
+                `${i + 1}번째 슬라이드`
+            );
+
+            dot.addEventListener("click", function () {
+                currentIndex = i;
+                moveSlider();
+                restartAuto();
+            });
+
+            pagination.appendChild(dot);
+        }
+
+        updateDots();
+    }
+
+    function nextSlide() {
+        const maxIndex = getMaxIndex();
+
+        currentIndex =
+            currentIndex < maxIndex
+                ? currentIndex + 1
+                : 0;
+
+        moveSlider();
+    }
+
+    function prevSlide() {
+        const maxIndex = getMaxIndex();
+
+        currentIndex =
+            currentIndex > 0
+                ? currentIndex - 1
+                : maxIndex;
+
+        moveSlider();
+    }
+
+    function startAuto() {
+        clearInterval(timer);
+
+        timer = setInterval(function () {
+            if (playing) {
+                nextSlide();
+            }
+        }, 3000);
+    }
+
+    function restartAuto() {
+        if (playing) {
+            startAuto();
+        }
+    }
+
+    nextButton.addEventListener("click", function () {
+        nextSlide();
+        restartAuto();
+    });
+
+    prevButton.addEventListener("click", function () {
+        prevSlide();
+        restartAuto();
+    });
+
+    playButton.addEventListener("click", function () {
+        playing = !playing;
+
+        if (playing) {
+            playButton.textContent = "Ⅱ";
+            playButton.setAttribute(
+                "aria-label",
+                "자동재생 정지"
+            );
+            startAuto();
+        } else {
+            playButton.textContent = "▶";
+            playButton.setAttribute(
+                "aria-label",
+                "자동재생 시작"
+            );
+            clearInterval(timer);
+        }
+    });
+
+    window.addEventListener("resize", function () {
+        const maxIndex = getMaxIndex();
+
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        createDots();
+        moveSlider();
+    });
+
+    createDots();
+    moveSlider();
+    startAuto();
+});
+</script>
+
+</body>
+</html>
+<!-- =========================================================
+     EATZ 쇼핑 SECTION 시작
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   EATZ SHOP 기본 설정
+========================================================= */
+
+.eatz-shop-section,
+.eatz-shop-section * {
+    box-sizing: border-box;
+}
+
+.eatz-shop-section {
+    width: 100%;
+    padding: 44px 0 62px;
+
+    background: #fff;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+.eatz-shop-inner {
+    width: 1150px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.eatz-shop-title {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0 0 20px;
+
+    color: #111;
+
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.eatz-shop-title-arrow {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   MD / 원두 탭
+========================================================= */
+
+.eatz-shop-tabs {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 19px;
+}
+
+.eatz-shop-tab {
+    position: relative;
+
+    padding: 0;
+
+    border: 0;
+
+    background: none;
+
+    color: #999;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.eatz-shop-tab + .eatz-shop-tab::before {
+    content: "";
+
+    position: absolute;
+
+    left: -9px;
+    top: 50%;
+
+    width: 1px;
+    height: 12px;
+
+    background: #ddd;
+
+    transform: translateY(-50%);
+}
+
+.eatz-shop-tab.active {
+    color: #111;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   슬라이더 전체
+========================================================= */
+
+.eatz-shop-slider {
+    position: relative;
+
+    width: 100%;
+}
+
+
+/* 상품이 실제 보이는 영역 */
+
+.eatz-shop-viewport {
+    width: 100%;
+
+    overflow: hidden;
+}
+
+
+/* 움직이는 영역 */
+
+.eatz-shop-track {
+    display: flex;
+
+    gap: 12px;
+
+    width: max-content;
+
+    transition: transform 0.45s ease;
+}
+
+
+/* =========================================================
+   상품 카드
+========================================================= */
+
+.eatz-shop-card {
+    flex: 0 0 212px;
+
+    width: 212px;
+
+    text-decoration: none;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   상품 이미지
+========================================================= */
+
+.eatz-shop-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 212px;
+    height: 212px;
+
+    overflow: hidden;
+
+    border: 1px solid #ececec;
+    border-radius: 15px;
+
+    background: #fff;
+}
+
+.eatz-shop-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease;
+}
+
+.eatz-shop-card:hover .eatz-shop-image img {
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   브랜드
+========================================================= */
+
+.eatz-shop-brand {
+    display: block;
+
+    margin-top: 12px;
+    margin-bottom: 5px;
+
+    color: #129b4b;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.eatz-shop-brand.angelinus {
+    color: #8d7768;
+}
+
+
+/* =========================================================
+   상품명
+========================================================= */
+
+.eatz-shop-name {
+    margin: 0 0 8px;
+
+    overflow: hidden;
+
+    color: #111;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   가격
+========================================================= */
+
+.eatz-shop-price {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    min-height: 24px;
+}
+
+.eatz-shop-discount {
+    color: #ff3d37;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.eatz-shop-sale-price {
+    color: #111;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.eatz-shop-normal-price {
+    color: #111;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+
+/* 기존 가격 */
+
+.eatz-shop-original {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 13px;
+
+    text-decoration: line-through;
+}
+
+
+/* =========================================================
+   좌우 화살표
+========================================================= */
+
+.eatz-shop-arrow {
+    position: absolute;
+
+    top: 91px;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    padding: 0;
+
+    border: 1px solid #eee;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    color: #ccc;
+
+    font-size: 35px;
+    font-weight: 200;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.eatz-shop-arrow:hover {
+    color: #333;
+}
+
+
+/* 이전 */
+
+.eatz-shop-prev {
+    left: -22px;
+}
+
+
+/* 다음 */
+
+.eatz-shop-next {
+    right: -22px;
+}
+
+
+/* 사용할 수 없는 버튼 */
+
+.eatz-shop-arrow.disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+</style>
+
+
+<section class="eatz-shop-section">
+
+    <div class="eatz-shop-inner">
+
+
+        <!-- =========================================
+             제목
+        ========================================== -->
+
+        <h2 class="eatz-shop-title">
+
+            EATZ 쇼핑
+
+            <span class="eatz-shop-title-arrow">
+                ›
+            </span>
+
+        </h2>
+
+
+        <!-- =========================================
+             MD / 원두
+        ========================================== -->
+
+        <div class="eatz-shop-tabs">
+
+            <button
+                type="button"
+                class="eatz-shop-tab active"
+                data-shop-tab="md"
+            >
+                MD
+            </button>
+
+            <button
+                type="button"
+                class="eatz-shop-tab"
+                data-shop-tab="bean"
+            >
+                원두
+            </button>
+
+        </div>
+
+
+        <!-- =========================================
+             상품 Slider
+        ========================================== -->
+
+        <div class="eatz-shop-slider">
+
+
+            <!-- 이전 -->
+            <button
+                type="button"
+                class="eatz-shop-arrow eatz-shop-prev"
+                aria-label="이전 상품"
+            >
+                ‹
+            </button>
+
+
+            <!-- 상품 보이는 부분 -->
+            <div class="eatz-shop-viewport">
+
+                <div
+                    class="eatz-shop-track"
+                    id="eatzShopTrack"
+                >
+                    <!-- JavaScript에서 상품 생성 -->
+                </div>
+
+            </div>
+
+
+            <!-- 다음 -->
+            <button
+                type="button"
+                class="eatz-shop-arrow eatz-shop-next"
+                aria-label="다음 상품"
+            >
+                ›
+            </button>
+
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
 
 
-    // 모든 슬라이드
-    const slides =
-        document.querySelectorAll(".lotta-main-slide");
+    /* =====================================================
+       상품 데이터
+       이미지 파일명은 여기서 변경하면 됩니다.
+    ===================================================== */
+
+    const shopData = {
 
 
-    // 버튼
-    const prev =
-        document.getElementById("lottaPrev");
+        /* =================================================
+           MD 상품
+        ================================================= */
 
-    const next =
-        document.getElementById("lottaNext");
+        md: [
 
-    const pause =
-        document.getElementById("lottaPause");
-
-
-    // 페이지 번호
-    const currentText =
-        document.getElementById("lottaCurrent");
-
-    const totalText =
-        document.getElementById("lottaTotal");
+            {
+                image: "./images/2b0013e4-203b-464a-8548-6bb65f45a8f4 (1).png",
+                brand: "크리스피크림 도넛",
+                brandClass: "",
+                name: "클래식 도트 시그니처 머그(L)",
+                price: "9,000원"
+            },
 
 
-    let current = 0;
-
-    let timer;
-
-    let playing = true;
-
-
-    // 전체 슬라이드 숫자
-    totalText.textContent =
-        slides.length;
-
+            {
+                image: "./images/d0f0de2c-1985-4bb0-8c2d-20ebcf35d529.png",
+                brand: "크리스피크림 도넛",
+                brandClass: "",
+                name: "시그니처 머그(S) 기프트 세트",
+                discount: "5%",
+                price: "19,000원",
+                original: "20,000원"
+            },
 
 
-    // =====================================
-    // 슬라이드 보여주기
-    // =====================================
-
-    function showSlide(num) {
-
-
-        if (num >= slides.length) {
-
-            num = 0;
-
-        }
+            {
+                image: "./images/3615efe7-374b-4295-93f9-3a66305a0b5a.png",
+                brand: "크리스피크림 도넛",
+                brandClass: "",
+                name: "BDNS 캔버스백(그린)",
+                price: "17,000원"
+            },
 
 
-        if (num < 0) {
-
-            num = slides.length - 1;
-
-        }
-
-
-        // 모든 슬라이드 숨기기
-        slides.forEach(function(slide) {
-
-            slide.classList.remove("on");
-
-        });
+            {
+                image: "./images/c04a0889-8526-4c78-a076-7aef1fffb222.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "아소부 엘티머그(화이트)",
+                price: "24,000원"
+            },
 
 
-        // 현재 슬라이드 표시
-        slides[num].classList.add("on");
+            {
+                image: "./images/3a1b0061-6172-48f4-8c07-59a6a1afe572 (2).png",
+                brand: "크리스피크림 도넛",
+                brandClass: "",
+                name: "모던 골드링 시그니처 머그(L)",
+                price: "9,000원"
+            },
 
 
-        current = num;
+            {
+                image: "./images/b9c368e4-3df0-486b-9ebb-1767ff471d77.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "시그니처 텀블러",
+                price: "22,000원"
+            },
 
 
-        // 숫자 변경
-        currentText.textContent =
-            current + 1;
+            {
+                image: "./images/81470634-83f3-4106-adb6-230ce7390ba2 (1).png",
+                brand: "크리스피크림 도넛",
+                brandClass: "",
+                name: "크리스피 시그니처 굿즈",
+                price: "15,000원"
+            }
 
+        ],
+
+
+
+        /* =================================================
+           원두 상품
+        ================================================= */
+
+        bean: [
+
+            {
+                image: "./images/imgi_87_x240.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "엔제리너스 시그니처 원두",
+                price: "18,000원"
+            },
+
+
+            {
+                image: "./images/shop-bean02.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "스페셜티 블렌드 원두",
+                price: "21,000원"
+            },
+
+
+            {
+                image: "./images/shop-bean03.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "콜롬비아 원두",
+                price: "19,000원"
+            },
+
+
+            {
+                image: "./images/shop-bean04.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "에티오피아 원두",
+                price: "20,000원"
+            },
+
+
+            {
+                image: "./images/shop-bean05.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "브라질 블렌드 원두",
+                price: "17,000원"
+            },
+
+
+            {
+                image: "./images/shop-bean06.png",
+                brand: "엔제리너스",
+                brandClass: "angelinus",
+                name: "디카페인 원두",
+                price: "22,000원"
+            }
+
+        ]
+
+    };
+
+
+
+    /* =====================================================
+       요소 가져오기
+    ===================================================== */
+
+    const track =
+        document.getElementById("eatzShopTrack");
+
+    const viewport =
+        document.querySelector(".eatz-shop-viewport");
+
+    const prevButton =
+        document.querySelector(".eatz-shop-prev");
+
+    const nextButton =
+        document.querySelector(".eatz-shop-next");
+
+    const tabs =
+        document.querySelectorAll(".eatz-shop-tab");
+
+
+    if (
+        !track ||
+        !viewport ||
+        !prevButton ||
+        !nextButton
+    ) {
+        return;
     }
 
 
 
-    // =====================================
-    // 자동재생
-    // =====================================
+    /* 현재 탭 */
 
-    function autoPlay() {
+    let currentTab = "md";
 
 
-        clearInterval(timer);
+    /* 현재 슬라이드 위치 */
+
+    let currentIndex = 0;
 
 
-        timer = setInterval(function() {
+
+    /* =====================================================
+       상품 만들기
+    ===================================================== */
+
+    function renderProducts(tabName) {
 
 
-            if (playing) {
+        /* 현재 탭 저장 */
 
-                showSlide(current + 1);
+        currentTab = tabName;
+
+
+        /* 슬라이드 처음으로 */
+
+        currentIndex = 0;
+
+
+        /* 기존 상품 삭제 */
+
+        track.innerHTML = "";
+
+
+        const products =
+            shopData[tabName];
+
+
+        products.forEach(function (product) {
+
+
+            const card =
+                document.createElement("a");
+
+
+            card.href = "#";
+
+            card.className =
+                "eatz-shop-card";
+
+
+            /* =====================================
+               가격 영역
+            ===================================== */
+
+            let priceHTML = "";
+
+
+            /* 할인 상품 */
+
+            if (product.discount) {
+
+                priceHTML = `
+
+                    <div class="eatz-shop-price">
+
+                        <span class="eatz-shop-discount">
+                            ${product.discount}
+                        </span>
+
+                        <strong class="eatz-shop-sale-price">
+                            ${product.price}
+                        </strong>
+
+                    </div>
+
+                    <del class="eatz-shop-original">
+                        ${product.original}
+                    </del>
+
+                `;
 
             }
 
 
-        }, 3000);
+            /* 일반 상품 */
+
+            else {
+
+                priceHTML = `
+
+                    <div class="eatz-shop-price">
+
+                        <strong class="eatz-shop-normal-price">
+                            ${product.price}
+                        </strong>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =====================================
+               상품 HTML
+            ===================================== */
+
+            card.innerHTML = `
+
+                <div class="eatz-shop-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                    >
+
+                </div>
+
+
+                <span
+                    class="eatz-shop-brand ${product.brandClass}"
+                >
+                    ${product.brand}
+                </span>
+
+
+                <p class="eatz-shop-name">
+                    ${product.name}
+                </p>
+
+
+                ${priceHTML}
+
+            `;
+
+
+            track.appendChild(card);
+
+        });
+
+
+        /* 처음 위치 */
+
+        moveSlider();
+
+        updateArrow();
 
     }
 
 
 
-    // =====================================
-    // 이전 버튼
-    // =====================================
+    /* =====================================================
+       한 화면에 보이는 상품 개수
+    ===================================================== */
 
-    prev.addEventListener("click", function() {
+    function getVisibleCount() {
+
+        const firstCard =
+            track.querySelector(".eatz-shop-card");
 
 
-        showSlide(current - 1);
+        if (!firstCard) {
+            return 1;
+        }
+
+
+        const style =
+            window.getComputedStyle(track);
+
+
+        const gap =
+            parseFloat(style.gap) || 12;
+
+
+        const cardWidth =
+            firstCard.offsetWidth;
+
+
+        return Math.floor(
+
+            (viewport.clientWidth + gap) /
+
+            (cardWidth + gap)
+
+        );
+
+    }
+
+
+
+    /* =====================================================
+       마지막 이동 위치
+    ===================================================== */
+
+    function getMaxIndex() {
+
+        const cards =
+            track.querySelectorAll(
+                ".eatz-shop-card"
+            );
+
+
+        const visibleCount =
+            getVisibleCount();
+
+
+        return Math.max(
+
+            0,
+
+            cards.length -
+            visibleCount
+
+        );
+
+    }
+
+
+
+    /* =====================================================
+       슬라이드 이동
+    ===================================================== */
+
+    function moveSlider() {
+
+        const firstCard =
+            track.querySelector(
+                ".eatz-shop-card"
+            );
+
+
+        if (!firstCard) {
+            return;
+        }
+
+
+        const style =
+            window.getComputedStyle(track);
+
+
+        const gap =
+            parseFloat(style.gap) || 12;
+
+
+        const cardWidth =
+            firstCard.offsetWidth;
+
+
+        const moveX =
+            currentIndex *
+            (cardWidth + gap);
+
+
+        track.style.transform =
+            `translateX(-${moveX}px)`;
+
+
+        updateArrow();
+
+    }
+
+
+
+    /* =====================================================
+       화살표 표시
+    ===================================================== */
+
+    function updateArrow() {
+
+        const maxIndex =
+            getMaxIndex();
+
+
+        /* 첫 화면에서는 왼쪽 숨김 */
+
+        if (currentIndex <= 0) {
+
+            prevButton.classList.add(
+                "disabled"
+            );
+
+        } else {
+
+            prevButton.classList.remove(
+                "disabled"
+            );
+
+        }
+
+
+        /* 마지막 화면에서는 오른쪽 숨김 */
+
+        if (currentIndex >= maxIndex) {
+
+            nextButton.classList.add(
+                "disabled"
+            );
+
+        } else {
+
+            nextButton.classList.remove(
+                "disabled"
+            );
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       오른쪽 버튼
+    ===================================================== */
+
+    nextButton.addEventListener(
+        "click",
+        function () {
+
+
+            const maxIndex =
+                getMaxIndex();
+
+
+            if (
+                currentIndex <
+                maxIndex
+            ) {
+
+                currentIndex++;
+
+                moveSlider();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       왼쪽 버튼
+    ===================================================== */
+
+    prevButton.addEventListener(
+        "click",
+        function () {
+
+
+            if (
+                currentIndex > 0
+            ) {
+
+                currentIndex--;
+
+                moveSlider();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       MD / 원두 클릭
+    ===================================================== */
+
+    tabs.forEach(function (button) {
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+
+                /* active 제거 */
+
+                tabs.forEach(
+                    function (tab) {
+
+                        tab.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                /* 현재 탭 */
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const tabName =
+                    button.dataset.shopTab;
+
+
+                renderProducts(
+                    tabName
+                );
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       브라우저 크기 변경 대응
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+
+            const maxIndex =
+                getMaxIndex();
+
+
+            if (
+                currentIndex >
+                maxIndex
+            ) {
+
+                currentIndex =
+                    maxIndex;
+
+            }
+
+
+            moveSlider();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       최초 MD 상품 출력
+    ===================================================== */
+
+    renderProducts("md");
+
+
+});
+
+</script>
+
+<!-- EATZ 쇼핑 SECTION 끝 -->
+ <!-- =========================================================
+     EATZ TV SECTION 시작
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   EATZ TV 기본
+========================================================= */
+
+.eatz-tv-section,
+.eatz-tv-section * {
+    box-sizing: border-box;
+}
+
+.eatz-tv-section {
+    width: 100%;
+
+    padding: 68px 0 72px;
+
+    background: #1d2428;
+
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+
+/* 가운데 영역 */
+
+.eatz-tv-inner {
+    width: 1110px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   제목
+========================================================= */
+
+.eatz-tv-title {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0 0 22px;
+
+    color: #fff;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+/* 제목 오른쪽 화살표 */
+
+.eatz-tv-title span {
+    font-size: 30px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   동영상 목록
+========================================================= */
+
+.eatz-tv-list {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   동영상 카드
+========================================================= */
+
+.eatz-tv-card {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   VIDEO 영역
+========================================================= */
+
+.eatz-tv-video {
+    position: relative;
+
+    width: 100%;
+    height: 150px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #000;
+}
+
+
+.eatz-tv-video video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   동영상 제목
+========================================================= */
+
+.eatz-tv-card h3 {
+    margin: 12px 0 0;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.45;
+
+    word-break: keep-all;
+}
+
+
+/* =========================================================
+   hover
+========================================================= */
+
+.eatz-tv-video {
+    transition: transform 0.3s ease;
+}
+
+.eatz-tv-video:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   video 기본 컨트롤 색감
+========================================================= */
+
+.eatz-tv-video video {
+    cursor: pointer;
+}
+
+</style>
+
+
+
+<section class="eatz-tv-section">
+
+    <div class="eatz-tv-inner">
+
+
+        <!-- =========================================
+             제목
+        ========================================== -->
+
+        <h2 class="eatz-tv-title">
+
+            EATZ TV
+
+            <span>
+                ›
+            </span>
+
+        </h2>
+
+
+
+        <!-- =========================================
+             동영상 4개
+        ========================================== -->
+
+        <div class="eatz-tv-list">
+
+
+            <!-- =====================================
+                 VIDEO 01
+            ====================================== -->
+
+            <article class="eatz-tv-card">
+
+                <div class="eatz-tv-video">
+
+                    <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        poster="./images/https://youtu.be/yO8D99ei90Q"
+                    >
+
+                        <source
+                            src="./videos/https://youtu.be/BwJv6AkPeZI"
+                            type="video/mp4"
+                        >
+
+                        브라우저가 동영상 재생을 지원하지 않습니다.
+
+                    </video>
+
+                </div>
+
+
+                <h3>
+                    타기 직전까지 끌어올린 반전의 맛!
+                    #번든비프버거 (30s)
+                </h3>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 VIDEO 02
+            ====================================== -->
+
+            <article class="eatz-tv-card">
+
+                <div class="eatz-tv-video">
+
+                    <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        poster="./images/"
+                    >
+
+                        <source
+                            src="./videos/eatz-tv02.mp4"
+                            type="video/mp4"
+                        >
+
+                        브라우저가 동영상 재생을 지원하지 않습니다.
+
+                    </video>
+
+                </div>
+
+
+                <h3>
+                    탄 줄 알았다고? 삐딱한 생각이
+                    버거를 맛있게! #번든비프버거 (FULL)
+                </h3>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 VIDEO 03
+            ====================================== -->
+
+            <article class="eatz-tv-card">
+
+                <div class="eatz-tv-video">
+
+                    <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        poster="./images/eatz-tv03.jpg"
+                    >
+
+                        <source
+                            src="./videos/<iframe width="1337" height="752" src="https://www.youtube.com/embed/k3GnHTPEgJI" title="롯데리아 또 이상한 거 한다!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>"
+                            type="video/mp4"
+                        >
+
+                        브라우저가 동영상 재생을 지원하지 않습니다.
+
+                    </video>
+
+                </div>
+
+
+                <h3>
+                    롯데리아 또 한번 삐딱해진다.
+                </h3>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 VIDEO 04
+            ====================================== -->
+
+            <article class="eatz-tv-card">
+
+                <div class="eatz-tv-video">
+
+                    <video
+                        controls
+                        playsinline
+                        preload="metadata"
+                        poster="./images/eatz-tv04.jpg"
+                    >
+
+                        <source
+                            src="./videos/eatz-tv04.mp4"
+                            type="video/mp4"
+                        >
+
+                        브라우저가 동영상 재생을 지원하지 않습니다.
+
+                    </video>
+
+                </div>
+
+
+                <h3>
+                    그렇게 딸바보가 된다
+                </h3>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* =========================================================
+   EATZ TV
+
+   하나의 영상을 재생하면
+   다른 영상은 자동으로 정지
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const eatzVideos =
+        document.querySelectorAll(
+            ".eatz-tv-video video"
+        );
+
+
+    eatzVideos.forEach(function (video) {
+
+        video.addEventListener(
+            "play",
+            function () {
+
+
+                eatzVideos.forEach(
+                    function (otherVideo) {
+
+
+                        if (
+                            otherVideo !== video
+                        ) {
+
+                            otherVideo.pause();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    });
+
+});
+
+</script>
+
+<!-- =========================================================
+     LOTTA FOOTER 시작
+     HTML + CSS + JavaScript 통합
+========================================================= -->
+
+<footer class="lotta-footer">
+
+    <div class="lotta-footer-inner">
+
+
+        <!-- =====================================================
+             상단 : 약관 + FAMILY SITE
+        ====================================================== -->
+        <div class="lotta-footer-top">
+
+            <!-- 왼쪽 약관 메뉴 -->
+            <ul class="lotta-footer-policy">
+
+                <li>
+                    <a href="#" class="blue">
+                        개인정보처리방침
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="bold">
+                        이용약관
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="blue">
+                        위치기반서비스 이용약관
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        영상정보 처리기기 운영 및 관리 방침
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        공지사항
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        창업상담
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        설정
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- =================================================
+                 FAMILY SITE
+            ================================================== -->
+            <div class="lotta-family-site">
+
+                <button
+                    type="button"
+                    class="lotta-family-btn"
+                    aria-expanded="false"
+                >
+                    <span>Family Site</span>
+
+                    <span class="lotta-family-arrow">
+                        ▼
+                    </span>
+                </button>
+
+
+                <ul class="lotta-family-list">
+
+                    <li>
+                        <a href="#" target="_blank">
+                            롯데리아
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            엔제리너스
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            크리스피크림 도넛
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            스탠브루
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" target="_blank">
+                            롯데GRS
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             가맹점 모집
+        ====================================================== -->
+        <div class="lotta-footer-row">
+
+            <strong class="lotta-footer-label">
+                가맹점 모집
+            </strong>
+
+
+            <div class="lotta-footer-buttons">
+
+                <a href="#">
+                    롯데리아
+                </a>
+
+                <a href="#">
+                    엔제리너스
+                </a>
+
+                <a href="#">
+                    크리스피크림도넛
+                </a>
+
+                <a href="#">
+                    스탠브루
+                </a>
+
+                <a href="#">
+                    창업설명회 신청
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             협력사 거래희망등록
+        ====================================================== -->
+        <div class="lotta-footer-row">
+
+            <strong class="lotta-footer-label">
+                협력사 거래희망등록
+            </strong>
+
+
+            <div class="lotta-footer-buttons">
+
+                <a href="#">
+                    납품제안
+                </a>
+
+                <a href="#">
+                    임대제안
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             롯데GRS 사업자정보
+        ====================================================== -->
+        <div class="lotta-footer-info-row">
+
+            <strong class="lotta-footer-label">
+                롯데GRS 사업자정보
+            </strong>
+
+
+            <div class="lotta-footer-info">
+
+                <div class="lotta-business-line">
+
+                    <span>
+                        대표자 : 이원택
+                    </span>
+
+                    <span>
+                        주소 : 서울시 송파구 백제고분로 217 LOTTE GRS 79 SQUARE
+                    </span>
+
+                    <span>
+                        사업자번호 : 106-81-23498
+                    </span>
+
+                </div>
+
+
+                <div class="lotta-business-line">
+
+                    <span>
+                        통신판매번호 : 2024-서울송파-1356
+                    </span>
+
+                    <a href="#" class="business-check">
+                        사업자정보확인
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             문의처
+        ====================================================== -->
+        <div class="lotta-footer-info-row lotta-contact-row">
+
+            <strong class="lotta-footer-label">
+                문의처
+            </strong>
+
+
+            <div class="lotta-footer-info">
+
+                <div class="lotta-business-line">
+
+                    <span>
+                        본사 고객의 소리 운영시간 평일 9시~18시
+                    </span>
+
+                    <span>
+                        유선상담
+                    </span>
+
+                    <span>
+                        일반문의/매장이용 불편사항 080-550-0005 (평일 9시~18시)
+                    </span>
+
+                </div>
+
+
+                <div class="lotta-business-line">
+
+                    <span>
+                        모바일 쿠폰 오류, 환불 등 문의 사항은 구입처에서만 유선 상담 가능합니다.
+                    </span>
+
+                    <span>
+                        LOTTE EATZ앱 문의: 1600-0552 (평일 9시~18시)
+                    </span>
+
+                </div>
+
+
+                <div class="lotta-business-line">
+
+                    <span>
+                        일반 쿠폰(기프티엘): 1644-4276 (평일 9시30분~18시)
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             인증 영역
+        ====================================================== -->
+        <div class="lotta-certification">
+
+
+            <!-- ISMS-P -->
+            <div class="lotta-cert-item">
+
+                <div class="lotta-cert-logo">
+
+                    <!--
+                    실제 이미지가 있으면 아래 src만 바꿔주세요.
+                    -->
+                    <img
+                        src="./images/isms-p.png"
+                        alt="ISMS-P 인증마크"
+                    >
+
+                </div>
+
+
+                <div class="lotta-cert-text">
+
+                    <p>
+                        인증 범위 : 롯데GRS 온라인 서비스
+                        (롯데잇츠 앱/웹, CRM 시스템, 홈페이지)
+                    </p>
+
+                    <p>
+                        유효기간 : 2026.01.21 ~ 2029.01.20
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- 웹 접근성 인증 -->
+            <div class="lotta-cert-item">
+
+                <div class="lotta-cert-logo">
+
+                    <img
+                        src="./images/wa-mark.png"
+                        alt="웹 접근성 인증마크"
+                    >
+
+                </div>
+
+
+                <div class="lotta-cert-text">
+
+                    <p>
+                        인증 범위 : 롯데잇츠 웹 페이지
+                    </p>
+
+                    <p>
+                        유효기간 : 2026.05.07 ~ 2027.05.06
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             하단 COPYRIGHT + SNS
+        ====================================================== -->
+        <div class="lotta-footer-bottom">
+
+            <p class="lotta-copyright">
+                copyright © 2023 Lotte GRS co.,ltd all right reserved
+            </p>
+
+
+            <div class="lotta-sns">
+
+                <!-- Facebook -->
+                <a href="#" aria-label="Facebook" class="facebook">
+                    f
+                </a>
+
+
+                <!-- Instagram -->
+                <a href="#" aria-label="Instagram" class="instagram">
+                    ◎
+                </a>
+
+
+                <!-- X -->
+                <a href="#" aria-label="X" class="twitter">
+                    X
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+<style>
+
+/* =========================================================
+   LOTTA FOOTER
+========================================================= */
+
+.lotta-footer,
+.lotta-footer * {
+    box-sizing: border-box;
+}
+
+
+.lotta-footer {
+    width: 100%;
+
+    background: #f6f7f8;
+
+    color: #5f6770;
+
+    font-family:
+        Arial,
+        "Noto Sans KR",
+        "Malgun Gothic",
+        sans-serif;
+}
+
+
+/* 가운데 영역 */
+
+.lotta-footer-inner {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1150px;
+
+    min-height: 425px;
+
+    margin: 0 auto;
+
+    padding: 25px 3px 30px;
+}
+
+
+/* =========================================================
+   상단
+========================================================= */
+
+.lotta-footer-top {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 23px;
+}
+
+
+/* =========================================================
+   약관
+========================================================= */
+
+.lotta-footer-policy {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 0;
+
+    margin: 8px 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.lotta-footer-policy li {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* 메뉴 사이 세로선 */
+
+.lotta-footer-policy li:not(:last-child)::after {
+    content: "";
+
+    display: block;
+
+    width: 1px;
+    height: 11px;
+
+    margin: 0 10px;
+
+    background: #d4d7da;
+}
+
+
+.lotta-footer-policy a {
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1;
+
+    text-decoration: none;
+}
+
+
+/* 파란색 메뉴 */
+
+.lotta-footer-policy a.blue {
+    color: #0096c6;
+
+    font-weight: 600;
+}
+
+
+/* 굵은 메뉴 */
+
+.lotta-footer-policy a.bold {
+    color: #111;
+
+    font-weight: 700;
+}
+
+
+.lotta-footer-policy a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FAMILY SITE
+========================================================= */
+
+.lotta-family-site {
+    position: relative;
+
+    flex: 0 0 180px;
+
+    width: 180px;
+
+    z-index: 100;
+}
+
+
+.lotta-family-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    width: 180px;
+    height: 45px;
+
+    padding: 0 15px;
+
+    border: 1px solid #d7dce0;
+
+    border-radius: 4px;
+
+    background: #fff;
+
+    color: #111;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+
+.lotta-family-btn:hover {
+    background: #fafafa;
+}
+
+
+/* 삼각형 */
+
+.lotta-family-arrow {
+    color: #111;
+
+    font-size: 9px;
+
+    transition: transform .25s ease;
+}
+
+
+.lotta-family-site.active .lotta-family-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* 펼쳐지는 메뉴 */
+
+.lotta-family-list {
+    position: absolute;
+
+    top: 49px;
+    left: 0;
+
+    display: none;
+
+    width: 180px;
+
+    margin: 0;
+    padding: 5px 0;
+
+    border: 1px solid #d7dce0;
+
+    border-radius: 4px;
+
+    background: #fff;
+
+    list-style: none;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .08);
+}
+
+
+.lotta-family-site.active .lotta-family-list {
+    display: block;
+}
+
+
+.lotta-family-list a {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+    height: 35px;
+
+    padding: 0 15px;
+
+    color: #555;
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+
+.lotta-family-list a:hover {
+    background: #f2f4f5;
+
+    color: #111;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   공통 ROW
+========================================================= */
+
+.lotta-footer-row,
+.lotta-footer-info-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    width: 100%;
+
+    margin-bottom: 19px;
+}
+
+
+/* 왼쪽 제목 영역 */
+
+.lotta-footer-label {
+    flex: 0 0 135px;
+
+    width: 135px;
+
+    padding-top: 9px;
+
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   작은 버튼
+========================================================= */
+
+.lotta-footer-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+.lotta-footer-buttons a {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 72px;
+    height: 33px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d7dce0;
+
+    border-radius: 4px;
+
+    background: #fff;
+
+    color: #111;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+
+.lotta-footer-buttons a:hover {
+    border-color: #aaa;
+
+    background: #f1f3f4;
+}
+
+
+/* =========================================================
+   사업자 / 문의 정보
+========================================================= */
+
+.lotta-footer-info {
+    padding-top: 5px;
+
+    color: #69727c;
+
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.9;
+}
+
+
+.lotta-business-line {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    column-gap: 17px;
+}
+
+
+.business-check {
+    color: #111;
+
+    font-weight: 600;
+
+    text-decoration: underline;
+}
+
+
+/* 문의처는 위 여백 조금 감소 */
+
+.lotta-contact-row {
+    margin-top: -2px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   인증마크
+========================================================= */
+
+.lotta-certification {
+    display: flex;
+
+    align-items: center;
+
+    gap: 32px;
+
+    width: 100%;
+
+    margin-top: 3px;
+    margin-bottom: 18px;
+}
+
+
+.lotta-cert-item {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 43px;
+}
+
+
+.lotta-cert-logo {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 49px;
+
+    margin-right: 11px;
+}
+
+
+.lotta-cert-logo img {
+    display: block;
+
+    max-width: 48px;
+    max-height: 42px;
+
+    object-fit: contain;
+}
+
+
+.lotta-cert-text {
+    color: #69727c;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+.lotta-cert-text p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   COPYRIGHT + SNS
+========================================================= */
+
+.lotta-footer-bottom {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+}
+
+
+.lotta-copyright {
+    margin: 0;
+
+    color: #777f87;
+
+    font-size: 12px;
+}
+
+
+/* SNS */
+
+.lotta-sns {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-left: 24px;
+}
+
+
+.lotta-sns a {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    color: #8b8f93;
+
+    text-decoration: none;
+}
+
+
+/* Facebook */
+
+.lotta-sns .facebook {
+    font-family: Arial, sans-serif;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+/* Instagram */
+
+.lotta-sns .instagram {
+    font-size: 26px;
+
+    line-height: 1;
+}
+
+
+/* X */
+
+.lotta-sns .twitter {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+
+.lotta-sns a:hover {
+    color: #111;
+}
+
+
+/* =========================================================
+   화면이 좁아졌을 때
+========================================================= */
+
+@media (max-width: 1190px) {
+
+    .lotta-footer-inner {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .lotta-footer-top {
+        gap: 20px;
+    }
+
+
+    .lotta-footer-policy {
+        row-gap: 12px;
+    }
+
+
+    .lotta-footer-row,
+    .lotta-footer-info-row {
+        flex-direction: column;
+    }
+
+
+    .lotta-footer-label {
+        width: auto;
+
+        flex-basis: auto;
+
+        margin-bottom: 8px;
+    }
+
+
+    .lotta-footer-buttons {
+        flex-wrap: wrap;
+    }
+
+
+    .lotta-certification {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================================================
+   FAMILY SITE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const familySite =
+        document.querySelector(".lotta-family-site");
+
+    const familyButton =
+        document.querySelector(".lotta-family-btn");
+
+
+    if (!familySite || !familyButton) {
+        return;
+    }
+
+
+    /* Family Site 클릭 */
+    familyButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        const isOpen =
+            familySite.classList.toggle("active");
+
+
+        familyButton.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+    });
+
+
+    /* 바깥을 클릭하면 닫기 */
+    document.addEventListener("click", function (event) {
+
+        if (!familySite.contains(event.target)) {
+
+            familySite.classList.remove("active");
+
+            familyButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    });
+
+
+    /* ESC 키로 닫기 */
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            familySite.classList.remove("active");
+
+            familyButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    });
+
+});
+
+</script>
+
+<!-- =========================================================
+     LOTTA FOOTER 끝
+========================================================= -->
