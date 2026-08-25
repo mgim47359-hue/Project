@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="오늘 해야 할 일을 가장 간단하게 관리하는 반응형 웹앱">
+        <title>오늘해 할 일 관리 앱</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div class="app">
+            <aside class="side" aria-label="주요 메뉴">
+                <div class="side-logo">
+                    오늘해
+                </div>
+                <nav class="side-menu">
+                    <button type="button" class="side-btn active" data-view="all">
+                        <span>
+                            ⌂
+                        </span>
+                        전체 할 일
+                    </button>
+                    <button type="button" class="side-btn" data-view="today">
+                        <span>
+                            ✓
+                        </span>
+                        오늘
+                    </button>
+                    <button type="button" class="side-btn" data-view="upcoming">
+                        <span>
+                            ▣
+                        </span>
+                        예정
+                    </button>
+                    <button type="button" class="side-btn" data-view="completed">
+                        <span>
+                            ◉
+                        </span>
+                        완료
+                    </button>
+                </nav>
+            </aside>
+            <main class="main">
+                <header class="top">
+                    <div>
+                        <div class="brand">
+                            <span class="logo">
+                                오
+                            </span>
+                            오늘해
+                        </div>
+                        <p class="date" id="todayLabel">
+                        </p>
+                    </div>
+                    <button type="button" class="primary" id="focusTitle">
+                        + 할 일 등록
+                    </button>
+                </header>
+                <section class="hero">
+                    <div class="intro">
+                        <h1>
+                            오늘도 가볍게 시작해요
+                        </h1>
+                        <p>
+                            해야 할 일을 기록하고 하나씩 완료해 보세요.
+                        </p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-head">
+                            <span>
+                                오늘의 완료율
+                            </span>
+                            <b id="progressText">
+                                0%
+                            </b>
+                        </div>
+                        <div class="bar">
+                            <i id="progressBar">
+                            </i>
+                        </div>
+                    </div>
+                </section>
+                <section class="stats" aria-label="할 일 현황">
+                    <div class="stat">
+                        <b id="statAll">
+                            0
+                        </b>
+                        <span>
+                            전체
+                        </span>
+                    </div>
+                    <div class="stat">
+                        <b id="statToday">
+                            0
+                        </b>
+                        <span>
+                            오늘
+                        </span>
+                    </div>
+                    <div class="stat">
+                        <b id="statLate">
+                            0
+                        </b>
+                        <span>
+                            기한 지남
+                        </span>
+                    </div>
+                    <div class="stat">
+                        <b id="statDone">
+                            0
+                        </b>
+                        <span>
+                            완료
+                        </span>
+                    </div>
+                </section>
+                <div class="work">
+                    <section class="panel composer">
+                        <h2 id="formTitle">
+                            새 할 일
+                        </h2>
+                        <form class="form" id="taskForm" novalidate>
+                            <input type="hidden" id="taskId">
+                            <div class="field">
+                                <label for="title">
+                                    할 일 제목 *
+                                </label>
+                                <input id="title" maxlength="80" placeholder="예: 포트폴리오 메인 화면 완성" required>
+                                <p class="error" id="titleError" aria-live="polite">
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label for="memo">
+                                    메모
+                                </label>
+                                <textarea id="memo" maxlength="300" placeholder="필요한 내용을 적어주세요">
+                                </textarea>
+                            </div>
+                            <div class="grid2">
+                                <div class="field">
+                                    <label for="dueDate">
+                                        마감일
+                                    </label>
+                                    <input type="date" id="dueDate">
+                                </div>
+                                <div class="field">
+                                    <label for="dueTime">
+                                        시간
+                                    </label>
+                                    <input type="time" id="dueTime">
+                                </div>
+                            </div>
+                            <div class="grid2">
+                                <div class="field">
+                                    <label for="category">
+                                        카테고리
+                                    </label>
+                                    <select id="category">
+                                        <option>
+                                            업무
+                                        </option>
+                                        <option>
+                                            공부
+                                        </option>
+                                        <option>
+                                            운동
+                                        </option>
+                                        <option>
+                                            약속
+                                        </option>
+                                        <option>
+                                            개인
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="priority">
+                                        우선순위
+                                    </label>
+                                    <select id="priority">
+                                        <option value="normal">
+                                            보통
+                                        </option>
+                                        <option value="high">
+                                            높음
+                                        </option>
+                                        <option value="low">
+                                            낮음
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="ghost hidden" id="cancelEdit" type="button">
+                                    취소
+                                </button>
+                                <button class="primary" id="saveBtn" type="submit">
+                                    저장하기
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="panel list-panel">
+                        <div class="list-head">
+                            <h2 id="listTitle">
+                                전체 할 일
+                            </h2>
+                            <div class="tools">
+                                <div class="search">
+                                    <span>
+                                        ⌕
+                                    </span>
+                                    <label class="hidden" for="search">
+                                        검색
+                                    </label>
+                                    <input id="search" type="search" placeholder="제목이나 메모 검색">
+                                </div>
+                                <div class="filters">
+                                    <label class="hidden" for="categoryFilter">
+                                        카테고리
+                                    </label>
+                                    <select id="categoryFilter">
+                                        <option value="all">
+                                            모든 카테고리
+                                        </option>
+                                        <option>
+                                            업무
+                                        </option>
+                                        <option>
+                                            공부
+                                        </option>
+                                        <option>
+                                            운동
+                                        </option>
+                                        <option>
+                                            약속
+                                        </option>
+                                        <option>
+                                            개인
+                                        </option>
+                                    </select>
+                                    <label class="hidden" for="sort">
+                                        정렬
+                                    </label>
+                                    <select id="sort">
+                                        <option value="created">
+                                            최근 등록순
+                                        </option>
+                                        <option value="due">
+                                            마감일순
+                                        </option>
+                                        <option value="priority">
+                                            우선순위순
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="tasks" id="taskList">
+                        </ul>
+                        <div class="empty hidden" id="empty">
+                            <div class="empty-mark">
+                                ✓
+                            </div>
+                            <strong>
+                                표시할 할 일이 없어요
+                            </strong>
+                            <span>
+                                새로운 할 일을 등록해 보세요.
+                            </span>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+        <nav class="bottom" aria-label="모바일 메뉴">
+            <button type="button" class="nav active" data-view="all">
+                <span>
+                    ⌂
+                </span>
+                전체
+            </button>
+            <button type="button" class="nav" data-view="today">
+                <span>
+                    ✓
+                </span>
+                오늘
+            </button>
+            <button type="button" class="nav" data-view="upcoming">
+                <span>
+                    ▣
+                </span>
+                예정
+            </button>
+            <button type="button" class="nav" data-view="completed">
+                <span>
+                    ◉
+                </span>
+                완료
+            </button>
+        </nav>
+        <dialog id="deleteDialog">
+            <div class="dialog-body">
+                <h2>
+                    할 일을 삭제할까요?
+                </h2>
+                <p>
+                    삭제한 할 일은 다시 복구할 수 없습니다.
+                </p>
+                <div class="dialog-actions">
+                    <button type="button" class="ghost" id="cancelDelete">
+                        취소
+                    </button>
+                    <button type="button" class="primary danger-button" id="confirmDelete">
+                        삭제하기
+                    </button>
+                </div>
+            </div>
+        </dialog>
+        <div class="toast" id="toast" role="status" aria-live="polite">
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
