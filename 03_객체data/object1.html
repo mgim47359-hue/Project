@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 data</title>
+</head>
+
+<body>
+    <script>
+        // 배열 선언
+        let jumsu = [100, 90, 80, 70, 60];
+
+        console.log(jumsu);
+
+        document.write(`국어점수 : ${jumsu[0]}<br>`);
+        document.write(`영어점수 : ${jumsu[1]}<br>`);
+        document.write(`수학점수 : ${jumsu[2]}<br>`);
+        document.write(`과학점수 : ${jumsu[3]}<br>`);
+        document.write(`사회점수 : ${jumsu[4]}<br>`);
+
+        document.write("<hr>");
+
+        // 학생 성적 객체 선언
+        let score = {
+            no: 1,
+            name: "홍길동",
+            kor: 100,
+            eng: 90,
+            mat: 80,
+            sci: 70,
+            soc: 60
+        };
+
+        document.write(`번호 : ${score.no}<br>`);
+        document.write(`이름 : ${score.name}<br>`);
+        document.write(`국어점수 : ${score.kor}<br>`);
+        document.write(`영어점수 : ${score.eng}<br>`);
+        document.write(`수학점수 : ${score.mat}<br>`);
+        document.write(`과학점수 : ${score.sci}<br>`);
+        document.write(`사회점수 : ${score.soc}<br>`);
+
+        document.write("<hr>");
+
+        // 자동차 객체 선언
+        const car = {
+            color: "검정",
+            cc: 3000,
+            make: "현대 자동차"
+        };
+
+        document.write(`색상 : ${car.color}<br>`);
+        document.write(`배기량 : ${car.cc}cc<br>`);
+        document.write(`제조사 : ${car.make}<br>`);
+
+        document.write("<hr>");
+
+        // 성적 객체 선언
+        const sungjuk = {
+            kor: 100,
+            eng: 90,
+            mat: 80,
+            sci: 70
+        };
+
+        // 대괄호 표기법으로 객체 데이터 출력
+        document.write(`국어 : ${sungjuk["kor"]}<br>`);
+        document.write(`영어 : ${sungjuk["eng"]}<br>`);
+        document.write(`수학 : ${sungjuk["mat"]}<br>`);
+        document.write(`과학 : ${sungjuk["sci"]}<br>`);
+
+        // 콘솔에서 객체 전체 확인
+        console.log(score);
+        console.log(car);
+        console.log(sungjuk);
+    </script>
+</body>
+</html>
