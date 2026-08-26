@@ -1,1035 +1,745 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#fff8f5">
-    <title>김민혁 ♥ 이서영 모바일 청첩장</title>
-
-    <style>
-        :root {
-            --bg: #fffaf7;
-            --card: #ffffff;
-            --text: #2f2927;
-            --muted: #817875;
-            --line: #eee5e1;
-            --accent: #c9877a;
-            --accent-dark: #a96559;
-            --soft: #f7ece8;
-            --shadow: 0 12px 40px rgba(83, 57, 49, 0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background: #f1eeee;
-        }
-
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
-            color: var(--text);
-            background: #f1eeee;
-            line-height: 1.6;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        button,
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        img {
-            display: block;
-            width: 100%;
-        }
-
-        .wedding-app {
-            width: min(100%, 430px);
-            min-height: 100svh;
-            margin: 0 auto;
-            overflow: hidden;
-            background: var(--bg);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
-        }
-
-        .main-visual {
-            position: relative;
-            min-height: 88svh;
-            overflow: hidden;
-            background:
-                linear-gradient(180deg, rgba(27, 19, 16, 0.05), rgba(27, 19, 16, 0.5)),
-                #ddd3ce;
-        }
-
-        .main-visual > img {
-            position: absolute;
-            inset: 0;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .main-visual::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.02) 35%, rgba(0,0,0,0.55) 100%);
-            pointer-events: none;
-        }
-
-        .main-text {
-            position: absolute;
-            z-index: 1;
-            left: 24px;
-            right: 24px;
-            bottom: 46px;
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.28);
-        }
-
-        .main-text p {
-            margin: 0 0 12px;
-            font-size: 11px;
-            letter-spacing: 0.24em;
-        }
-
-        .main-text h1 {
-            margin: 0 0 12px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(34px, 10vw, 44px);
-            font-weight: 500;
-            letter-spacing: -0.04em;
-        }
-
-        .main-text h1 span {
-            margin: 0 5px;
-            color: #ffd6ce;
-            font-size: 0.63em;
-            vertical-align: 0.12em;
-        }
-
-        .main-text strong {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .section {
-            padding: 72px 24px;
-            text-align: center;
-        }
-
-        .section + .section {
-            border-top: 1px solid rgba(238, 229, 225, 0.72);
-        }
-
-        .section-label {
-            margin: 0 0 11px;
-            color: var(--accent);
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 12px;
-            letter-spacing: 0.22em;
-        }
-
-        .section-label.light {
-            color: #f9d9d2;
-        }
-
-        .section h2 {
-            margin: 0 0 34px;
-            font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
-            font-size: 24px;
-            font-weight: 500;
-            letter-spacing: -0.035em;
-        }
-
-        .invitation-message {
-            margin: 0;
-            color: #615955;
-            font-size: 15px;
-            line-height: 2;
-        }
-
-        .family {
-            margin-top: 36px;
-            padding: 22px 18px;
-            border-radius: 16px;
-            background: #fff;
-            box-shadow: var(--shadow);
-        }
-
-        .family p {
-            margin: 8px 0;
-            color: #6d6460;
-            font-size: 14px;
-        }
-
-        .family strong,
-        .family b {
-            color: var(--text);
-        }
-
-        .family b {
-            margin-left: 6px;
-            font-size: 16px;
-        }
-
-        .button-group {
-            display: grid;
-            gap: 12px;
-        }
-
-        .button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 52px;
-            padding: 0 18px;
-            border: 1px solid transparent;
-            border-radius: 14px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-
-        .button:active,
-        .copy-button:active,
-        .gallery-button:active {
-            transform: scale(0.98);
-        }
-
-        .primary-button {
-            color: #fff;
-            background: var(--accent);
-        }
-
-        .outline-button {
-            color: var(--accent-dark);
-            border-color: #d9b4ab;
-            background: rgba(255,255,255,0.7);
-        }
-
-        .gallery-main {
-            overflow: hidden;
-            aspect-ratio: 4 / 5;
-            border-radius: 22px;
-            background: #eee7e3;
-            box-shadow: var(--shadow);
-        }
-
-        .gallery-main img {
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.25s ease;
-        }
-
-        .gallery-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .gallery-button {
-            width: 38px;
-            height: 38px;
-            border: 1px solid #dcc9c4;
-            border-radius: 999px;
-            color: #8d7d77;
-            background: #fff;
-            cursor: pointer;
-        }
-
-        .gallery-button.active {
-            color: #fff;
-            border-color: var(--accent);
-            background: var(--accent);
-        }
-
-        .countdown-section {
-            color: #fff;
-            background: linear-gradient(145deg, #b9786d, #8c5b53);
-        }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .count-box {
-            padding: 18px 4px 15px;
-            border: 1px solid rgba(255,255,255,0.22);
-            border-radius: 14px;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(4px);
-        }
-
-        .count-box strong,
-        .count-box span {
-            display: block;
-        }
-
-        .count-box strong {
-            font-size: 25px;
-            line-height: 1.1;
-        }
-
-        .count-box span {
-            margin-top: 8px;
-            font-size: 8px;
-            letter-spacing: 0.08em;
-            opacity: 0.75;
-        }
-
-        .countdown-message {
-            min-height: 24px;
-            margin: 20px 0 0;
-            font-size: 13px;
-            color: rgba(255,255,255,0.82);
-        }
-
-        .location #venueName {
-            display: block;
-            margin-top: -8px;
-            font-size: 18px;
-        }
-
-        .location #venueAddress {
-            margin: 8px 0 20px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .kakao-map {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            background: #eee9e6;
-            box-shadow: var(--shadow);
-        }
-
-        .map-fallback {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 24px;
-            color: #766c68;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .map-button {
-            margin-top: 16px;
-        }
-
-        .section-description {
-            margin: -15px 0 26px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .account-list {
-            display: grid;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .account-list details {
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            background: #fff;
-        }
-
-        .account-list summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px;
-            list-style: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .account-list summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .account-list details[open] summary span {
-            transform: rotate(45deg);
-        }
-
-        .account-list summary span {
-            transition: transform 0.2s ease;
-        }
-
-        .account-content {
-            padding: 0 18px 18px;
-            border-top: 1px solid var(--line);
-        }
-
-        .account-content p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .account-content strong {
-            color: var(--text);
-            font-size: 17px;
-        }
-
-        .copy-button {
-            width: 100%;
-            min-height: 46px;
-            border: 0;
-            border-radius: 12px;
-            color: #fff;
-            background: var(--accent);
-            cursor: pointer;
-        }
-
-        .guestbook form {
-            display: grid;
-            gap: 18px;
-            text-align: left;
-        }
-
-        .guestbook label > span:first-child {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .guestbook input[type="text"],
-        .guestbook select,
-        .guestbook textarea {
-            width: 100%;
-            padding: 13px 14px;
-            border: 1px solid #dfd4d0;
-            border-radius: 12px;
-            outline: none;
-            color: var(--text);
-            background: #fff;
-        }
-
-        .guestbook input:focus,
-        .guestbook select:focus,
-        .guestbook textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(201,135,122,0.12);
-        }
-
-        .consent {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .consent input {
-            margin-top: 2px;
-        }
-
-        .submit-button {
-            border: 0;
-        }
-
-        .form-status {
-            min-height: 22px;
-            margin: -4px 0 0;
-            text-align: center;
-            color: var(--accent-dark);
-            font-size: 13px;
-        }
-
-        .guestbook-list {
-            display: grid;
-            gap: 10px;
-            margin-top: 24px;
-            text-align: left;
-        }
-
-        .guestbook-item {
-            padding: 15px;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            background: #fff;
-        }
-
-        .guestbook-item strong {
-            font-size: 13px;
-        }
-
-        .guestbook-item small {
-            margin-left: 6px;
-            color: var(--muted);
-        }
-
-        .guestbook-item p {
-            margin: 7px 0 0;
-            color: #5e5652;
-            font-size: 13px;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        footer {
-            padding: 38px 24px 46px;
-            text-align: center;
-            color: #8f837e;
-            background: #f4eae6;
-        }
-
-        footer p {
-            margin: 0 0 4px;
-            color: #685d58;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 18px;
-        }
-
-        .toast {
-            position: fixed;
-            z-index: 9999;
-            left: 50%;
-            bottom: calc(24px + env(safe-area-inset-bottom));
-            max-width: calc(100% - 40px);
-            padding: 12px 16px;
-            border-radius: 999px;
-            color: #fff;
-            background: rgba(35, 29, 27, 0.92);
-            font-size: 13px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translate(-50%, 12px);
-            transition: 0.2s ease;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-
-        .image-error {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100%;
-            padding: 20px;
-            text-align: center;
-            color: #6f6561;
-            background: linear-gradient(135deg, #eadbd5, #f8f0ec);
-        }
-
-        @media (min-width: 700px) {
-            body {
-                padding: 28px 0;
-            }
-
-            .wedding-app {
-                border-radius: 26px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>김민혁 ♥ 이서영 모바일 청첩장</title>
+  <style>
+    :root {
+      --bg: #faf7f5;
+      --card: #ffffff;
+      --text: #3c3431;
+      --muted: #857a75;
+      --accent: #b9877a;
+      --accent-dark: #8d6258;
+      --line: #eadfda;
+      --soft: #f2ebe7;
+      --shadow: 0 12px 32px rgba(82, 62, 53, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: #eee9e6;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.7;
+    }
+
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .app {
+      width: min(100%, 430px);
+      min-height: 100svh;
+      margin: 0 auto;
+      background: var(--bg);
+      box-shadow: 0 0 40px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: #d8cfca;
+      overflow: hidden;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.05) 35%, rgba(0,0,0,.62) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 42px 24px 54px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .hero-kicker {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: .24em;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      margin: 0 7px;
+      color: #ffd8cf;
+    }
+
+    .hero-date {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .section + .section { border-top: 1px solid var(--line); }
+
+    .label {
+      margin: 0 0 8px;
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .section h2 {
+      margin: 0 0 28px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+
+    .invitation-message {
+      margin: 0;
+      font-size: 15px;
+      color: #665c57;
+    }
+
+    .family {
+      margin-top: 34px;
+      display: grid;
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .family p { margin: 0; }
+    .family b { margin-left: 8px; font-size: 17px; }
+
+    .contact-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .phone-number {
+      margin: 0 0 2px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      border: 1px solid var(--accent);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .btn:active { transform: scale(.98); }
+    .btn.primary { background: var(--accent); color: #fff; }
+    .btn.secondary { background: #fff; color: var(--accent-dark); }
+
+    .gallery-frame {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #e5ddda;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .gallery-dot {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .gallery-dot.active {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .count-section {
+      color: #fff;
+      background: linear-gradient(145deg, #9b7268, #75524a);
+    }
+
+    .count-section .label { color: #f5ded7; }
+    .count-section h2 { margin-bottom: 32px; }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .count-box {
+      padding: 16px 6px 14px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(6px);
+    }
+
+    .count-box strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .count-box span {
+      display: block;
+      margin-top: 7px;
+      font-size: 9px;
+      letter-spacing: .08em;
+      opacity: .8;
+    }
+
+    .count-message {
+      min-height: 26px;
+      margin: 18px 0 0;
+      font-size: 14px;
+      color: #f7e8e3;
+    }
+
+    .venue-name {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .venue-address {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    #kakaoMap {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--soft);
+      box-shadow: var(--shadow);
+    }
+
+    .map-fallback {
+      height: 100%;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .full-map-btn { margin-top: 14px; width: 100%; }
+
+    .account-list { display: grid; gap: 12px; }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      font-weight: 700;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .account-content {
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .account-content p {
+      margin: 14px 0;
+      color: var(--muted);
+    }
+
+    .account-content strong { color: var(--text); font-size: 17px; }
+
+    .copy-btn {
+      width: 100%;
+      border: 0;
+      background: var(--soft);
+      color: var(--accent-dark);
+    }
+
+    .guest-form {
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .field span {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      padding: 13px 14px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--accent); }
+
+    .consent {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .consent input { margin-top: 5px; }
+
+    .guest-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .guest-item {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .guest-item strong { display: block; margin-bottom: 4px; }
+    .guest-item small { color: var(--muted); }
+    .guest-item p { margin: 8px 0 0; white-space: pre-wrap; }
+
+    footer {
+      padding: 36px 24px 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer p { margin: 0 0 4px; color: var(--text); font-weight: 700; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(24px + env(safe-area-inset-bottom));
+      z-index: 1000;
+      width: max-content;
+      max-width: calc(100vw - 40px);
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(45,38,35,.92);
+      color: #fff;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 12px);
+      transition: .25s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  </style>
 </head>
-
 <body>
-    <main class="wedding-app">
-        <section class="main-visual">
-            <img
-                src="./imges/wedding1.jpg"
-                alt="신랑 김민혁과 신부 이서영"
-                onerror="this.style.display='none'"
-            >
-
-            <div class="main-text">
-                <p>WE ARE GETTING MARRIED</p>
-                <h1>김민혁 <span>♥</span> 이서영</h1>
-                <strong id="weddingDateText">2026년 8월 27일 목요일</strong>
-            </div>
-        </section>
-
-        <section class="section invitation">
-            <p class="section-label">INVITATION</p>
-            <h2>소중한 분들을 초대합니다</h2>
-
-            <p class="invitation-message">
-                깨지지 않는 약속으로 하늘에 아로 새기어<br>
-                서로의 동반자 되어<br>
-                인생의 여정을 출발하고자 합니다.<br><br>
-                저희 두 사람의 약속이<br>
-                더욱 빛날 수 있도록<br>
-                부디 방문하시어 따뜻한 격려와<br>
-                축복을 부탁드립니다.
-            </p>
-
-            <div class="family">
-                <p><strong>김대성</strong>의 아들 <b>김민혁</b></p>
-                <p><strong>이완성</strong>의 딸 <b>이서영</b></p>
-            </div>
-        </section>
-
-        <section class="section contact">
-            <p class="section-label">CONTACT</p>
-            <h2>신랑 · 신부에게 연락하기</h2>
-
-            <div class="button-group">
-                <a id="groomCallButton" class="button primary-button" href="tel:01085630000">신랑에게 전화하기 · 010-8563-0000</a>
-                <a id="brideCallButton" class="button outline-button" href="tel:01085630000">신부에게 전화하기 · 010-8563-0000</a>
-            </div>
-        </section>
-
-        <section class="section gallery">
-            <p class="section-label">GALLERY</p>
-            <h2>우리의 아름다운 순간</h2>
-
-            <div class="gallery-main" id="galleryFrame">
-                <img id="galleryImage" src="./imges/wedding2.jpg" alt="웨딩 사진 1">
-            </div>
-
-            <div class="gallery-buttons">
-                <button type="button" class="gallery-button active" data-image="./imges/wedding1.jpg" data-alt="웨딩 사진 1">1</button>
-                <button type="button" class="gallery-button" data-image="./imges/wedding2.jpg" data-alt="웨딩 사진 2">2</button>
-                <button type="button" class="gallery-button" data-image="./imges/wedding3.jpg" data-alt="웨딩 사진 3">3</button>
-            </div>
-        </section>
-
-        <section class="section countdown-section">
-            <p class="section-label light">OUR WEDDING DAY</p>
-            <h2>두 사람의 새로운 시작까지</h2>
-
-            <div class="countdown">
-                <div class="count-box"><strong id="days">--</strong><span>DAYS</span></div>
-                <div class="count-box"><strong id="hours">--</strong><span>HOURS</span></div>
-                <div class="count-box"><strong id="minutes">--</strong><span>MINUTES</span></div>
-                <div class="count-box"><strong id="seconds">--</strong><span>SECONDS</span></div>
-            </div>
-
-            <p id="countdownMessage" class="countdown-message"></p>
-        </section>
-
-        <section class="section location">
-            <p class="section-label">LOCATION</p>
-            <h2>오시는 길</h2>
-
-            <strong id="venueName">더채플앳청담</strong>
-            <p id="venueAddress">서울특별시 강남구 선릉로 757</p>
-
-            <div id="kakaoMap" class="kakao-map">
-                <div class="map-fallback">카카오맵을 불러오는 중입니다.</div>
-            </div>
-
-            <a id="largeMapButton" class="button outline-button map-button" href="https://map.kakao.com/?q=%EB%8D%94%EC%B1%84%ED%94%8C%EC%95%B3%EC%B2%AD%EB%8B%B4" target="_blank" rel="noopener">카카오맵에서 크게 보기</a>
-        </section>
-
-        <section class="section account">
-            <p class="section-label">ACCOUNT</p>
-            <h2>마음 전하실 곳</h2>
-            <p class="section-description">참석이 어려우신 분들을 위해<br>계좌번호를 안내드립니다.</p>
-
-            <div class="account-list">
-                <details>
-                    <summary>신랑측 계좌번호 <span>＋</span></summary>
-                    <div class="account-content">
-                        <p>농협은행<br><strong>392-0897-5992-89</strong></p>
-                        <button type="button" class="copy-button" data-account="농협은행 392-0897-5992-89">계좌번호 복사</button>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>신부측 계좌번호 <span>＋</span></summary>
-                    <div class="account-content">
-                        <p>농협은행<br><strong>392-0897-5992-89</strong></p>
-                        <button type="button" class="copy-button" data-account="농협은행 392-0897-5992-89">계좌번호 복사</button>
-                    </div>
-                </details>
-            </div>
-        </section>
-
-        <section class="section guestbook">
-            <p class="section-label">GUESTBOOK</p>
-            <h2>축하 메시지</h2>
-
-            <form id="guestbookForm">
-                <label>
-                    <span>이름</span>
-                    <input type="text" id="guestName" minlength="2" maxlength="20" placeholder="이름을 입력해 주세요" required>
-                </label>
-
-                <label>
-                    <span>구분</span>
-                    <select id="guestSide">
-                        <option value="공통">공통</option>
-                        <option value="신랑측">신랑측</option>
-                        <option value="신부측">신부측</option>
-                    </select>
-                </label>
-
-                <label>
-                    <span>축하 메시지</span>
-                    <textarea id="guestMessage" rows="5" minlength="2" maxlength="300" placeholder="따뜻한 축하 메시지를 남겨주세요" required></textarea>
-                </label>
-
-                <label class="consent">
-                    <input type="checkbox" id="privacyConsent" required>
-                    <span>방명록 저장을 위한 개인정보 수집에 동의합니다.</span>
-                </label>
-
-                <button id="guestbookSubmitButton" type="submit" class="button primary-button submit-button">축하 메시지 남기기</button>
-                <p id="guestbookStatus" class="form-status"></p>
-            </form>
-
-            <div id="guestbookList" class="guestbook-list"></div>
-        </section>
-
-        <footer>
-            <p>김민혁 ♥ 이서영</p>
-            <small>소중한 걸음 기다리겠습니다.</small>
-        </footer>
-    </main>
-
-    <div id="toast" class="toast"></div>
-
-    <!-- 카카오맵 JavaScript SDK: 사용자가 제공한 JavaScript 키 삽입 완료 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c1150e850c41fd7881e31f1d2ab6391e&libraries=services&autoload=false"></script>
-
-    <script>
-        "use strict";
-
-        /* =====================================================
-           여기만 바꾸면 주요 정보가 한 번에 변경됩니다.
-           weddingDate가 비어 있으면 카운트다운은 안내 문구만 표시합니다.
-        ====================================================== */
-        const WEDDING_CONFIG = {
-            groomName: "김민혁",
-            brideName: "이서영",
-            // 예식 날짜: 2026년 8월 27일 (시간 미지정 → 날짜 시작 시점 기준 카운트다운)
-            weddingDate: "2026-08-27T00:00:00+09:00",
-            groomPhone: "010-8563-0000",
-            bridePhone: "010-8563-0000",
-            venue: {
-                name: "더채플앳청담",
-                address: "서울특별시 강남구 선릉로 757",
-                latitude: 37.522473836496,
-                longitude: 127.03914876371,
-                level: 3
-            }
-        };
-
-        const $ = (selector) => document.querySelector(selector);
-        const $$ = (selector) => Array.from(document.querySelectorAll(selector));
-
-        let toastTimer = null;
-        let countdownTimer = null;
-
-        function showToast(message) {
-            const toast = $("#toast");
-            if (!toast) return;
-
-            toast.textContent = message;
-            toast.classList.add("show");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
-        }
-
-        function setupContactButtons() {
-            const items = [
-                { selector: "#groomCallButton", phone: WEDDING_CONFIG.groomPhone, label: "신랑" },
-                { selector: "#brideCallButton", phone: WEDDING_CONFIG.bridePhone, label: "신부" }
-            ];
-
-            items.forEach(({ selector, phone, label }) => {
-                const button = $(selector);
-                if (!button) return;
-
-                if (phone.trim()) {
-                    button.href = `tel:${phone.replace(/[^0-9+]/g, "")}`;
-                } else {
-                    button.href = "#";
-                    button.addEventListener("click", (event) => {
-                        event.preventDefault();
-                        showToast(`${label} 전화번호를 WEDDING_CONFIG에 입력해 주세요.`);
-                    });
-                }
-            });
-        }
-
-        function setupGallery() {
-            const image = $("#galleryImage");
-            const frame = $("#galleryFrame");
-            const buttons = $$(".gallery-button");
-
-            if (!image || !frame || !buttons.length) return;
-
-            function showImage(button) {
-                const path = button.dataset.image;
-                const alt = button.dataset.alt || "웨딩 사진";
-
-                image.style.opacity = "0";
-                setTimeout(() => {
-                    image.src = path;
-                    image.alt = alt;
-                    image.style.display = "block";
-                    image.style.opacity = "1";
-                }, 120);
-
-                buttons.forEach((item) => item.classList.toggle("active", item === button));
-            }
-
-            buttons.forEach((button) => button.addEventListener("click", () => showImage(button)));
-
-            image.addEventListener("error", () => {
-                image.style.display = "none";
-                if (!frame.querySelector(".image-error")) {
-                    const fallback = document.createElement("div");
-                    fallback.className = "image-error";
-                    fallback.innerHTML = "사진을 표시하려면 <b>imges</b> 폴더에<br>main-wedding.jpg, wedding1.jpg~wedding3.jpg를 넣어 주세요.";
-                    frame.appendChild(fallback);
-                }
-            });
-
-            image.addEventListener("load", () => {
-                frame.querySelector(".image-error")?.remove();
-                image.style.display = "block";
-            });
-        }
-
-        function setupCountdown() {
-            const dateText = $("#weddingDateText");
-            const message = $("#countdownMessage");
-            const fields = {
-                days: $("#days"),
-                hours: $("#hours"),
-                minutes: $("#minutes"),
-                seconds: $("#seconds")
-            };
-
-            if (!WEDDING_CONFIG.weddingDate) {
-                dateText.textContent = "예식일을 준비 중입니다";
-                message.textContent = "WEDDING_CONFIG의 weddingDate에 예식일을 입력하면 실시간 카운트다운이 시작됩니다.";
-                return;
-            }
-
-            const target = new Date(WEDDING_CONFIG.weddingDate);
-            if (Number.isNaN(target.getTime())) {
-                message.textContent = "예식일 형식이 올바르지 않습니다.";
-                return;
-            }
-
-            const formatter = new Intl.DateTimeFormat("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                weekday: "long"
-            });
-            dateText.textContent = formatter.format(target);
-
-            function update() {
-                const diff = target.getTime() - Date.now();
-
-                if (diff <= 0) {
-                    clearInterval(countdownTimer);
-                    Object.values(fields).forEach((field) => field && (field.textContent = "00"));
-                    message.textContent = "오늘, 두 사람의 새로운 시작을 축하해 주세요 ♥";
-                    return;
-                }
-
-                const totalSeconds = Math.floor(diff / 1000);
-                const days = Math.floor(totalSeconds / 86400);
-                const hours = Math.floor((totalSeconds % 86400) / 3600);
-                const minutes = Math.floor((totalSeconds % 3600) / 60);
-                const seconds = totalSeconds % 60;
-
-                fields.days.textContent = String(days).padStart(2, "0");
-                fields.hours.textContent = String(hours).padStart(2, "0");
-                fields.minutes.textContent = String(minutes).padStart(2, "0");
-                fields.seconds.textContent = String(seconds).padStart(2, "0");
-                message.textContent = `${WEDDING_CONFIG.groomName} ♥ ${WEDDING_CONFIG.brideName}의 예식까지 남은 시간입니다.`;
-            }
-
-            update();
-            countdownTimer = setInterval(update, 1000);
-        }
-
-        function setupCopyButtons() {
-            $$(".copy-button").forEach((button) => {
-                button.addEventListener("click", async () => {
-                    const text = button.dataset.account || "";
-                    try {
-                        await navigator.clipboard.writeText(text);
-                    } catch (error) {
-                        const textarea = document.createElement("textarea");
-                        textarea.value = text;
-                        textarea.style.position = "fixed";
-                        textarea.style.opacity = "0";
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        document.execCommand("copy");
-                        textarea.remove();
-                    }
-                    showToast("계좌번호를 복사했습니다.");
-                });
-            });
-        }
-
-        function setupGuestbook() {
-            const form = $("#guestbookForm");
-            const list = $("#guestbookList");
-            const status = $("#guestbookStatus");
-            const storageKey = "wedding_guestbook_v1";
-
-            if (!form || !list) return;
-
-            function loadItems() {
-                try {
-                    return JSON.parse(localStorage.getItem(storageKey) || "[]");
-                } catch (error) {
-                    return [];
-                }
-            }
-
-            function saveItems(items) {
-                localStorage.setItem(storageKey, JSON.stringify(items.slice(0, 30)));
-            }
-
-            function render() {
-                const items = loadItems();
-                list.innerHTML = "";
-
-                items.slice(0, 8).forEach((item) => {
-                    const card = document.createElement("article");
-                    card.className = "guestbook-item";
-
-                    const header = document.createElement("div");
-                    const name = document.createElement("strong");
-                    const meta = document.createElement("small");
-                    const message = document.createElement("p");
-
-                    name.textContent = item.name;
-                    meta.textContent = `${item.side} · ${item.date}`;
-                    message.textContent = item.message;
-
-                    header.append(name, meta);
-                    card.append(header, message);
-                    list.appendChild(card);
-                });
-            }
-
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-
-                if (!form.reportValidity()) return;
-
-                const item = {
-                    name: $("#guestName").value.trim(),
-                    side: $("#guestSide").value,
-                    message: $("#guestMessage").value.trim(),
-                    date: new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium" }).format(new Date())
-                };
-
-                const items = loadItems();
-                items.unshift(item);
-                saveItems(items);
-                render();
-                form.reset();
-                status.textContent = "축하 메시지가 이 기기에 저장되었습니다.";
-                showToast("축하 메시지를 저장했습니다.");
-            });
-
-            render();
-        }
-
-        function setMapFallback(message) {
-            const container = $("#kakaoMap");
-            if (!container) return;
-            container.innerHTML = "";
-            const fallback = document.createElement("div");
-            fallback.className = "map-fallback";
-            fallback.innerHTML = message;
-            container.appendChild(fallback);
-        }
-
-        function setupKakaoMap() {
-            const container = $("#kakaoMap");
-            const venueName = $("#venueName");
-            const venueAddress = $("#venueAddress");
-            const largeMapButton = $("#largeMapButton");
-            const venue = WEDDING_CONFIG.venue;
-
-            venueName.textContent = venue.name;
-            venueAddress.textContent = venue.address;
-
-            largeMapButton.href = `https://map.kakao.com/?q=${encodeURIComponent(venue.name + " " + venue.address)}`;
-
-            if (!container) return;
-
-            if (typeof kakao === "undefined" || !kakao.maps || typeof kakao.maps.load !== "function") {
-                setMapFallback("카카오맵 SDK를 불러오지 못했습니다.<br>인터넷 연결과 카카오 Developers의 JavaScript SDK 도메인 등록을 확인해 주세요.");
-                return;
-            }
-
-            kakao.maps.load(() => {
-                try {
-                    const latitude = Number(venue.latitude);
-                    const longitude = Number(venue.longitude);
-                    const position = new kakao.maps.LatLng(latitude, longitude);
-
-                    container.innerHTML = "";
-
-                    const map = new kakao.maps.Map(container, {
-                        center: position,
-                        level: venue.level
-                    });
-
-                    const marker = new kakao.maps.Marker({
-                        position: position
-                    });
-                    marker.setMap(map);
-
-                    const infoWindow = new kakao.maps.InfoWindow({
-                        content: `<div style="padding:8px 12px;font-size:13px;white-space:nowrap;">${venue.name}</div>`
-                    });
-                    infoWindow.open(map, marker);
-
-                    largeMapButton.href = `https://map.kakao.com/link/to/${encodeURIComponent(venue.name)},${latitude},${longitude}`;
-
-                    window.addEventListener("resize", () => {
-                        map.relayout();
-                        map.setCenter(position);
-                    });
-                } catch (error) {
-                    console.error("카카오맵 생성 오류:", error);
-                    setMapFallback("카카오맵을 표시하지 못했습니다.<br>카카오 Developers의 JavaScript SDK 도메인 등록을 확인해 주세요.");
-                }
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            setupContactButtons();
-            setupGallery();
-            setupCountdown();
-            setupCopyButtons();
-            setupGuestbook();
-            setupKakaoMap();
+  <main class="app">
+    <section class="hero">
+      <img src="./imges/wedding1.jpg" alt="김민혁과 이서영 웨딩 사진" />
+      <div class="hero-content">
+        <p class="hero-kicker">WE ARE GETTING MARRIED</p>
+        <h1>김민혁 <span>♥</span> 이서영</h1>
+        <p class="hero-date" id="heroDate">2026년 8월 27일 목요일</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="label">INVITATION</p>
+      <h2>소중한 분들을 초대합니다</h2>
+      <p class="invitation-message">
+        깨지지 않는 약속으로 하늘에 아로 새기어<br />
+        서로의 동반자 되어<br />
+        인생의 여정을 출발하고자 합니다.<br /><br />
+        저희 두 사람의 약속이 더욱 빛날 수 있도록<br />
+        부디 방문하시어 따뜻한 격려와<br />
+        축복을 부탁드립니다.
+      </p>
+      <div class="family">
+        <p><strong>김대성</strong>의 아들 <b>김민혁</b></p>
+        <p><strong>이완성</strong>의 딸 <b>이서영</b></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="label">CONTACT</p>
+      <h2>신랑 · 신부에게 연락하기</h2>
+      <div class="contact-card">
+        <p class="phone-number">010-8563-0000</p>
+        <div class="button-row">
+          <a class="btn primary" href="tel:01085630000">신랑에게 전화</a>
+          <a class="btn secondary" href="tel:01085630000">신부에게 전화</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="label">GALLERY</p>
+      <h2>우리의 아름다운 순간</h2>
+      <div class="gallery-frame">
+        <img id="galleryImage" src="./imges/wedding2.jpg" alt="웨딩 갤러리 사진 1" />
+      </div>
+      <div class="gallery-controls" aria-label="웨딩 사진 선택">
+        <button class="gallery-dot active" type="button" data-image="./imges/wedding1.jpg" data-alt="웨딩 갤러리 사진 1">1</button>
+        <button class="gallery-dot" type="button" data-image="./imges/wedding2.jpg" data-alt="웨딩 갤러리 사진 2">2</button>
+        <button class="gallery-dot" type="button" data-image="./imges/wedding3.jpg" data-alt="웨딩 갤러리 사진 3">3</button>
+      </div>
+    </section>
+
+    <section class="section count-section">
+      <p class="label">OUR WEDDING DAY</p>
+      <h2>두 사람의 새로운 시작까지</h2>
+      <div class="countdown">
+        <div class="count-box"><strong id="days">00</strong><span>DAYS</span></div>
+        <div class="count-box"><strong id="hours">00</strong><span>HOURS</span></div>
+        <div class="count-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+        <div class="count-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+      </div>
+      <p class="count-message" id="countMessage"></p>
+    </section>
+
+    <section class="section">
+      <p class="label">LOCATION</p>
+      <h2>오시는 길</h2>
+      <strong class="venue-name">더채플앳청담</strong>
+      <p class="venue-address">서울특별시 강남구 선릉로 757</p>
+      <div id="kakaoMap">
+        <div class="map-fallback" id="mapFallback">카카오맵을 불러오는 중입니다.</div>
+      </div>
+      <a class="btn secondary full-map-btn" id="largeMapButton" href="https://map.kakao.com/link/map/더채플앳청담,37.522473836496,127.03914876371" target="_blank" rel="noopener">카카오맵에서 크게 보기</a>
+    </section>
+
+    <section class="section">
+      <p class="label">ACCOUNT</p>
+      <h2>마음 전하실 곳</h2>
+      <div class="account-list">
+        <details>
+          <summary>신랑측 계좌번호</summary>
+          <div class="account-content">
+            <p>농협은행<br /><strong>392-0897-5992-89</strong></p>
+            <button class="btn copy-btn" type="button" data-account="392-0897-5992-89">계좌번호 복사</button>
+          </div>
+        </details>
+        <details>
+          <summary>신부측 계좌번호</summary>
+          <div class="account-content">
+            <p>농협은행<br /><strong>392-0897-5992-89</strong></p>
+            <button class="btn copy-btn" type="button" data-account="392-0897-5992-89">계좌번호 복사</button>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="label">GUESTBOOK</p>
+      <h2>축하 메시지</h2>
+      <form class="guest-form" id="guestForm">
+        <label class="field">
+          <span>이름</span>
+          <input id="guestName" type="text" minlength="2" maxlength="20" required placeholder="이름을 입력해 주세요" />
+        </label>
+        <label class="field">
+          <span>구분</span>
+          <select id="guestSide">
+            <option>공통</option>
+            <option>신랑측</option>
+            <option>신부측</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>축하 메시지</span>
+          <textarea id="guestMessage" rows="5" minlength="2" maxlength="300" required placeholder="따뜻한 축하 메시지를 남겨주세요"></textarea>
+        </label>
+        <label class="consent">
+          <input id="privacyConsent" type="checkbox" required />
+          <span>방명록 저장을 위한 개인정보 수집에 동의합니다.</span>
+        </label>
+        <button class="btn primary" type="submit">축하 메시지 남기기</button>
+      </form>
+      <div class="guest-list" id="guestList"></div>
+    </section>
+
+    <footer>
+      <p>김민혁 ♥ 이서영</p>
+      <small>소중한 걸음 기다리겠습니다.</small>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- 카카오맵 JavaScript SDK -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c1150e850c41fd7881e31f1d2ab6391e"></script>
+
+  <script>
+    const WEDDING = {
+      date: new Date("2026-08-27T00:00:00+09:00"),
+      phone: "010-8563-0000",
+      venue: {
+        name: "더채플앳청담",
+        address: "서울특별시 강남구 선릉로 757",
+        latitude: 37.522473836496,
+        longitude: 127.03914876371,
+        level: 3
+      }
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = WEDDING.date.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        $("#days").textContent = "00";
+        $("#hours").textContent = "00";
+        $("#minutes").textContent = "00";
+        $("#seconds").textContent = "00";
+        $("#countMessage").textContent = "오늘, 두 사람의 새로운 시작을 축복해 주세요 ♥";
+        return;
+      }
+
+      const day = Math.floor(diff / 86400000);
+      const hour = Math.floor((diff % 86400000) / 3600000);
+      const minute = Math.floor((diff % 3600000) / 60000);
+      const second = Math.floor((diff % 60000) / 1000);
+
+      $("#days").textContent = String(day).padStart(2, "0");
+      $("#hours").textContent = String(hour).padStart(2, "0");
+      $("#minutes").textContent = String(minute).padStart(2, "0");
+      $("#seconds").textContent = String(second).padStart(2, "0");
+      $("#countMessage").textContent = `예식일까지 ${day}일 남았습니다.`;
+    }
+
+    function setupGallery() {
+      const image = $("#galleryImage");
+      $$(".gallery-dot").forEach((button) => {
+        button.addEventListener("click", () => {
+          image.src = button.dataset.image;
+          image.alt = button.dataset.alt;
+          $$(".gallery-dot").forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
         });
-    </script>
+      });
+    }
+
+    function initKakaoMap() {
+      const fallback = $("#mapFallback");
+
+      if (!window.kakao || !window.kakao.maps) {
+        fallback.textContent = "카카오맵을 불러오지 못했습니다. 카카오 Developers의 JavaScript 키와 사이트 도메인 등록을 확인해 주세요.";
+        return;
+      }
+
+      const container = $("#kakaoMap");
+      container.innerHTML = "";
+
+      const position = new kakao.maps.LatLng(WEDDING.venue.latitude, WEDDING.venue.longitude);
+      const map = new kakao.maps.Map(container, {
+        center: position,
+        level: WEDDING.venue.level
+      });
+
+      const marker = new kakao.maps.Marker({ position });
+      marker.setMap(map);
+
+      const infoWindow = new kakao.maps.InfoWindow({
+        content: '<div style="padding:8px 10px;font-size:12px;white-space:nowrap;">더채플앳청담</div>'
+      });
+      infoWindow.open(map, marker);
+
+      window.addEventListener("resize", () => {
+        map.relayout();
+        map.setCenter(position);
+      });
+    }
+
+    async function copyAccount(account) {
+      try {
+        await navigator.clipboard.writeText(account);
+        showToast("계좌번호를 복사했습니다.");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = account;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+        showToast("계좌번호를 복사했습니다.");
+      }
+    }
+
+    function setupAccountCopy() {
+      $$(".copy-btn").forEach((button) => {
+        button.addEventListener("click", () => copyAccount(button.dataset.account));
+      });
+    }
+
+    function loadGuestbook() {
+      try {
+        return JSON.parse(localStorage.getItem("weddingGuestbook") || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function renderGuestbook() {
+      const list = $("#guestList");
+      const items = loadGuestbook();
+      list.innerHTML = "";
+
+      if (!items.length) return;
+
+      items.slice().reverse().forEach((item) => {
+        const article = document.createElement("article");
+        article.className = "guest-item";
+
+        const name = document.createElement("strong");
+        name.textContent = `${item.name} · ${item.side}`;
+
+        const date = document.createElement("small");
+        date.textContent = item.date;
+
+        const message = document.createElement("p");
+        message.textContent = item.message;
+
+        article.append(name, date, message);
+        list.appendChild(article);
+      });
+    }
+
+    function setupGuestbook() {
+      $("#guestForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const name = $("#guestName").value.trim();
+        const side = $("#guestSide").value;
+        const message = $("#guestMessage").value.trim();
+
+        if (!name || !message || !$("#privacyConsent").checked) return;
+
+        const items = loadGuestbook();
+        items.push({
+          name,
+          side,
+          message,
+          date: new Date().toLocaleString("ko-KR")
+        });
+
+        localStorage.setItem("weddingGuestbook", JSON.stringify(items));
+        event.currentTarget.reset();
+        renderGuestbook();
+        showToast("축하 메시지를 저장했습니다.");
+      });
+
+      renderGuestbook();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      setupGallery();
+      setupAccountCopy();
+      setupGuestbook();
+      initKakaoMap();
+    });
+  </script>
 </body>
 </html>
