@@ -1,0 +1,196 @@
+/* 예식장 정보 */
+
+const WEDDING_LOCATION = {
+    name: "더채플앳청담",
+
+    address:
+        "서울특별시 강남구 선릉로 757",
+
+    level: 3
+};
+
+
+/* 페이지 실행 */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        showWeddingLocation();
+
+        createKakaoMap();
+
+    }
+);
+
+
+/* 예식장 이름과 주소 표시 */
+
+function showWeddingLocation() {
+
+    const venueName =
+        document.querySelector(
+            "#venueName"
+        );
+
+    const venueAddress =
+        document.querySelector(
+            "#venueAddress"
+        );
+
+    venueName.textContent =
+        WEDDING_LOCATION.name;
+
+    venueAddress.textContent =
+        WEDDING_LOCATION.address;
+
+}
+
+
+/* 주소를 이용해 카카오맵 생성 */
+
+function createKakaoMap() {
+
+    const mapContainer =
+        document.querySelector(
+            "#kakaoMap"
+        );
+
+    const largeMapButton =
+        document.querySelector(
+            "#largeMapButton"
+        );
+
+
+    if (
+        typeof kakao === "undefined"
+    ) {
+
+        mapContainer.innerHTML =
+            `
+            <p>
+                카카오맵 API를 불러오지 못했습니다.<br>
+                JavaScript 키와 등록 도메인을 확인해 주세요.
+            </p>
+            `;
+
+        return;
+
+    }
+
+
+    const geocoder =
+        new kakao.maps.services.Geocoder();
+
+
+    geocoder.addressSearch(
+
+        WEDDING_LOCATION.address,
+
+        function (
+            result,
+            status
+        ) {
+
+            if (
+                status !==
+                kakao.maps.services.Status.OK
+            ) {
+
+                mapContainer.innerHTML =
+                    `
+                    <p>
+                        입력한 주소를 찾지 못했습니다.<br>
+                        도로명 주소를 다시 확인해 주세요.
+                    </p>
+                    `;
+
+                return;
+
+            }
+
+
+            const latitude =
+                Number(
+                    result[0].y
+                );
+
+            const longitude =
+                Number(
+                    result[0].x
+                );
+
+
+            const position =
+                new kakao.maps.LatLng(
+                    latitude,
+                    longitude
+                );
+
+
+            mapContainer.innerHTML =
+                "";
+
+
+            const map =
+                new kakao.maps.Map(
+                    mapContainer,
+                    {
+                        center: position,
+                        level:
+                            WEDDING_LOCATION.level
+                    }
+                );
+
+
+            const marker =
+                new kakao.maps.Marker(
+                    {
+                        position: position
+                    }
+                );
+
+
+            marker.setMap(
+                map
+            );
+
+
+            const infoWindow =
+                new kakao.maps.InfoWindow(
+                    {
+                        content:
+                            `
+                            <div
+                                style="
+                                    width: 180px;
+                                    padding: 12px;
+                                    text-align: center;
+                                    font-size: 13px;
+                                    font-weight: bold;
+                                "
+                            >
+                                ${WEDDING_LOCATION.name}
+                            </div>
+                            `
+                    }
+                );
+
+
+            infoWindow.open(
+                map,
+                marker
+            );
+
+
+            largeMapButton.href =
+                `https://map.kakao.com/link/map/${
+                    encodeURIComponent(
+                        WEDDING_LOCATION.name
+                    )
+                },${latitude},${longitude}`;
+
+        }
+    );
+
+}
