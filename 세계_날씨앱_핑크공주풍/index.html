@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세계 날씨 앱</title>
+  <style>
+    :root { font-family: Pretendard, "Noto Sans KR", system-ui, sans-serif; color: #5d3154; background: #fff0f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { min-height: 100svh; padding: 24px 16px; background: radial-gradient(circle at 15% 5%, #fff 0 5%, transparent 22%), radial-gradient(circle at 85% 2%, #ead7ff 0, transparent 28%), linear-gradient(155deg, #ffd8ea 0%, #f7e9ff 48%, #ffeef5 100%); }
+    .app { width: min(100%, 560px); margin: auto; }
+    .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .mark { display: grid; place-items: center; width: 46px; height: 46px; color: #a63479; background: linear-gradient(145deg, #fff, #ffcfe6); border: 1px solid #fff; border-radius: 50% 50% 44% 44%; font-size: 23px; box-shadow: 0 10px 28px #c94c8c35, inset 0 0 0 3px #fff7; }
+    .eyebrow { margin: 0 0 2px; color: #b14482; font-size: 10px; font-weight: 800; letter-spacing: .18em; }
+    h1 { margin: 0; font-size: 21px; }
+    .settings-btn { width: 44px; height: 44px; margin-left: auto; color: #a83a78; background: #ffffff96; border: 1px solid #fff; border-radius: 50%; box-shadow: 0 8px 20px #b54b8330; }
+    .api-box { display: grid; gap: 12px; margin-bottom: 14px; padding: 17px; background: #ffffffa8; border: 1px solid #fff; border-radius: 24px; box-shadow: 0 14px 35px #bf5a9126; }
+    .api-title { display: flex; align-items: center; gap: 9px; color: #c33f87; }
+    .api-title div { display: grid; gap: 2px; }
+    .api-title strong { color: #73305b; font-size: 14px; }
+    .api-title span { color: #a57896; font-size: 11px; }
+    .api-row, .search { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    input { width: 100%; color: #713352; background: #fff8fc; border: 1px solid #f0b5d2; outline: none; }
+    input:focus { border-color: #ea8dbb; box-shadow: 0 0 0 4px #ea8dbb24; }
+    .api-row input { height: 46px; padding: 0 14px; border-radius: 16px; }
+    .api-row button, .search button { color: #fff; font-weight: 800; background: linear-gradient(135deg, #ef71ae, #bd438d); border: 0; box-shadow: 0 10px 24px #c5458940; }
+    .api-row button { height: 46px; padding: 0 18px; border-radius: 16px; }
+    .api-box a { width: fit-content; color: #b53d7c; font-size: 12px; text-decoration: none; }
+    .search { position: relative; }
+    .search input { height: 52px; padding: 0 14px 0 43px; background: #ffffffbd; border: 1px solid #fff; border-radius: 22px; box-shadow: 0 10px 28px #bb5c8e20; }
+    .search button { height: 52px; padding: 0 20px; border-radius: 22px; }
+    .search-icon { position: absolute; top: 15px; left: 16px; color: #c35b91; font-size: 19px; }
+    .recent { display: flex; gap: 8px; overflow-x: auto; padding: 12px 1px 3px; scrollbar-width: none; }
+    .recent button { flex: none; padding: 7px 12px; color: #9c4775; background: #ffffff9c; border: 1px solid #fff; border-radius: 999px; box-shadow: 0 5px 14px #bb5c8e20; }
+    .notice { margin-top: 22px; padding: 22px; border-radius: 24px; }
+    .error { color: #ffd0c8; background: #ff6b4a14; border: 1px solid #ff8c7533; line-height: 1.6; }
+    .empty { padding: 56px 28px; text-align: center; background: #ffffff9c; border: 1px solid #fff; box-shadow: 0 18px 45px #b6538824; }
+    .empty .globe { font-size: 60px; }
+    .empty h2 { margin: 22px 0 8px; font-size: 22px; }
+    .empty p { margin: 0; color: #9b718c; font-size: 14px; line-height: 1.7; }
+    .hero { display: flex; align-items: center; justify-content: space-between; min-height: 315px; padding: 30px 12px 22px; }
+    .location { color: #7c315d; font-weight: 700; }
+    .date { margin: 7px 0 12px; color: #a77694; font-size: 13px; }
+    .temp { font-size: clamp(76px, 22vw, 116px); font-weight: 250; line-height: .9; letter-spacing: -.08em; }
+    .temp sup { font-size: .4em; vertical-align: top; }
+    .description { margin: 16px 0 3px; font-size: 20px; font-weight: 750; }
+    .range { margin: 0; color: #9f708d; font-size: 13px; }
+    .hero img { width: min(38vw, 190px); filter: drop-shadow(0 24px 30px #0007); }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .card { display: grid; gap: 8px; padding: 17px; background: #ffffffa3; border: 1px solid #fff; border-radius: 24px; box-shadow: 0 14px 35px #bb5c8e20; }
+    .card span { color: #a47391; font-size: 12px; }
+    .card strong { font-size: 19px; }
+    .card:last-child { grid-column: 1 / -1; }
+    .sun { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 10px; padding: 19px; text-align: center; background: linear-gradient(135deg, #fff1c9cc, #ffd8ecb5); border: 1px solid #fff; border-radius: 26px; box-shadow: 0 14px 35px #bb5c8e20; }
+    .sun div { display: grid; gap: 4px; }
+    .sun span { color: #a47591; font-size: 11px; }
+    footer { padding: 28px 0 8px; color: #a27891; font-size: 11px; text-align: center; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="app">
+      <header class="topbar">
+        <div class="mark">♔</div>
+        <div><p class="eyebrow">GLOBAL WEATHER</p><h1>세계 날씨</h1></div>
+        <button id="settingsButton" class="settings-btn" type="button" aria-label="API 키 설정">⚙</button>
+      </header>
+
+      <form id="apiForm" class="api-box">
+        <div class="api-title">🔑<div><strong>OpenWeather API 키</strong><span>이 브라우저에만 저장돼요.</span></div></div>
+        <div class="api-row"><input id="apiKeyInput" type="password" placeholder="API 키 붙여넣기" autocomplete="off"><button>저장</button></div>
+        <a href="https://home.openweathermap.org/api_keys" target="_blank" rel="noreferrer">내 API 키 확인하기 →</a>
+      </form>
+
+      <form id="searchForm" class="search">
+        <span class="search-icon">⌕</span>
+        <input id="cityInput" value="Seoul" placeholder="도시명 입력 (예: London)" aria-label="날씨를 검색할 도시">
+        <button id="searchButton">검색</button>
+      </form>
+
+      <div id="recent" class="recent"></div>
+      <div id="error" class="notice error" role="alert" hidden></div>
+      <section id="empty" class="notice empty"><div class="globe">🌍</div><h2>오늘, 어디의 날씨가 궁금하세요?</h2><p>API 키를 입력한 뒤 도시를 검색하면 실시간 날씨를 확인할 수 있어요.</p></section>
+
+      <section id="result" hidden>
+        <section class="hero">
+          <div><div id="location" class="location"></div><p id="date" class="date"></p><div id="temp" class="temp"></div><p id="description" class="description"></p><p id="range" class="range"></p></div>
+          <img id="weatherIcon" alt="날씨 아이콘">
+        </section>
+        <section class="grid">
+          <article class="card"><span>🌡 체감온도</span><strong id="feels"></strong></article>
+          <article class="card"><span>💧 습도</span><strong id="humidity"></strong></article>
+          <article class="card"><span>💨 풍속</span><strong id="wind"></strong></article>
+          <article class="card"><span>◉ 기압</span><strong id="pressure"></strong></article>
+          <article class="card"><span>👁 가시거리</span><strong id="visibility"></strong></article>
+        </section>
+        <section class="sun"><div><span>🌅 일출</span><strong id="sunrise"></strong></div><div><span>🌇 일몰</span><strong id="sunset"></strong></div></section>
+      </section>
+      <footer>Data provided by OpenWeather</footer>
+    </section>
+  </main>
+
+  <script>
+    const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+    const API_KEY_STORAGE = "global-weather-openweather-key";
+    const RECENT_KEY = "global-weather-recent-cities";
+    const $ = (id) => document.getElementById(id);
+    let apiKey = localStorage.getItem(API_KEY_STORAGE) || "";
+    let recentCities = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
+
+    $("apiKeyInput").value = apiKey;
+    $("apiForm").hidden = Boolean(apiKey);
+    renderRecent();
+
+    $("settingsButton").addEventListener("click", () => { $("apiForm").hidden = !$("apiForm").hidden; });
+    $("apiForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = $("apiKeyInput").value.trim();
+      if (!value) return showError("OpenWeather에서 복사한 API 키를 입력해 주세요.");
+      apiKey = value;
+      localStorage.setItem(API_KEY_STORAGE, value);
+      $("apiForm").hidden = true;
+      hideError();
+    });
+    $("searchForm").addEventListener("submit", (event) => { event.preventDefault(); getWeather($("cityInput").value); });
+
+    async function getWeather(city) {
+      const keyword = city.trim();
+      if (!keyword) return;
+      if (!apiKey) { $("apiForm").hidden = false; return showError("먼저 OpenWeather API 키를 입력해 주세요."); }
+      setLoading(true); hideError();
+      try {
+        const params = new URLSearchParams({ q: keyword, appid: apiKey, units: "metric", lang: "kr" });
+        const response = await fetch(`${API_URL}?${params}`);
+        const data = await response.json();
+
+        // 서버에서 받은 원본 데이터를 화면에 표시하기 전에 먼저 확인합니다.
+        console.log("OpenWeather 원본 데이터:", data);
+
+        if (!response.ok) {
+          if (response.status === 401) throw new Error("API 키가 올바르지 않거나 아직 활성화되지 않았어요.");
+          if (response.status === 404) throw new Error("도시를 찾지 못했어요. 영문 도시명으로 다시 검색해 주세요.");
+          throw new Error(data.message || "날씨 정보를 불러오지 못했어요.");
+        }
+        showWeather(data);
+        recentCities = [data.name, ...recentCities.filter((item) => item !== data.name)].slice(0, 5);
+        localStorage.setItem(RECENT_KEY, JSON.stringify(recentCities));
+        renderRecent();
+      } catch (error) {
+        console.error("OpenWeather 요청 오류:", error);
+        $("result").hidden = true;
+        showError(error.message || "알 수 없는 오류가 발생했어요.");
+      } finally { setLoading(false); }
+    }
+
+    function showWeather(data) {
+      const weather = data.weather[0];
+      $("cityInput").value = data.name;
+      $("location").textContent = `📍 ${data.name}, ${data.sys.country}`;
+      $("date").textContent = `현지 ${formatTime(data.dt, data.timezone, false)}`;
+      $("temp").innerHTML = `${Math.round(data.main.temp)}<sup>°</sup>`;
+      $("description").textContent = weather.description;
+      $("range").textContent = `최고 ${Math.round(data.main.temp_max)}° · 최저 ${Math.round(data.main.temp_min)}°`;
+      $("weatherIcon").src = `https://openweathermap.org/img/wn/${weather.icon}@4x.png`;
+      $("weatherIcon").alt = weather.description;
+      $("feels").textContent = `${Math.round(data.main.feels_like)}°`;
+      $("humidity").textContent = `${data.main.humidity}%`;
+      $("wind").textContent = `${data.wind.speed.toFixed(1)} m/s`;
+      $("pressure").textContent = `${data.main.pressure} hPa`;
+      $("visibility").textContent = data.visibility ? `${(data.visibility / 1000).toFixed(1)} km` : "-";
+      $("sunrise").textContent = formatTime(data.sys.sunrise, data.timezone, true);
+      $("sunset").textContent = formatTime(data.sys.sunset, data.timezone, true);
+      $("empty").hidden = true;
+      $("result").hidden = false;
+    }
+
+    function formatTime(unix, timezone, timeOnly) {
+      return new Intl.DateTimeFormat("ko-KR", { timeZone: "UTC", ...(timeOnly ? { hour: "2-digit", minute: "2-digit" } : { month: "long", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }) }).format(new Date((unix + timezone) * 1000));
+    }
+    function renderRecent() {
+      $("recent").innerHTML = "";
+      recentCities.forEach((city) => { const button = document.createElement("button"); button.type = "button"; button.textContent = city; button.onclick = () => { $("cityInput").value = city; getWeather(city); }; $("recent").appendChild(button); });
+    }
+    function showError(message) { $("error").textContent = message; $("error").hidden = false; }
+    function hideError() { $("error").hidden = true; }
+    function setLoading(value) { $("searchButton").disabled = value; $("searchButton").textContent = value ? "검색 중" : "검색"; }
+  </script>
+</body>
+</html>

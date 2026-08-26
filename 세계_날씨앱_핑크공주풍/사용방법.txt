@@ -1,0 +1,20 @@
+세계 날씨 앱 사용방법
+
+1. ZIP 파일의 압축을 풉니다.
+2. index.html 파일을 더블클릭하거나 VS Code Live Server로 실행합니다.
+3. OpenWeather의 My API Keys에서 API 키를 복사합니다.
+4. 앱 상단 API 키 입력창에 붙여넣고 저장합니다.
+5. 도시명을 입력하고 검색합니다.
+
+개발자 콘솔에서 데이터 확인하기
+- Chrome 또는 Edge에서 F12를 누릅니다.
+- Console 탭을 선택합니다.
+- 도시를 검색하면 "OpenWeather 원본 데이터:" 로그가 표시됩니다.
+
+GitHub Pages에 올릴 때
+- index.html을 저장소 최상단에 올립니다.
+- Settings > Pages에서 main / (root)를 선택합니다.
+
+주의
+- API 키는 브라우저 localStorage에만 저장됩니다.
+- 실제 API 키를 코드에 직접 적거나 공개 GitHub 저장소에 올리지 마세요.
