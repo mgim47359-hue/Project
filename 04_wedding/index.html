@@ -555,7 +555,7 @@
     <main class="wedding-app">
         <section class="main-visual">
             <img
-                src="./imges/wedding2.jpg"
+                src="./imges/wedding1.jpg"
                 alt="신랑 김민혁과 신부 이서영"
                 onerror="this.style.display='none'"
             >
@@ -563,7 +563,7 @@
             <div class="main-text">
                 <p>WE ARE GETTING MARRIED</p>
                 <h1>김민혁 <span>♥</span> 이서영</h1>
-                <strong id="weddingDateText">예식일을 준비 중입니다</strong>
+                <strong id="weddingDateText">2026년 8월 27일 목요일</strong>
             </div>
         </section>
 
@@ -592,8 +592,8 @@
             <h2>신랑 · 신부에게 연락하기</h2>
 
             <div class="button-group">
-                <a id="groomCallButton" class="button primary-button" href="#">지금 신랑에게 연락하세요</a>
-                <a id="brideCallButton" class="button outline-button" href="#">지금 신부에게 연락하세요</a>
+                <a id="groomCallButton" class="button primary-button" href="tel:01085630000">신랑에게 전화하기 · 010-8563-0000</a>
+                <a id="brideCallButton" class="button outline-button" href="tel:01085630000">신부에게 전화하기 · 010-8563-0000</a>
             </div>
         </section>
 
@@ -602,7 +602,7 @@
             <h2>우리의 아름다운 순간</h2>
 
             <div class="gallery-main" id="galleryFrame">
-                <img id="galleryImage" src="./imges/wedding1.jpg" alt="웨딩 사진 1">
+                <img id="galleryImage" src="./imges/wedding2.jpg" alt="웨딩 사진 1">
             </div>
 
             <div class="gallery-buttons">
@@ -721,9 +721,10 @@
         const WEDDING_CONFIG = {
             groomName: "김민혁",
             brideName: "이서영",
-            weddingDate: "",
-            groomPhone: "",
-            bridePhone: "",
+            // 예식 날짜: 2026년 8월 27일 (시간 미지정 → 날짜 시작 시점 기준 카운트다운)
+            weddingDate: "2026-08-27T00:00:00+09:00",
+            groomPhone: "010-8563-0000",
+            bridePhone: "010-8563-0000",
             venue: {
                 name: "더채플앳청담",
                 address: "서울특별시 강남구 선릉로 757",
@@ -837,9 +838,7 @@
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-                weekday: "long",
-                hour: "numeric",
-                minute: "2-digit"
+                weekday: "long"
             });
             dateText.textContent = formatter.format(target);
 
