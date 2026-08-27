@@ -6,7 +6,7 @@
 const BUSAN_FOOD_SERVICE_KEY = "여기에_공공데이터_SERVICE_KEY_입력";
 
 // 카카오 개발자 사이트의 JavaScript 키를 입력하세요.
-const KAKAO_MAP_JAVASCRIPT_KEY = "여기에_카카오맵_JAVASCRIPT_KEY_입력";
+const KAKAO_MAP_JAVASCRIPT_KEY = "c1150e850c41fd7881e31f1d2ab6391e";
 
 const API_BASE_URL = "https://apis.data.go.kr/6260000/FoodService";
 const FALLBACK_IMAGE = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#d9ebe6"/><stop offset="1" stop-color="#6fa8a0"/></linearGradient></defs><rect width="800" height="520" fill="url(#g)"/><circle cx="400" cy="260" r="150" fill="#fff" opacity=".85"/><text x="400" y="275" text-anchor="middle" font-family="sans-serif" font-size="45" font-weight="700" fill="#174b55">BUSAN FOOD</text></svg>`);
