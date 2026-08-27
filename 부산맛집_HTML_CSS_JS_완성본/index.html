@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부산맛집 탐색 서비스 | 부산한입</title>
+  <meta name="description" content="부산시 공공데이터로 맛집과 대표메뉴, 카카오맵 위치를 찾아보세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Song+Myung&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-icon">♨</span><span><b>부산한입</b><small>BUSAN FOOD FINDER</small></span></a>
+      <select id="languageSelect" aria-label="언어 선택"><option value="getFoodKr">한국어</option><option value="getFoodEn">English</option><option value="getFoodJa">日本語</option><option value="getFoodZhs">简体中文</option><option value="getFoodZht">繁體中文</option></select>
+    </header>
+
+    <main id="top">
+      <section class="hero"><p>BUSAN FOOD CURATION</p><h1>부산의 맛을<br><em>한입에 찾아보세요.</em></h1><span>공공데이터로 만나는 부산의 검증된 맛집과 대표 메뉴</span></section>
+      <section class="search-panel">
+        <div class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="맛집명, 메뉴를 검색해 보세요" aria-label="맛집 검색"><button id="clearSearch" aria-label="검색어 지우기">×</button></div>
+        <div class="filter-head"><b>지역 선택</b><button id="favoriteFilter">♡ 저장 <span id="favoriteCount">0</span></button></div>
+        <div id="regionChips" class="chips"></div>
+      </section>
+      <section class="results">
+        <div class="result-head"><div><p>오늘의 부산 맛집</p><h2><strong id="resultCount">0</strong>곳을 찾았어요</h2></div><small id="demoBadge">미리보기 데이터</small></div>
+        <div id="statusBox" class="status hidden"></div>
+        <div id="foodGrid" class="food-grid"></div>
+      </section>
+    </main>
+    <footer><div class="brand"><span class="brand-icon">♨</span><span><b>부산한입</b><small>BUSAN FOOD FINDER</small></span></div><p>부산광역시 공공데이터 FoodService 기반</p><p>운영시간과 메뉴는 방문 전 매장에 확인해 주세요.</p></footer>
+  </div>
+
+  <div id="detailModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <article class="detail-card"><button id="closeModal" class="close" aria-label="상세 닫기">×</button><div class="detail-image"><img id="detailImage" alt=""><div class="detail-title"><span id="detailRegion"></span><h2 id="detailTitle"></h2><p id="detailMenu"></p></div></div><div class="detail-body"><div class="detail-actions"><a id="callButton">☎ 전화</a><a id="bigMapButton" target="_blank" rel="noopener">⌖ 큰 지도</a><button id="detailFavorite">♡ 저장</button></div><h3>매장 정보</h3><dl><div><dt>주소</dt><dd id="detailAddress"></dd></div><div><dt>운영시간</dt><dd id="detailTime"></dd></div><div><dt>전화</dt><dd id="detailPhone"></dd></div></dl><h3>맛집 소개</h3><p id="detailDescription" class="description"></p><h3>위치</h3><div id="kakaoMap" class="map"><div id="mapMessage">카카오맵 JavaScript 키를 입력해 주세요.</div></div></div></article>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
