@@ -1,0 +1,13 @@
+부산맛집 탐색 앱 사용 방법
+
+1. VS Code에서 이 폴더 전체를 엽니다.
+2. script.js 상단의 BUSAN_FOOD_SERVICE_KEY에 공공데이터 인증키를 입력합니다.
+3. KAKAO_MAP_JAVASCRIPT_KEY에 카카오맵 JavaScript 키를 입력합니다.
+4. index.html을 오른쪽 클릭한 뒤 Open with Live Server로 실행합니다.
+5. F12 → Console에서 "FoodService API 원본 응답:"을 확인합니다.
+
+중요
+- index.html을 더블클릭한 file:/// 주소에서는 API가 차단될 수 있으므로 Live Server를 사용하세요.
+- 카카오 개발자 사이트의 플랫폼 > Web에 http://127.0.0.1:5500 주소를 등록하세요.
+- API 키가 없거나 요청이 실패하면 기능 확인을 위해 예시 데이터가 자동 표시됩니다.
+- 순수 HTML 프로젝트에서는 공공데이터 키가 브라우저에 보일 수 있습니다. 실제 운영 서비스는 서버 프록시를 사용하세요.
